@@ -20,7 +20,7 @@ public class Connection extends AsyncTask <String,String,String>{
         HttpURLConnection connection = null;
         URL url = null;
         try {
-            url = new URL("https://api.jsonbin.io/b/622d24c27caf5d6783675b8c");
+            url = new URL("https://api.jsonbin.io/b/622d3d5ba703bb67492a05af/1");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

@@ -15,16 +15,21 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
 
-// hola prueba 1 fetch xd
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
+        mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -47,4 +52,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+            goLogin();
+        }
+    }
+
+    private void goLogin() {
+
+        Intent Log = new Intent(this, LoginActivity.class);
+        startActivity(Log);
+
+    }
+
 }
