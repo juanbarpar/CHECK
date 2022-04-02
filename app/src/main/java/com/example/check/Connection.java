@@ -1,5 +1,10 @@
 package com.example.check;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import java.io.BufferedInputStream;
@@ -43,7 +48,18 @@ public class Connection extends AsyncTask <String,String,String>{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        //1443
         return null;
+    }
+
+    public boolean isConnected(){
+
+            try {
+                String command = "ping -c 1 google.com";
+                return (Runtime.getRuntime().exec(command).waitFor() == 0);
+            } catch (Exception e) {
+                return false;
+            }
+
     }
 }

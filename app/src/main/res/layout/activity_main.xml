@@ -2,17 +2,95 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <androidx.cardview.widget.CardView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/cardProfilePic"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_user"
+            android:scaleType="fitXY"/>
+    </androidx.cardview.widget.CardView>
+
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/bar_nav"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:iconSize="20dp"
+        app:iconTint="#C63145"
+        app:backgroundColor="#FFFFFF"
+        app:iconTintActive="#FFFFFF"
+        app:indicatorColor="#0E1D32"
+        app:indicatorRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:menu="@menu/nav_menu"
+        app:textSize="15sp"
+        />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textHello"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Hola JuanCa"
+        android:textColor="#212121"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@id/cardProfilePic"
+        app:layout_constraintEnd_toStartOf="@id/cardProfilePic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardProfilePic"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textWhereAreWe"
+        android:text="Bienvenido a Check"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="#212121"
+        android:textSize="35sp"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/cardProfilePic"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textGoing"
+        android:text="Nuestras expediciones"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="#757575"
+        android:textSize="30sp"
+        android:includeFontPadding="false"
+        android:fontFamily="antonio_bold"
+        app:layout_constraintTop_toBottomOf="@id/textWhereAreWe"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/locationViewPager"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        app:layout_constraintBottom_toTopOf="@id/bar_nav"
+        app:layout_constraintTop_toBottomOf="@id/textGoing"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
