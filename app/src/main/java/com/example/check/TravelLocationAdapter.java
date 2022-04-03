@@ -1,8 +1,10 @@
 package com.example.check;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -57,13 +60,16 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
         }
         void setLocationData(TravelLocation travelLocation){
 
-            kbvLocation.setTag(travelLocation.title);
-            Picasso.get().load(travelLocation.imageUrl).into(kbvLocation);
+            kbvLocation.setTag(travelLocation.imageUrl);
 
+
+            Picasso.get().load(travelLocation.imageUrl).into(kbvLocation);
             textTitle.setText(travelLocation.title);
             textLocation.setText(travelLocation.location);
             textStartRating.setText(String.valueOf(travelLocation.startRating));
+
             itemView.setTag(travelLocation.title);
+
 
 
 

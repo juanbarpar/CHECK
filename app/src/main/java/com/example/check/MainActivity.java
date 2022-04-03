@@ -151,10 +151,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void getView(View view){
 
+        KenBurnsView kbvImage;
+        TextView textTitle, textLocation, textStartRating;
+
         System.out.println(view.getTag());
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+                kbvImage = view.findViewById(R.id.kbvLocation);
+                textTitle = view.findViewById(R.id.textTitle);
+                textStartRating = view.findViewById(R.id.textStartRating);
+                textLocation = view.findViewById(R.id.textLocation);
+
+                System.out.println(textTitle.getText());
+        System.out.println(textStartRating.getText());
+        System.out.println(textLocation.getText());
+        System.out.println(kbvImage.getTag());
 
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                         MainActivity.this, R.style.bt_sheet_dialog
@@ -163,19 +173,22 @@ public class MainActivity extends AppCompatActivity {
                 View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
                         R.layout.bt_sheet, (LinearLayout)findViewById(R.id.bt_sheet_container)
                 );
-                
-
                 bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         bottomSheetDialog.dismiss();
                     }
                 });
+
+                KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
+                TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
+                TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
+
+                textViewexp.setText(textTitle.getText());
+                textViewlugar.setText(textLocation.getText());
+                Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
                 bottomSheetDialog.setContentView(bottonSheetView);
                 bottomSheetDialog.show();
-
-            }
-        });
 
 
     }
