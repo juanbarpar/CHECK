@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
@@ -39,18 +40,34 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
         private KenBurnsView kbvLocation;
         private TextView textTitle, textLocation, textStartRating;
+        private ConstraintLayout constraintLayout;
+
         TravelLocationViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            constraintLayout = itemView.findViewById(R.id.waitingforid);
             kbvLocation = itemView.findViewById(R.id.kbvLocation);
             textTitle = itemView.findViewById(R.id.textTitle);
             textStartRating = itemView.findViewById(R.id.textStartRating);
             textLocation = itemView.findViewById(R.id.textLocation);
+
+
+
+
         }
         void setLocationData(TravelLocation travelLocation){
+
+            kbvLocation.setTag(travelLocation.title);
             Picasso.get().load(travelLocation.imageUrl).into(kbvLocation);
+
             textTitle.setText(travelLocation.title);
             textLocation.setText(travelLocation.location);
             textStartRating.setText(String.valueOf(travelLocation.startRating));
+            itemView.setTag(travelLocation.title);
+
+
+
+
         }
     }
 }

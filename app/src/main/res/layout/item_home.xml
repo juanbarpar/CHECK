@@ -7,12 +7,20 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/waitingforid"
+        android:tag=""
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <com.flaviofaria.kenburnsview.KenBurnsView
             android:id="@+id/kbvLocation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="getView"
+
+            
             />
         <LinearLayout
             android:orientation="horizontal"

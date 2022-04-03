@@ -33,7 +33,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:iconSize="20dp"
-        app:iconTint="#C63145"
+        app:iconTint="@color/check1"
         app:backgroundColor="#FFFFFF"
         app:iconTintActive="#FFFFFF"
         app:indicatorColor="#0E1D32"

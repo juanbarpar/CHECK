@@ -1,6 +1,7 @@
 package com.example.check;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -21,15 +22,25 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
+
 import android.content.Intent;
 import androidx.annotation.NonNull;
+
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -84,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
         });
         locationViewPager.setPageTransformer(compositePageTransformer);
 
-
-
-
         Connection connection = new Connection();
         System.out.println(connection.isConnected() + "------------");
 
@@ -116,8 +124,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
 
-
-
         }
 
     }
@@ -140,6 +146,38 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View view){
         mAuth.signOut();
         goLogin();
+    }
+
+
+    public void getView(View view){
+
+        System.out.println(view.getTag());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        MainActivity.this, R.style.bt_sheet_dialog
+                );
+
+                View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
+                        R.layout.bt_sheet, (LinearLayout)findViewById(R.id.bt_sheet_container)
+                );
+                
+
+                bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+                bottomSheetDialog.setContentView(bottonSheetView);
+                bottomSheetDialog.show();
+
+            }
+        });
+
+
     }
 
 }
