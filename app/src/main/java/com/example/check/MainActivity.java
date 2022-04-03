@@ -162,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 textLocation = view.findViewById(R.id.textLocation);
 
                 System.out.println(textTitle.getText());
-        System.out.println(textStartRating.getText());
-        System.out.println(textLocation.getText());
-        System.out.println(kbvImage.getTag());
+                System.out.println(textStartRating.getText());
+                System.out.println(textLocation.getText());
+                System.out.println(kbvImage.getTag());
 
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                         MainActivity.this, R.style.bt_sheet_dialog
@@ -180,15 +180,37 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
+
                 KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
                 TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
                 TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
+
+        bottonSheetView.findViewById(R.id.share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                whatsappIntent.setType("text/plain");
+                whatsappIntent.setPackage("com.whatsapp");
+                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " +
+                        "expediciones programadas a distintos lugares de Colombia. " +
+                        "Una diversidad de destinos, itinerarios llenos de momentos" +
+                        " auténticos y experiencias de vida que recordarás para siempre " + kbvImage.getTag());
+                try {
+                    MainActivity.this.startActivity(whatsappIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    System.out.println("Whatsapp have not been installed.");
+                }
+            }
+        });
 
                 textViewexp.setText(textTitle.getText());
                 textViewlugar.setText(textLocation.getText());
                 Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
                 bottomSheetDialog.setContentView(bottonSheetView);
                 bottomSheetDialog.show();
+
+
 
 
     }
