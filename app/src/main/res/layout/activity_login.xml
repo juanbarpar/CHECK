@@ -4,52 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#013350"
     tools:context=".LoginActivity">
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto_bold"
         android:onClick="toLog"
-        android:text="Log in "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button3" />
+        android:text="Entrar"
+        android:textColor="#013451"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pass" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto_bold"
         android:onClick="toSign"
-        android:text="Sign up"
+        android:text="Crear una cuenta"
+        android:textColor="#013451"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/User"
-        android:layout_width="245dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="40dp"
-        android:hint="User"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/white"
+        android:hint="   Correo Electrónico"
         android:textColor="#222222"
+        android:textColorHint="#738895"
         app:layout_constraintBottom_toTopOf="@+id/Pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/Pass"
-        android:layout_width="245dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="300dp"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="192dp"
+        android:background="@color/white"
         android:ems="10"
-        android:hint="Password"
-        android:textColor="#222222"
+        android:hint="   Contraseña"
         android:inputType="textPassword"
+        android:textColor="#222222"
+        android:textColorHint="#738895"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="229dp"
+        android:layout_height="221dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logolugar" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/checkname" />
+
+    <TextView
+        android:id="@+id/IniciaSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Inicia Sesión"
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/User"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="¿No tienes una cuenta?"
+        android:textColor="@android:color/white"
+        android:textSize="29sp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.333" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
