@@ -68,7 +68,7 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
             textLocation.setText(travelLocation.location);
             textStartRating.setText(String.valueOf(travelLocation.startRating));
 
-            itemView.setTag(travelLocation.title);
+            textTitle.setTag(travelLocation.url);
 
 
 

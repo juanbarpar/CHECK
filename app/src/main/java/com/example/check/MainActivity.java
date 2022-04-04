@@ -34,6 +34,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 
 import android.view.LayoutInflater;
@@ -65,18 +66,25 @@ public class MainActivity extends AppCompatActivity {
         travelLocationFi.title = "En Busca del Paraíso Teyuna";
         travelLocationFi.location = "Ciudad Perdida - Santa Marta";
         travelLocationFi.startRating = "14 al 18 de abril de 2022";
+        travelLocationFi.url = "https://checknewplaces.com/expediciones/en-busca-del-paraiso-teyuna/";
+
         travelLocations.add(travelLocationFi);
         TravelLocation travelLocationS = new TravelLocation();
         travelLocationS.imageUrl = "https://checknewplaces.com/wp-content/uploads/2022/03/4-4.jpg";
         travelLocationS.title = "En Busca del Safari Marino";
         travelLocationS.location = "Nuquí - Chocó";
         travelLocationS.startRating = "14 al 18 de abril de 2022";
+        travelLocationS.url = "https://checknewplaces.com/expediciones/en-busca-del-safari-marino/";
+
         travelLocations.add(travelLocationS);
         TravelLocation travelLocationSe = new TravelLocation();
         travelLocationSe.imageUrl = "https://checknewplaces.com/wp-content/uploads/2022/03/3-4.jpg";
         travelLocationSe.title = "En Busca de Perezosos";
         travelLocationSe.location = "Puerto Inirída - Guainía";
         travelLocationSe.startRating = "14 al 18 de abril de 2022";
+        travelLocationSe.url = "https://checknewplaces.com/expediciones/en-busca-del-safari-marino/";
+        System.out.println(travelLocationSe.url + "oooooooooo");
+
         travelLocations.add(travelLocationSe);
         locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
         locationViewPager.setClipToPadding(false);
@@ -98,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         Connection connection = new Connection();
         System.out.println(connection.isConnected() + "------------");
 
-        if(true){
+        if (true) {
 
             try {
                 String response = connection.execute("").get();
@@ -107,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONArray jresponse = new JSONArray(response);
 
-                for (int i = 0;i<jresponse.length();i++){
+                for (int i = 0; i < jresponse.length(); i++) {
                     System.out.println(i);
                     JSONObject jsonObject = jresponse.getJSONObject(i);
                     System.out.println(jsonObject);
@@ -121,18 +129,18 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
 
         }
 
     }
+
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser == null){
+        if (currentUser == null) {
             goLogin();
         }
     }
@@ -143,59 +151,58 @@ public class MainActivity extends AppCompatActivity {
         startActivity(Log);
 
     }
-    public void logout(View view){
+
+    public void logout(View view) {
         mAuth.signOut();
         goLogin();
     }
 
 
-    public void getView(View view){
+    public void getView(View view) {
 
         KenBurnsView kbvImage;
         TextView textTitle, textLocation, textStartRating;
 
         System.out.println(view.getTag());
 
-                kbvImage = view.findViewById(R.id.kbvLocation);
-                textTitle = view.findViewById(R.id.textTitle);
-                textStartRating = view.findViewById(R.id.textStartRating);
-                textLocation = view.findViewById(R.id.textLocation);
+        kbvImage = view.findViewById(R.id.kbvLocation);
+        textTitle = view.findViewById(R.id.textTitle);
+        textStartRating = view.findViewById(R.id.textStartRating);
+        textLocation = view.findViewById(R.id.textLocation);
 
-                System.out.println(textTitle.getText());
-                System.out.println(textStartRating.getText());
-                System.out.println(textLocation.getText());
-                System.out.println(kbvImage.getTag());
+        System.out.println(textTitle.getText());
+        System.out.println(textStartRating.getText());
+        System.out.println(textLocation.getText());
+        System.out.println(kbvImage.getTag());
 
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                        MainActivity.this, R.style.bt_sheet_dialog
-                );
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                MainActivity.this, R.style.bt_sheet_dialog
+        );
 
-                View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
-                        R.layout.bt_sheet, (LinearLayout)findViewById(R.id.bt_sheet_container)
-                );
-                bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        bottomSheetDialog.dismiss();
-                    }
-                });
+        View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
+                R.layout.bt_sheet, (LinearLayout) findViewById(R.id.bt_sheet_container)
+        );
+        bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+            }
+        });
 
-
-
-                KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
-                TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
-                TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
+        KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
+        TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
+        TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
 
         bottonSheetView.findViewById(R.id.share).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View viewe) {
                 Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
                 whatsappIntent.setType("text/plain");
                 whatsappIntent.setPackage("com.whatsapp");
                 whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " +
                         "expediciones programadas a distintos lugares de Colombia. " +
                         "Una diversidad de destinos, itinerarios llenos de momentos" +
-                        " auténticos y experiencias de vida que recordarás para siempre " + kbvImage.getTag());
+                        " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
                 try {
                     MainActivity.this.startActivity(whatsappIntent);
                 } catch (android.content.ActivityNotFoundException ex) {
@@ -204,13 +211,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-                textViewexp.setText(textTitle.getText());
-                textViewlugar.setText(textLocation.getText());
-                Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
-                bottomSheetDialog.setContentView(bottonSheetView);
-                bottomSheetDialog.show();
-
-
+        textViewexp.setText(textTitle.getText());
+        textViewlugar.setText(textLocation.getText());
+        Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
+        bottomSheetDialog.setContentView(bottonSheetView);
+        bottomSheetDialog.show();
 
 
     }

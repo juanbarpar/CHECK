@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_wave__1_"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        app:layout_editor_absoluteX="-30dp"/>
+
+
+
+    <!---
     <androidx.cardview.widget.CardView
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -17,6 +29,7 @@
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,6 +37,7 @@
             android:src="@drawable/ic_user"
             android:scaleType="fitXY"/>
     </androidx.cardview.widget.CardView>
+    -->
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bar_nav"
@@ -34,7 +48,7 @@
         android:layout_marginBottom="10dp"
         app:iconSize="20dp"
         app:iconTint="@color/check1"
-        app:backgroundColor="#FFFFFF"
+        app:backgroundColor="#00C63145"
         app:iconTintActive="#FFFFFF"
         app:indicatorColor="#0E1D32"
         app:indicatorRadius="10dp"
@@ -43,7 +57,7 @@
         app:textSize="15sp"
         />
 
-
+    <!---
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,6 +71,7 @@
         app:layout_constraintEnd_toStartOf="@id/cardProfilePic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardProfilePic"/>
+-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,10 +80,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:textColor="#212121"
+        android:textColor="@color/white"
         android:textSize="35sp"
         android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/cardProfilePic"/>
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,7 +91,7 @@
         android:text="Nuestras expediciones"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:textColor="#757575"
+        android:textColor="@color/check2"
         android:textSize="30sp"
         android:includeFontPadding="false"
         android:fontFamily="antonio_bold"
