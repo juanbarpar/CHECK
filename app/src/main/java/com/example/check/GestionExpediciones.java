@@ -1,21 +1,25 @@
 package com.example.check;
 
+import androidx.viewpager2.widget.ViewPager2;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class GestionExpediciones {
 
 
-    public ArrayList<Expedicion> getAll(String response) {
+    public List<TravelLocation> getAll(String response) {
 
         Expedicion exp = null;
 
-        ArrayList<Expedicion> exps = new ArrayList();
+        List<TravelLocation> travelLocations = new ArrayList<>();
+
         try {
 
             try {
@@ -23,16 +27,17 @@ public class GestionExpediciones {
                 JSONArray jresponse = new JSONArray(response);
 
                 for (int i = 0;i<jresponse.length();i++) {
-
-
-                    System.out.println(i);
                     JSONObject jsonObject = jresponse.getJSONObject(i);
-                    String a = (jsonObject.getString("Expedicion"));
-                    String b = (jsonObject.getString("Fechas"));
-                    String c = (jsonObject.getString("url"));
+                    TravelLocation travelLocation = new TravelLocation();
+                    travelLocation.imageUrl = (jsonObject.getString("imagen"));
+                    travelLocation.title = (jsonObject.getString("Nombre"));
+                    travelLocation.location = (jsonObject.getString("ubicación"));
+                    travelLocation.startRating = (jsonObject.getString("fecha"));
+                    travelLocation.url = (jsonObject.getString("url"));
+
+                    travelLocations.add(travelLocation);
 
 
-                    exps.add(exp);
                     System.out.println(jsonObject);
                 }
 
@@ -45,6 +50,6 @@ public class GestionExpediciones {
             e.printStackTrace();
         }
 
-        return exps;
+        return travelLocations;
     }
 }

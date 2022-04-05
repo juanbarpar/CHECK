@@ -2,19 +2,71 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFFFFF"
+    android:background="@color/check1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <ImageView
+    
+    <View
+        android:id="@+id/actionbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/ic_wave__1_"
-        android:scaleType="centerCrop"
+        android:layout_height="@dimen/_80sdp"
+        android:elevation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/check1.2">
+
+    </View>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Check"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        app:layout_editor_absoluteX="-30dp"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/expedicionesT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        app:cardBackgroundColor="@color/check1"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="@id/actionbar"
+        app:layout_constraintTop_toBottomOf="@id/actionbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_14ssp"
+            >
+            
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nuestras expediciones"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 
 
@@ -43,14 +95,11 @@
         android:id="@+id/bar_nav"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
         app:iconSize="20dp"
-        app:iconTint="@color/check1"
-        app:backgroundColor="#00C63145"
-        app:iconTintActive="#FFFFFF"
-        app:indicatorColor="#0E1D32"
+        app:iconTint="@color/check1.2"
+        app:backgroundColor="#0E1D32"
+        app:iconTintActive="@color/check2"
+        app:indicatorColor="#193357"
         app:indicatorRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/nav_menu"
@@ -72,52 +121,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardProfilePic"/>
 -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textWhereAreWe"
-        android:text="Bienvenido a Check"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textGoing"
-        android:text="Nuestras expediciones"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/check2"
-        android:textSize="30sp"
-        android:includeFontPadding="false"
-        android:fontFamily="antonio_bold"
-        app:layout_constraintTop_toBottomOf="@id/textWhereAreWe"/>
+
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/locationViewPager"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
         app:layout_constraintBottom_toTopOf="@id/bar_nav"
-        app:layout_constraintTop_toBottomOf="@id/textGoing"/>
+        app:layout_constraintTop_toBottomOf="@id/expedicionesT"/>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="45dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_launcher_background"
-        android:onClick="logout"
-        android:text="🔴"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

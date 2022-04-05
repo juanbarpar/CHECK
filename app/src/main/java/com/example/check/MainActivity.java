@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import org.json.JSONArray;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         gesExp = new GestionExpediciones();
+        Connection connection = new Connection();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -86,7 +88,13 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(travelLocationSe.url + "oooooooooo");
 
         travelLocations.add(travelLocationSe);
-        locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
+        try {
+            locationViewPager.setAdapter(new TravelLocationAdapter(gesExp.getAll(connection.execute("").get())));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         locationViewPager.setClipToPadding(false);
         locationViewPager.setClipChildren(false);
         locationViewPager.setOffscreenPageLimit(3);
@@ -103,35 +111,9 @@ public class MainActivity extends AppCompatActivity {
         });
         locationViewPager.setPageTransformer(compositePageTransformer);
 
-        Connection connection = new Connection();
+
         System.out.println(connection.isConnected() + "------------");
 
-        if (true) {
-
-            try {
-                String response = connection.execute("").get();
-                gesExp.getAll(response);
-
-
-                JSONArray jresponse = new JSONArray(response);
-
-                for (int i = 0; i < jresponse.length(); i++) {
-                    System.out.println(i);
-                    JSONObject jsonObject = jresponse.getJSONObject(i);
-                    System.out.println(jsonObject);
-
-                }
-
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else {
-
-        }
 
     }
 
@@ -149,6 +131,13 @@ public class MainActivity extends AppCompatActivity {
 
         Intent Log = new Intent(this, LoginActivity.class);
         startActivity(Log);
+
+    }
+    private void goWeb(String inURL) {
+
+        Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse( inURL ) );
+
+        startActivity( browse );
 
     }
 
@@ -184,7 +173,10 @@ public class MainActivity extends AppCompatActivity {
         );
         bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
+                goWeb((String) textTitle.getTag());
+
                 bottomSheetDialog.dismiss();
             }
         });
