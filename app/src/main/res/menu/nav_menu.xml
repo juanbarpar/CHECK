@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/home"
         android:title="Inicio"
         android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"/>
+
         />
     <item
         android:id="@+id/share"
         android:title="Fotos"
         android:icon="@drawable/ic_photo"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"
         />
     <item
         android:id="@+id/chat"
         android:title="Chat"
         android:icon="@drawable/ic_baseline_chat_bubble_24"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"
         />
     <item
         android:id="@+id/user"
         android:title="Perfil"
-        android:icon="@drawable/ic_user" />
+        android:icon="@drawable/ic_user"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"/>
 
 
 </menu>

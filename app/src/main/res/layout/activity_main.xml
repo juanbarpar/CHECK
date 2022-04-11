@@ -6,90 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    
-    <View
-        android:id="@+id/actionbar"
+
+
+
+
+    <FrameLayout
+        android:id="@+id/frames"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
-        android:elevation="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/check1.2">
-
-    </View>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:text="Check"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bar_nav"
         app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/expedicionesT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        app:cardBackgroundColor="@color/check1"
-        app:cardCornerRadius="@dimen/_16sdp"
-        app:layout_constraintBottom_toBottomOf="@id/actionbar"
-        app:layout_constraintTop_toBottomOf="@id/actionbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_14ssp"
-            >
-            
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nuestras expediciones"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
-
-
-            
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
 
 
 
-    <!---
-    <androidx.cardview.widget.CardView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/cardProfilePic"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_user"
-            android:scaleType="fitXY"/>
-    </androidx.cardview.widget.CardView>
-    -->
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bar_nav"
@@ -104,34 +37,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/nav_menu"
         app:textSize="15sp"
+        android:onClick="getItem"
         />
-
-    <!---
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/textHello"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Hola JuanCa"
-        android:textColor="#212121"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@id/cardProfilePic"
-        app:layout_constraintEnd_toStartOf="@id/cardProfilePic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cardProfilePic"/>
--->
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/locationViewPager"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        app:layout_constraintBottom_toTopOf="@id/bar_nav"
-        app:layout_constraintTop_toBottomOf="@id/expedicionesT"/>
 
 
 

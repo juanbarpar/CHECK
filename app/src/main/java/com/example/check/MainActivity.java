@@ -1,49 +1,41 @@
 package com.example.check;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.ClipData;
 import android.net.Uri;
 import android.os.Bundle;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.squareup.picasso.Picasso;
 
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import kotlin.jvm.functions.Function1;
+import me.ibrahimsn.lib.OnItemSelectedListener;
+import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,37 +49,19 @@ public class MainActivity extends AppCompatActivity {
         gesExp = new GestionExpediciones();
         Connection connection = new Connection();
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
+        /*
         ViewPager2 locationViewPager = findViewById(R.id.locationViewPager);
-        List<TravelLocation> travelLocations = new ArrayList<>();
 
-        TravelLocation travelLocationFi = new TravelLocation();
-        travelLocationFi.imageUrl = "https://checknewplaces.com/wp-content/uploads/2022/03/Banner-fotos-Check-11.jpg";
-        travelLocationFi.title = "En Busca del Paraíso Teyuna";
-        travelLocationFi.location = "Ciudad Perdida - Santa Marta";
-        travelLocationFi.startRating = "14 al 18 de abril de 2022";
-        travelLocationFi.url = "https://checknewplaces.com/expediciones/en-busca-del-paraiso-teyuna/";
 
-        travelLocations.add(travelLocationFi);
-        TravelLocation travelLocationS = new TravelLocation();
-        travelLocationS.imageUrl = "https://checknewplaces.com/wp-content/uploads/2022/03/4-4.jpg";
-        travelLocationS.title = "En Busca del Safari Marino";
-        travelLocationS.location = "Nuquí - Chocó";
-        travelLocationS.startRating = "14 al 18 de abril de 2022";
-        travelLocationS.url = "https://checknewplaces.com/expediciones/en-busca-del-safari-marino/";
+        System.out.println(smoothBottomBar.getItemActiveIndex());
 
-        travelLocations.add(travelLocationS);
-        TravelLocation travelLocationSe = new TravelLocation();
-        travelLocationSe.imageUrl = "https://checknewplaces.com/wp-content/uploads/2022/03/3-4.jpg";
-        travelLocationSe.title = "En Busca de Perezosos";
-        travelLocationSe.location = "Puerto Inirída - Guainía";
-        travelLocationSe.startRating = "14 al 18 de abril de 2022";
-        travelLocationSe.url = "https://checknewplaces.com/expediciones/en-busca-del-safari-marino/";
-        System.out.println(travelLocationSe.url + "oooooooooo");
 
-        travelLocations.add(travelLocationSe);
         try {
             locationViewPager.setAdapter(new TravelLocationAdapter(gesExp.getAll(connection.execute("").get())));
         } catch (ExecutionException e) {
@@ -110,10 +84,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         locationViewPager.setPageTransformer(compositePageTransformer);
-
+        */
 
         System.out.println(connection.isConnected() + "------------");
+        replace(new HomeFragment());
 
+
+        smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
+
+            System.out.println(o);
+
+            switch (o) {
+                case 0:
+                    replace(new HomeFragment());
+                    break;
+                case 1:
+                    replace(new SocialFragment());
+                    break;
+                case 2:
+                    replace(new ChatFragment());
+                    break;
+                case 3:
+                    replace(new UserFragment());
+                    break;
+            }
+
+
+            return null;
+        });
+
+    }
+
+    private void replace(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frames, fragment);
+        transaction.commit();
 
     }
 
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+
         if (currentUser == null) {
             goLogin();
         }
@@ -129,15 +135,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void goLogin() {
 
+
         Intent Log = new Intent(this, LoginActivity.class);
         startActivity(Log);
 
     }
+
     private void goWeb(String inURL) {
 
-        Intent browse = new Intent( Intent.ACTION_VIEW , Uri.parse( inURL ) );
+        Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(inURL));
 
-        startActivity( browse );
+        startActivity(browse);
 
     }
 
@@ -145,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth.signOut();
         goLogin();
     }
+
+
 
 
     public void getView(View view) {
@@ -208,8 +218,7 @@ public class MainActivity extends AppCompatActivity {
         Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
         bottomSheetDialog.setContentView(bottonSheetView);
         bottomSheetDialog.show();
-
-
     }
+
 
 }
