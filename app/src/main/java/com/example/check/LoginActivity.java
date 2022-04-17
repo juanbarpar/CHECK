@@ -2,11 +2,16 @@ package com.example.check;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -104,6 +109,33 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+    }
+    public void Register(View View) {
+        Button Iniciar_sesion = findViewById(R.id.button3);
+        Button Registrarse = findViewById(R.id.button4);
+        Button Crear_Cuenta = findViewById(R.id.button2);
+        Crear_Cuenta.setText("Crear Cuenta");
+        Crear_Cuenta.setOnClickListener(this::toSign);
+        ImageView Logo_Lugar = findViewById(R.id.ImageLogo);
+        Logo_Lugar.setBackgroundResource(R.drawable.logolugar2);
+        Registrarse.setBackgroundColor(Color.parseColor("#055583"));
+        Iniciar_sesion.setBackgroundColor(Color.parseColor("#033F61"));
+        Iniciar_sesion.setTextColor(Color.parseColor("#A5A4A4"));
+        Registrarse.setTextColor(Color.WHITE);
+    }
+    public void Loginbutton(View View) {
+        Button Iniciar_sesion = findViewById(R.id.button3);
+        Button Registrarse = findViewById(R.id.button4);
+        Button Crear_Cuenta = findViewById(R.id.button2);
+        ConstraintLayout Fondo = findViewById(R.id.Fondo);
+        Crear_Cuenta.setOnClickListener(this::toLog);
+        ImageView Logo_Lugar = findViewById(R.id.ImageLogo);
+        Logo_Lugar.setBackgroundResource(R.drawable.logolugar);
+        Iniciar_sesion.setBackgroundColor(Color.parseColor("#055583"));
+        Registrarse.setBackgroundColor(Color.parseColor("#033F61"));
+        Registrarse.setTextColor(Color.parseColor("#A5A4A4"));
+        Iniciar_sesion.setTextColor(Color.WHITE);
+        Crear_Cuenta.setText("Entrar");
     }
 
 

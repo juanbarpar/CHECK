@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#013350"
@@ -11,23 +12,23 @@
         android:id="@+id/button2"
         android:layout_width="240dp"
         android:layout_height="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="104dp"
         android:background="@color/white"
         android:fontFamily="@font/roboto_bold"
         android:onClick="toLog"
         android:text="Entrar"
         android:textColor="#013451"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Pass" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/User"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="140dp"
         android:background="@color/white"
         android:hint="   Correo Electrónico"
         android:textColor="#222222"
@@ -54,14 +55,14 @@
         app:layout_constraintTop_toBottomOf="@+id/User" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ImageLogo"
         android:layout_width="229dp"
         android:layout_height="221dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/logolugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logolugar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -70,7 +71,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/ImageLogo"
         app:srcCompat="@drawable/checkname" />
 
     <Button
@@ -79,8 +80,9 @@
         android:layout_width="205dp"
         android:layout_height="39dp"
         android:layout_marginTop="16dp"
-        android:background="#033F61"
+        android:background="#055583"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="Loginbutton"
         android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -95,10 +97,11 @@
         android:layout_width="205dp"
         android:layout_height="39dp"
         android:layout_marginTop="16dp"
-        android:background="#055583"
+        android:background="#033F61"
         android:fontFamily="@font/roboto_bold"
+        android:onClick="Register"
         android:text="Registrarse"
-        android:textColor="#FFFFFF"
+        android:textColor="#A5A4A4"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
