@@ -28,7 +28,7 @@
         android:id="@+id/User"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="88dp"
         android:background="@color/white"
         android:hint="   Correo Electrónico"
         android:textColor="#222222"
@@ -105,5 +105,25 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pass" />
+
+    <TextView
+        android:id="@+id/Req_contra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="27dp"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
