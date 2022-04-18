@@ -1,22 +1,18 @@
-package com.example.check;
+package com.example.check.Gestion;
 
-import androidx.viewpager2.widget.ViewPager2;
+import com.example.check.Entidad.TravelLocation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class GestionExpediciones {
 
 
     public List<TravelLocation> getAll(String response) {
-
-        Expedicion exp = null;
 
         List<TravelLocation> travelLocations = new ArrayList<>();
 

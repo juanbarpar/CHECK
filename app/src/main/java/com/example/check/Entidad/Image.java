@@ -1,4 +1,4 @@
-package com.example.check;
+package com.example.check.Entidad;
 
 public class Image {
 

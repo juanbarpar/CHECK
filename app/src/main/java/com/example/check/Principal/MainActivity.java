@@ -1,34 +1,27 @@
-package com.example.check;
+package com.example.check.Principal;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ClipData;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
+import com.example.check.Principal.Fragmentos.ChatFragment;
+import com.example.check.Entidad.Connection;
+import com.example.check.Entidad.Image;
+import com.example.check.Gestion.GestionExpediciones;
+import com.example.check.Principal.Fragmentos.HomeFragment;
+import com.example.check.R;
+import com.example.check.Principal.Fragmentos.SocialFragment;
+import com.example.check.Principal.Fragmentos.UserFragment;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,32 +34,20 @@ import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.ismaeldivita.chipnavigation.ChipNavigationBar;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.format.DateFormat;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import kotlin.jvm.functions.Function1;
-import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -284,6 +265,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        System.out.println("Code: "+ requestCode);
+
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -301,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ImageView imageView = box.findViewById(R.id.selectedimage);
                 Picasso.get().load(currentUri).into(imageView);
+
                 Dialog dialog = new Dialog(this);
 
                 box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {

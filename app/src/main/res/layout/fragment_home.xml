@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/check1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment"
+    tools:context=".Principal.Fragmentos.HomeFragment"
     android:orientation="vertical"
     >
 
@@ -49,7 +49,7 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nuestras expediciones"
+                    android:text="@string/nuestras_expediciones"
                     android:textColor="@color/check3"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"

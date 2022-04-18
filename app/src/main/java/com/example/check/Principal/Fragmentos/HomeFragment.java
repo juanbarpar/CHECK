@@ -1,4 +1,4 @@
-package com.example.check;
+package com.example.check.Principal.Fragmentos;
 
 import android.os.Bundle;
 
@@ -12,6 +12,11 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.check.Entidad.Connection;
+import com.example.check.Gestion.GestionExpediciones;
+import com.example.check.Gestion.TravelLocationAdapter;
+import com.example.check.R;
 
 import java.util.concurrent.ExecutionException;
 

@@ -1,4 +1,4 @@
-package com.example.check;
+package com.example.check.Entidad;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 

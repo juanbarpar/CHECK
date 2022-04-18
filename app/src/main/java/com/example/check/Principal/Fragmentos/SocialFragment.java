@@ -1,6 +1,5 @@
-package com.example.check;
+package com.example.check.Principal.Fragmentos;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,20 +12,16 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.check.Entidad.Image;
+import com.example.check.Gestion.ImageAdapter;
+import com.example.check.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,42 +81,7 @@ public class SocialFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        StorageReference listRef = storage.getReference().child("images/"
-                + mAuth.getUid());
-        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
-                    @Override
-                    public void onSuccess(ListResult listResult) {
 
-                        for (StorageReference item : listResult.getItems()) {
-                            StorageReference storageRef = storage.getReference();
-                            storageRef.child(item.getPath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-
-                                    System.out.println(uri);
-
-                                    if(!imageList.contains(new Image(uri.toString()))){
-                                        imageList.add(new Image(uri.toString()));
-                                    }
-
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                    // Handle any errors
-                                }
-                            });
-
-                        }
-                        view.invalidate();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Uh-oh, an error occurred!
-                    }
-                });
 
     }
 
@@ -144,6 +104,45 @@ public class SocialFragment extends Fragment {
         view =  inflater.inflate(R.layout.fragment_social, container, false);
 
         recyclerView = view.findViewById(R.id.view_photo);
+
+        StorageReference listRef = storage.getReference().child("images/"
+                + mAuth.getUid());
+        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult) {
+
+                for (StorageReference item : listResult.getItems()) {
+                    StorageReference storageRef = storage.getReference();
+                    storageRef.child(item.getPath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+
+                            if(!imageList.contains(new Image(uri.toString()))){
+                                System.out.println(uri);
+                                imageList.add(new Image(uri.toString()));
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+
+                }
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Uh-oh, an error occurred!
+                    }
+                });
+
+        System.out.println("Seg");
 
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 
