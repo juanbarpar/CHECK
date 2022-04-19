@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
@@ -284,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
 
                 ImageView imageView = box.findViewById(R.id.selectedimage);
                 Picasso.get().load(currentUri).into(imageView);
-
                 Dialog dialog = new Dialog(this);
 
                 box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
