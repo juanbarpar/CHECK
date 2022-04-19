@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
+            android:name=".activities.Test_login_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Principal.LoginActivity"
             android:exported="false" />
         <activity
