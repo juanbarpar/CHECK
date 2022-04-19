@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
-<<<<<<< Updated upstream
             android:name=".LoginActivity"
-=======
             android:name=".Activities.TestSignUpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
