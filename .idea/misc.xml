@@ -20,7 +20,29 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1945" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1945" />
+<<<<<<< Updated upstream
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_login.xml" value="0.2" />
+=======
+        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_image.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_input.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.152" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_in.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_up.xml" value="0.2" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_sheet.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/dialog_box.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.176" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_home.xml" value="0.25" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_photo.xml" value="0.25" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>

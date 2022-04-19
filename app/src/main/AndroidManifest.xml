@@ -14,7 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
+<<<<<<< Updated upstream
             android:name=".LoginActivity"
+=======
+            android:name=".Activities.TestSignUpActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            />
+
+
+        <activity
+            android:name=".Activities.TestSignInActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity
+            android:name=".Principal.LoginActivity"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".MainActivity"
