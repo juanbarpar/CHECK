@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Image;
 import com.example.check.Gestion.ImageAdapter;
 import com.example.check.R;
@@ -81,8 +83,6 @@ public class SocialFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-
-
     }
 
     private FirebaseStorage storage;
@@ -100,7 +100,6 @@ public class SocialFragment extends Fragment {
         reference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_social, container, false);
 
         recyclerView = view.findViewById(R.id.view_photo);
@@ -142,9 +141,8 @@ public class SocialFragment extends Fragment {
                     }
                 });
 
-        System.out.println("Seg");
 
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+       recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         imageList.add(new Image("https://images.unsplash.com/photo-1610353087277-cb32686df0d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
         imageList.add(new Image("https://images.unsplash.com/photo-1649740619716-2e18d4af6052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
@@ -154,27 +152,13 @@ public class SocialFragment extends Fragment {
         imageList.add(new Image("https://checknewplaces.com/wp-content/uploads/2022/03/1-3.jpg"));
         imageList.add(new Image("https://images.unsplash.com/photo-1649720247942-5be3ef21a86b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
         imageList.add(new Image("https://images.unsplash.com/photo-1649649853880-05d01c3dc093?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
+        imageList.add(new Image("https://images.unsplash.com/photo-1610353087277-cb32686df0d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
+        imageList.add(new Image("https://images.unsplash.com/photo-1649740619716-2e18d4af6052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
+        imageList.add(new Image("https://images.unsplash.com/photo-1649713462761-ac493a95381a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"));
 
         recyclerView.setAdapter(new ImageAdapter(imageList));
 
         return view;
     }
 
-    public List<Image> getAllCloudImage(){
-        List<Image> imageList = new ArrayList<>();
-
-        return imageList;
-    }
-    private void actualizar(){
-
-        System.out.println("Act");
-        recyclerView.setAdapter(new ImageAdapter(imageList));
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        actualizar();
-    }
 }

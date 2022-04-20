@@ -9,6 +9,9 @@
     tools:context=".Principal.Fragmentos.HomeFragment"
     android:orientation="vertical">
 
+
+
+    <!-- Barra superior -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,9 +31,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expedicionesT"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
+
             app:cardBackgroundColor="@color/check1"
             app:layout_constraintBottom_toBottomOf="@id/actionbar"
             >
@@ -45,7 +49,7 @@
                     app:backgroundColor="@color/check1.2"
                     app:iconTintActive="@color/white"
                     app:indicatorColor="@color/check1"
-                    app:indicatorRadius="20dp"
+                    app:indicatorRadius="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:menu="@menu/blog_menu"
                     app:textSize="18sp"
@@ -69,24 +73,92 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/view_photo"
 
+
+
+
+
+
+
+        <!-- Contenido -->
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-
-            android:clipToPadding="false"
-            android:paddingStart="0dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="15dp"
-
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/actionbar"
-            app:layout_constraintBottom_toBottomOf="parent"
             >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Albumes Check"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
 
-        </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/text_ultimo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ultimas fotos"
+
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actionbar"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:clipToPadding="false"
+                android:paddingStart="0dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="15dp"
+
+                app:layout_constraintTop_toBottomOf="@id/text_ultimo"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Subir foto  -->
+
 
         <LinearLayout
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,9 +193,6 @@
                 android:layout_gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/check1"></TextView>
-
-
-
 
         </LinearLayout>
 
