@@ -78,19 +78,29 @@
             android:textStyle="bold"
             app:cornerRadius="@dimen/_8sdp" />
 
-        <TextView
-            android:id="@+id/textCreateNewAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:text="@string/cree_una_cuenta"
-            android:textColor="@color/check2"
+
+        <View
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/check2"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSignUp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Registrate"
+            android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
-            android:textStyle="italic" />
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8sdp"
+            />
+
 
 
     </LinearLayout>
+
 
 
 </ScrollView>
