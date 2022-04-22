@@ -34,6 +34,16 @@
             android:name=".activities.Test_Sign_Up_Activity"
             android:exported="false"/>
 
+        <service
+            android:name=".Firebase.Servicio_Mensajeria"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+
+        </service>
+
 
     </application>
 
