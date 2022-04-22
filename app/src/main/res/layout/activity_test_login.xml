@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,20 +11,19 @@
 
     android:scrollbars="none"
     tools:context=".activities.Test_login_Activity"
-    android:background="#013350">
+    android:background="#003552">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_height="@dimen/_140sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:srcCompat="@drawable/imagen_check" />
 
@@ -31,15 +31,15 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginTop="@dimen/_4sdp"
-            app:srcCompat="@drawable/checkname" />
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:srcCompat="@drawable/check_icono" />
 
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:background="@drawable/background_input"
             android:hint="@string/em"
             android:imeOptions="actionNext"
@@ -59,19 +59,20 @@
             android:background="@drawable/background_input"
             android:hint="@string/contrase_a2"
             android:imeOptions="actionDone"
-            android:textColorHint="#9b9b9b"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
             android:textColor="@color/check1.2"
-            android:textSize="@dimen/_13ssp"/>
+            android:textColorHint="#9b9b9b"
+            android:textSize="@dimen/_13ssp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:onClick="antAct"
             android:text="@string/entra"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
@@ -80,23 +81,23 @@
 
 
         <View
-            android:layout_marginTop="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/check2"/>
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/check2" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="@dimen/_40sdp"
             android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:onClick="antAct"
             android:text="Registrate"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:cornerRadius="@dimen/_8sdp"
-            />
-
+            app:cornerRadius="@dimen/_8sdp" />
 
 
     </LinearLayout>

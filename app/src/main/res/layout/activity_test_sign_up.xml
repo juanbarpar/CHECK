@@ -19,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/crea_una_cuenta"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp"
@@ -38,6 +38,7 @@
                 android:scaleType="centerCrop"
                 app:riv_oval="true"/>
             <TextView
+                android:id="@+id/añadirImagen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
