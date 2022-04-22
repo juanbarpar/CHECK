@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:text="@string/registrarte"
+            android:text="@string/registrarme"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
