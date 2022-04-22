@@ -43,17 +43,31 @@
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_button_delete.xml" value="0.104" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2215" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_image.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_input.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/bg_bt.xml" value="0.2215" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/bg_button.xml" value="0.104" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/bg_date.xml" value="0.2215" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/divider.xml" value="0.102" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_add.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_baseline_chat_bubble_24.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_baseline_today_24.xml" value="0.2215" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_blog.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_camera.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_location.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_op2.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_photo.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_photo2.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_share.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_user.xml" value="0.2215" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_wave__1_.xml" value="0.2215" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.152" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_login.xml" value="0.136" />
-        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_up.xml" value="0.152" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_up.xml" value="0.2" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.25" />
       </map>
     </option>

@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:onClick="antAct"
+
             android:text="@string/entra"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
@@ -92,7 +92,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_marginHorizontal="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:onClick="antAct"
+
             android:text="Registrate"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
