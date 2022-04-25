@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CHECK</string>
+    <string name="spn_title">Expedición</string>
+
+    <string-array name="dlangs">
+        <item>Selecciona tu expedición</item>
+        <item>En busca del paraíso Teyuna</item>
+        <item>En busca del Safari Marino</item>
+        <item>En busca de Perezosos</item>
+        <item>En Busca de un Pueblito Mágico</item>
+
+    </string-array>
 </resources>

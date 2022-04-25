@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="#013350">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="229dp"
-        android:layout_height="221dp"
+        android:layout_width="299dp"
+        android:layout_height="291dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,35 +18,56 @@
         app:srcCompat="@drawable/logolugar3" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="252dp"
-        android:layout_height="wrap_content"
-        android:hint="hint"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="405dp" />
+        android:id="@+id/textInputEditText"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:background="#FFFFFF"
+        android:fontFamily="sans-serif"
+        android:hint="Nick"
+        android:textAlignment="textStart"
+        android:textColor="#222222"
+        android:textColorHint="#738895"
+        app:barrierMargin="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editText"
-        android:layout_width="252dp"
-        android:layout_height="wrap_content"
-        android:hint="hint"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="468dp" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:hint="Nombre Completo"
+        android:lines="@integer/material_motion_duration_short_1"
+        android:minEms="6"
+        android:textColor="#222222"
+        android:textColorHint="#738895"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:srcCompat="@drawable/checknombre" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="328dp"
-        android:layout_height="30dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="543dp" />
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/spinnerinfo"
+        android:entries="@array/dlangs"
+        android:popupBackground="@color/check1.2"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        tools:background="@drawable/spinnerinfo" />
+
+    <TextView
+        android:id="@+id/pruebatext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

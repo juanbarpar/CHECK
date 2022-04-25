@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     public void toLog(View view){
 
         EditText u = findViewById(R.id.User);
@@ -88,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         String user = u.getText().toString();
 
         EditText p = findViewById(R.id.Pass);
-        p.setOn
         String pass = p.getText().toString();
 
         if(!user.equals("") && !pass.equals("")){
@@ -97,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                LogAuthentication();
+                                setContentView(R.layout.info_extra);
+                                
 
                             } else {
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",

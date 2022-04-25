@@ -44,6 +44,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Spinner spn = (Spinner) findViewById(R.id.spinner);
 
         ViewPager2 locationViewPager = findViewById(R.id.locationViewPager);
         List<TravelLocation> travelLocations = new ArrayList<>();
