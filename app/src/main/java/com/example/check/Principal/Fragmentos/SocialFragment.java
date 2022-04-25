@@ -1,32 +1,37 @@
 package com.example.check.Principal.Fragmentos;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.check.Entidad.Connection;
-import com.example.check.Entidad.Image;
+import com.example.check.Entidad.Imagedb;
+import com.example.check.Gestion.AlbumAdapter;
+import com.example.check.Gestion.GestionExpediciones;
+import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.ImageAdapter;
 import com.example.check.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,7 +95,8 @@ public class SocialFragment extends Fragment {
     private FirebaseAuth mAuth;
     private View view;
     private RecyclerView recyclerView;
-    List<Image> imageList = new ArrayList<>();
+    List<Imagedb> imageList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,66 +105,68 @@ public class SocialFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
-
         view =  inflater.inflate(R.layout.fragment_social, container, false);
 
+
+
+
         recyclerView = view.findViewById(R.id.view_photo);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+
+        RecyclerView rvAlbum = view.findViewById(R.id.view_album);
+        rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+
+        try {
+            rvAlbum.setAdapter(new AlbumAdapter(new GestionExpediciones().getAllAlbum(new Connection().execute("").get())));
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         StorageReference listRef = storage.getReference().child("images/"
                 + mAuth.getUid());
-        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+
+        recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs,getActivity()));
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = db.getReference("Images");
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onSuccess(ListResult listResult) {
-
-                for (StorageReference item : listResult.getItems()) {
-                    StorageReference storageRef = storage.getReference();
-                    storageRef.child(item.getPath()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-
-
-                            if(!imageList.contains(new Image(uri.toString()))){
-                                System.out.println(uri);
-                                imageList.add(new Image(uri.toString()));
-                            }
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });
-
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Imagedb imagedb = snapshot.getValue(Imagedb.class);
+                GestionImage.addImage(imagedb);
+                recyclerView.getAdapter().notifyDataSetChanged();
 
             }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Uh-oh, an error occurred!
-                    }
-                });
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
-       recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
-        imageList.add(new Image("https://images.unsplash.com/photo-1610353087277-cb32686df0d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649740619716-2e18d4af6052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649713462761-ac493a95381a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"));
-        imageList.add(new Image("https://checknewplaces.com/wp-content/uploads/2022/03/1-1.jpg"));
-        imageList.add(new Image("https://checknewplaces.com/wp-content/uploads/2022/03/1-2.jpg"));
-        imageList.add(new Image("https://checknewplaces.com/wp-content/uploads/2022/03/1-3.jpg"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649720247942-5be3ef21a86b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649649853880-05d01c3dc093?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1610353087277-cb32686df0d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649740619716-2e18d4af6052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"));
-        imageList.add(new Image("https://images.unsplash.com/photo-1649713462761-ac493a95381a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80"));
-
-        recyclerView.setAdapter(new ImageAdapter(imageList));
 
         return view;
     }
+
+
 
 }

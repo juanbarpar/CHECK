@@ -1,5 +1,6 @@
 package com.example.check.Gestion;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,19 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.check.Entidad.Image;
+import com.bumptech.glide.Glide;
+import com.example.check.Entidad.Imagedb;
 import com.example.check.R;
 import com.makeramen.roundedimageview.RoundedImageView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>{
 
-    private List<Image> imageList;
+    private List<Imagedb> imageList;
+    Activity activity;
 
-    public ImageAdapter(List<Image> imageList) {
+    public ImageAdapter(List<Imagedb> imageList, Activity activity) {
         this.imageList = imageList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -48,8 +51,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             super(itemView);
             imageView = itemView.findViewById(R.id.image_post);
         }
-        void setImageView(Image image){
-            Picasso.get().load(image.getImage()).into(imageView);
+        void setImageView(Imagedb image){
+
+            Glide.with(activity)
+                    .load(image.getUrl())
+                    .into(imageView);
+
         }
     }
 

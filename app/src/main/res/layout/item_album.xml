@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="138dp"
-    android:layout_height="220dp"
+    android:layout_width="92dp"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="12dp"
-    >
 
+    android:layout_margin="5dp"
+    android:elevation="2dp"
+    android:adjustViewBounds="true"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/waitingforid"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/kbvLocation"
+            android:id="@+id/kbvAlbum"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -21,17 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/check3">
+            android:background="#B5223650">
 
             <TextView
+                android:id="@+id/text_album"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="En busca de placeholder"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="4dp"/>
 
         </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
