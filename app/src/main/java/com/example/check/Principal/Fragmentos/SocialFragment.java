@@ -127,6 +127,7 @@ public class SocialFragment extends Fragment {
         StorageReference listRef = storage.getReference().child("images/"
                 + mAuth.getUid());
 
+
         recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs,getActivity()));
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -134,9 +135,14 @@ public class SocialFragment extends Fragment {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Imagedb imagedb = snapshot.getValue(Imagedb.class);
-                GestionImage.addImage(imagedb);
+
+                if(!GestionImage.imagedbs.contains(snapshot.getValue(Imagedb.class))){
+                    Imagedb imagedb = snapshot.getValue(Imagedb.class);
+                    GestionImage.addImage(imagedb);
+
+                }
                 recyclerView.getAdapter().notifyDataSetChanged();
+
 
             }
 
