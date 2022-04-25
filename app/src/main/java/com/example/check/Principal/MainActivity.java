@@ -1,6 +1,7 @@
 package com.example.check.Principal;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,14 +10,15 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+import com.example.check.Entidad.Imagedb;
 import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
-import com.example.check.Entidad.Image;
 import com.example.check.Gestion.GestionExpediciones;
 import com.example.check.Principal.Fragmentos.HomeFragment;
 import com.example.check.R;
@@ -26,11 +28,13 @@ import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -101,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
             return null;
         });
 
-        getAllCloudImage();
-
 
     }
 
@@ -164,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                 MainActivity.this, R.style.bt_sheet_dialog
+
         );
+        ///getAct..
 
         View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
                 R.layout.bt_sheet, (LinearLayout) findViewById(R.id.bt_sheet_container)
@@ -253,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
     private void fromCamera() {
 
         ImagePicker.with(this)
-                .cameraOnly()    //User can only capture image using Camera
+                .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
     }
@@ -287,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
                 Dialog dialog = new Dialog(this);
 
                 box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
                         uploadImage(currentUri);
@@ -308,12 +313,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void uploadImage(Uri filePath) {
+
         if (filePath != null) {
+
             ProgressDialog progressDialog
                     = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+
             StorageReference ref
                     = reference
                     .child(
@@ -325,9 +334,23 @@ public class MainActivity extends AppCompatActivity {
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                                 @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                    while (!uriTask.isSuccessful());
+                                    Uri uriImage = uriTask.getResult();
+
+                                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                                    LocalDateTime now = LocalDateTime.now();
+
+                                    Imagedb imdb = new Imagedb();
+                                    imdb.setDate(dtf.format(now));
+                                    imdb.setUser(mAuth.getUid());
+                                    imdb.setUrl(uriImage.toString());
+
+                                    FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference = db.getReference("Images");
+                                    databaseReference.push().setValue(imdb);
 
                                     progressDialog.dismiss();
                                     Toast
@@ -371,33 +394,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public List<Image> getAllCloudImage(){
-        List<Image> imageList = new ArrayList<>();
-        StorageReference listRef = storage.getReference().child("images/"
-                + mAuth.getUid());
-        listRef.listAll()
-                .addOnSuccessListener(new OnSuccessListener<ListResult>() {
-                    @Override
-                    public void onSuccess(ListResult listResult) {
 
-                        for (StorageReference item : listResult.getItems()) {
-                            System.out.println("222");
-                            System.out.println(item.getPath());
-                            System.out.println(item.getBucket());
-                            System.out.println(item.getDownloadUrl());
-                            System.out.println(item.getRoot());
 
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Uh-oh, an error occurred!
-                    }
-                });
-        return imageList;
-    }
+
+
 
 
 }
