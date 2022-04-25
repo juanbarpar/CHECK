@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.ConsoleMessage;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void SignUpProcess(){
+        Intent Log = new Intent(this, SignUpActivity.class);
+        startActivity(Log);
+    }
+
     public void toLog(View view){
 
         EditText u = findViewById(R.id.User);
@@ -59,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                                 LogAuthentication();
 
                             } else {
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "Authentication failed. (Log in)",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -89,10 +96,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                LogAuthentication();
+                                SignUpProcess();
 
                             } else {
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+
+                                Log.e(null,task.getException().toString());
+                                Toast.makeText(LoginActivity.this, "Authentication failed. (Sign Up)",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

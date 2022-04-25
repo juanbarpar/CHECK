@@ -1,5 +1,6 @@
 package com.example.check.Principal.Fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,9 @@ import android.view.ViewGroup;
 import com.example.check.Entidad.Connection;
 import com.example.check.Gestion.GestionExpediciones;
 import com.example.check.Gestion.TravelLocationAdapter;
+import com.example.check.Principal.LoginActivity;
 import com.example.check.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.ExecutionException;
 
@@ -26,6 +29,7 @@ import java.util.concurrent.ExecutionException;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private FirebaseAuth mAuth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -103,6 +107,19 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+    public void logout(View view) {
+        mAuth.signOut();
+        goLogin();
+    }
+    private void goLogin() {
+
+
+
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        getActivity().startActivity(intent);
+
+
     }
 
 }

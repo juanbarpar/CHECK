@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
+            android:name=".Principal.SignUpActivity"
+            android:exported="false" />
+        <activity
             android:name=".Principal.LoginActivity"
             android:exported="false" />
         <activity
