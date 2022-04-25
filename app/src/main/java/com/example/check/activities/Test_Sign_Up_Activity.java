@@ -56,6 +56,7 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
 
     }
     private  void signUp(){
+
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String,Object> user = new HashMap<>();
