@@ -22,7 +22,7 @@ public class Test_login_Activity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Test_Sign_Up_Activity.class)));
 
    }
-
+    
 
 
 

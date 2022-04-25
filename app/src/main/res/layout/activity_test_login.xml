@@ -93,7 +93,7 @@
             android:layout_marginHorizontal="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_20sdp"
 
-            android:text="Registrate"
+            android:text="@string/registrate"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
