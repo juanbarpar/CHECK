@@ -19,6 +19,7 @@ import com.example.check.Principal.MainActivity;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestSignUpBinding;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
@@ -56,6 +57,8 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
 
     }
     private  void signUp(){
+
+
 
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -131,6 +134,9 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
             return false;
         }else if(!binding.inputPassword.getText().toString().equals(binding.inputConfirmPassword.getText().toString())){
             showToast("La contraseña y la confirmacion de contraseña deben ser iguales");
+            return false;
+        }else if(Constantes.KEY_EMAIL_CONFIRM!=""){
+            showToast("Este correo ya se encuentra registrado");
             return false;
         }else{
             return true;
