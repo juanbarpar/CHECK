@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Gestion.AlbumAdapter;
-import com.example.check.Gestion.GestionExpediciones;
+import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.ImageAdapter;
 import com.example.check.R;
@@ -111,13 +111,14 @@ public class SocialFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.view_photo);
+
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         RecyclerView rvAlbum = view.findViewById(R.id.view_album);
         rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
         try {
-            rvAlbum.setAdapter(new AlbumAdapter(new GestionExpediciones().getAllAlbum(new Connection().execute("").get())));
+            rvAlbum.setAdapter(new AlbumAdapter(new GestionTravelLocation().getAllAlbum(new Connection().execute("").get())));
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

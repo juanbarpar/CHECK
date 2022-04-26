@@ -13,13 +13,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
-import com.example.check.Gestion.GestionExpediciones;
+import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Principal.Fragmentos.HomeFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
@@ -57,7 +54,7 @@ import me.ibrahimsn.lib.SmoothBottomBar;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private GestionExpediciones gesExp;
+    private GestionTravelLocation gesExp;
     private FirebaseStorage storage;
     private StorageReference reference;
 
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        gesExp = new GestionExpediciones();
+        gesExp = new GestionTravelLocation();
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
         Connection connection = new Connection();
@@ -313,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     private void uploadImage(Uri filePath) {
 
         if (filePath != null) {
@@ -340,11 +337,10 @@ public class MainActivity extends AppCompatActivity {
                                     while (!uriTask.isSuccessful());
                                     Uri uriImage = uriTask.getResult();
 
-                                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                                    LocalDateTime now = LocalDateTime.now();
+
 
                                     Imagedb imdb = new Imagedb();
-                                    imdb.setDate(dtf.format(now));
+                                    imdb.setDate("wait");
                                     imdb.setUser(mAuth.getUid());
                                     imdb.setUrl(uriImage.toString());
 

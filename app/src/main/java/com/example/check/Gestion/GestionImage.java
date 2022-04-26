@@ -9,7 +9,7 @@ public class GestionImage {
 
     public static List<Imagedb> imagedbs = new ArrayList<>();
     public static void addImage(Imagedb image){
-        imagedbs.add(image);
+        imagedbs.add(0,image);
     }
 
 

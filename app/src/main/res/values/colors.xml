@@ -8,17 +8,16 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="check1">#0E1D32</color>
     <color name="check2">#0196D5</color>
     <color name="check1.2">#C63145</color>
     <color name="check3">#222222</color>
     <color name="check4">#444444</color>
 
-
-
-        <color name="ucrop_color_toolbar">#FF6F82</color>
-        <color name="ucrop_color_statusbar">@color/check1.2</color>
-        <color name="ucrop_color_widget_active">@color/check1.2</color>
+    <color name="ucrop_color_toolbar">#FF6F82</color>
+    <color name="ucrop_color_statusbar">@color/check1.2</color>
+    <color name="ucrop_color_widget_active">@color/check1.2</color>
 
 
 

@@ -13,6 +13,7 @@ import com.example.check.Entidad.Imagedb;
 import com.example.check.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>{
@@ -21,7 +22,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     Activity activity;
 
     public ImageAdapter(List<Imagedb> imageList, Activity activity) {
+
+
         this.imageList = imageList;
+
         this.activity = activity;
     }
 

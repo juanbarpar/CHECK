@@ -4,10 +4,12 @@
     android:layout_height="120dp"
     android:layout_gravity="center"
     android:scaleType="centerCrop"
+    android:background="@color/check1.2"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/image_post"
     android:layout_margin="5dp"
     android:adjustViewBounds="true"
-    app:riv_corner_radius="5dp">
+    app:riv_corner_radius="5dp"
+    >
 
 </com.makeramen.roundedimageview.RoundedImageView>

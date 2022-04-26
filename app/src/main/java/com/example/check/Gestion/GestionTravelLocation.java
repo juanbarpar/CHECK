@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionExpediciones {
+public class GestionTravelLocation {
 
 
     public List<TravelLocation> getAll(String response) {
