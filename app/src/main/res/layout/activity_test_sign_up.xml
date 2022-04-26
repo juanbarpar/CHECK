@@ -113,12 +113,14 @@
             android:textColor="@color/check1.2"
             android:textSize="@dimen/_13ssp"/>
         <FrameLayout
+            android:onClick="Sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:animateLayoutChanges="true">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSignUp"
+                android:onClick="Sign"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
                 android:text="@string/registrarme"

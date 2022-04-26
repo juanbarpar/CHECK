@@ -52,52 +52,22 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
         setListeners();
     }
     private void setListeners(){
-        binding.buttonSignUp.setOnClickListener(view -> {
-            if(isValidSignUpDetails()) {
-                signUp();
-            }
-        });
+
+
+
         binding.layoutImage.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
         });
     }
+
     private void showToast(String message){
+
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
 
     }
-    private  void signUp(){
 
-        if(toSign(binding.inputEmail.getText().toString().trim(),binding.inputPassword.getText().toString().trim())){
-
-            loading(true);
-            FirebaseFirestore database = FirebaseFirestore.getInstance();
-            HashMap<String,Object> user = new HashMap<>();
-            user.put(Constantes.KEY_NAME, binding.inputName.getText().toString());
-            user.put(Constantes.KEY_EMAIL, binding.inputEmail.getText().toString().trim());
-            user.put(Constantes.KEY_PASSWORD, binding.inputPassword.getText().toString().trim());
-            user.put(Constantes.KEY_IMAGE, encodedImage);
-
-            database.collection(Constantes.KEY_COLLECTION_USERS)
-                    .add(user)
-                    .addOnSuccessListener(documentReference -> {
-                        loading(false);
-                        preferenceManager.putBoolean(Constantes.KEY_IS_SIGNED_IN,true);
-                        preferenceManager.putString(Constantes.KEY_USER_ID,documentReference.getId());
-                        preferenceManager.putString(Constantes.KEY_NAME, binding.inputName.getText().toString());
-                        preferenceManager.putString(Constantes.KEY_IMAGE,encodedImage);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    })
-                    .addOnFailureListener(exception -> {
-                        loading(false);
-                        showToast(exception.getMessage());
-                    });
-        }
-
-    }
 
     private String encodeImage(Bitmap bitmap){
         int previewWidth = 150;
@@ -164,24 +134,41 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
             binding.buttonSignUp.setVisibility(View.VISIBLE);
         }
     }
-    boolean is;
-    public boolean toSign(String u, String p){
 
+    public void Sign(View view){
 
-        String user = u;
+        String user = binding.inputEmail.getText().toString().trim();
+        String pass = binding.inputPassword.getText().toString().trim();
 
-
-        String pass = p;
-
-        if(!user.equals("") && !pass.equals("")){
+        if(!user.equals("") && !pass.equals("") && isValidSignUpDetails()){
             mAuth.createUserWithEmailAndPassword(user, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                is = task.isSuccessful();
+                                loading(true);
+                                FirebaseFirestore database = FirebaseFirestore.getInstance();
+                                HashMap<String,Object> user = new HashMap<>();
+                                user.put(Constantes.KEY_NAME, binding.inputName.getText().toString());
+                                user.put(Constantes.KEY_EMAIL, binding.inputEmail.getText().toString().trim());
+                                user.put(Constantes.KEY_PASSWORD, binding.inputPassword.getText().toString().trim());
+                                user.put(Constantes.KEY_IMAGE, encodedImage);
+                                database.collection(Constantes.KEY_COLLECTION_USERS)
+                                        .add(user)
+                                        .addOnSuccessListener(documentReference -> {
+                                            loading(false);
+                                            preferenceManager.putBoolean(Constantes.KEY_IS_SIGNED_IN,true);
+                                            preferenceManager.putString(Constantes.KEY_USER_ID,documentReference.getId());
+                                            preferenceManager.putString(Constantes.KEY_NAME, binding.inputName.getText().toString());
+                                            preferenceManager.putString(Constantes.KEY_IMAGE,encodedImage);
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(intent);
+                                        })
+                                        .addOnFailureListener(exception -> {
+                                            loading(false);
+                                            showToast(exception.getMessage());
+                                        });
                             } else {
 
                             }
@@ -191,14 +178,7 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
                 showToast("El email ya se encuentra registrado");
             });
         }
-        else{
 
-            return  false;
-
-
-
-        }
-    return is;
     }
 
 }
