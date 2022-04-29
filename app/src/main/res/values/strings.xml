@@ -18,4 +18,6 @@
     <string name="registrarme">Registrarme</string>
     <string name="registrate">Registrate</string>
     <string name="chat">Chat</string>
+    <string name="nickname">nickname</string>
+    <string name="en_busca_de_perezosos">En Busca de Perezosos</string>
 </resources>
