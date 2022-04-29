@@ -8,12 +8,13 @@
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
-
     android:scrollbars="none"
     tools:context=".activities.Test_login_Activity"
-    android:background="#003552">
+    android:background="#003552"
+    >
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -83,12 +84,13 @@
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
                 app:cornerRadius="@dimen/_8sdp" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_25sdp"
+                android:layout_width="25dp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="center"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
         </FrameLayout>
 
 
