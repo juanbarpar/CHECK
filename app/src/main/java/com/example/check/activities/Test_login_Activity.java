@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.check.Principal.MainActivity;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;

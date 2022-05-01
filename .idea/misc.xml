@@ -50,9 +50,22 @@
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_box.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_icon.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_image.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_add.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_baseline_chat_bubble_24.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_exit.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.10408299866131192" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w936dp/activity_login2.xml" value="0.121484375" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login2.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_prueba.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_login.xml" value="0.152" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.1" />
       </map>
     </option>
   </component>
