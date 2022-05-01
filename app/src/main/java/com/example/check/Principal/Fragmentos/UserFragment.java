@@ -1,14 +1,20 @@
 package com.example.check.Principal.Fragmentos;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.check.R;
+import com.example.check.Utilities.Constantes;
+import com.example.check.Utilities.PreferenceManager;
+import com.example.check.databinding.FragmentUserBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +22,8 @@ import com.example.check.R;
  * create an instance of this fragment.
  */
 public class UserFragment extends Fragment {
+    private FragmentUserBinding binding;
+    private PreferenceManager preferenceManager;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +69,16 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        preferenceManager = new PreferenceManager(getContext());
+        binding= FragmentUserBinding.inflate(getLayoutInflater());
+        // Inflate the layout for this fragment
+        loadUserDetails();
+        return binding.getRoot();
+    }
+    private void loadUserDetails(){
+        binding.nombreUsuario.setText(preferenceManager.getString(Constantes.KEY_NAME));
+        byte[] bytes = Base64.decode(preferenceManager.getString(Constantes.KEY_IMAGE),Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+        binding.imagenPerfil.setImageBitmap(bitmap);
     }
 }
