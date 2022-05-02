@@ -31,19 +31,34 @@
         android:layout_marginVertical="@dimen/_20sdp"
         android:elevation="10dp"
         android:backgroundTint="#0085ca"
+
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/_8sdp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/check_png" />
+
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imagenPerfil"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_gravity="center"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="left"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="17dp"
                 android:layout_marginBottom="@dimen/_30sdp"
                 android:background="@drawable/background_icon"
                 android:scaleType="centerCrop"
@@ -51,24 +66,19 @@
 
             <TextView
                 android:id="@+id/nombreUsuario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="75dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="112dp"
+                android:layout_marginEnd="0dp"
                 android:text="Carlos Fernando Gaviria Hernandez"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/_20ssp"
-                android:textSize="@dimen/_20ssp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/en_busca_de_perezosos"
-
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_18ssp" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>
@@ -103,10 +113,6 @@
 
 
     </LinearLayout>
-
-
-
-
 
 
 </FrameLayout>

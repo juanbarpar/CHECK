@@ -80,7 +80,7 @@ public class ChatFragment extends Fragment {
                         preferenceManager.getString(Constantes.KEY_USER_ID)
                 );
         documentReference.update(Constantes.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(unused -> showToast("Token updated successfully"))
+                .addOnSuccessListener(unused -> showToast("Token creado"))
                 .addOnFailureListener(e -> showToast("Unable to update token"));
     }
 }
