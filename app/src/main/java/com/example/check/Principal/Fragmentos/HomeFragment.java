@@ -1,5 +1,6 @@
 package com.example.check.Principal.Fragmentos;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.check.Entidad.Connection;
+import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.TravelLocationAdapter;
 import com.example.check.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -78,13 +82,31 @@ public class HomeFragment extends Fragment {
 
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager);
 
-        try {
-            locationViewPager.setAdapter(new TravelLocationAdapter(gesExp.getAll(connection.execute("").get())));
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(connection.isConnected()){
+
+            try {
+                locationViewPager.setAdapter(new TravelLocationAdapter(gesExp.getAll(connection.execute("").get())));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            List<TravelLocation> travelLocations = new ArrayList<>();
+
+            TravelLocation travelLocation = new TravelLocation();
+            travelLocation.url = "";
+            travelLocation.location="No logramos conectar con el servidor";
+            travelLocation.title="Offline";
+            travelLocation.startRating = "";
+            Uri uri = Uri.parse("android.resource://com.example.check/" + R.drawable.signal);
+            travelLocation.imageUrl=uri.toString();
+            travelLocations.add(travelLocation);
+            locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
+
         }
+
         locationViewPager.setClipToPadding(false);
         locationViewPager.setClipChildren(false);
         locationViewPager.setOffscreenPageLimit(3);

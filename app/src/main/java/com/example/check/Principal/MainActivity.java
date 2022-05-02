@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private GestionTravelLocation gesExp;
     private FirebaseStorage storage;
     private StorageReference reference;
+    private Connection connection;
 
 
     @Override
@@ -67,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         gesExp = new GestionTravelLocation();
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
-        Connection connection = new Connection();
-
-
+        connection = new Connection();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void replace(Fragment fragment) {
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frames, fragment);
         transaction.commit();
@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStart() {
+
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser == null) {
             goLogin();
         }
+
     }
 
     private void goLogin() {
@@ -134,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
     private void goWeb(String inURL) {
 
         Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(inURL));
-
         startActivity(browse);
 
     }
@@ -146,68 +147,86 @@ public class MainActivity extends AppCompatActivity {
 
     public void getView(View view) {
 
-        KenBurnsView kbvImage;
-        TextView textTitle, textLocation, textStartRating;
+        if (!connection.isConnected()){
 
-        System.out.println(view.getTag());
+            View box = LayoutInflater.from(getApplicationContext()).inflate(
+                    R.layout.dialog_box_offline, findViewById(R.id.dialog_box_3)
+            );
 
-        kbvImage = view.findViewById(R.id.kbvLocation);
-        textTitle = view.findViewById(R.id.textTitle);
-        textStartRating = view.findViewById(R.id.textStartRating);
-        textLocation = view.findViewById(R.id.textLocation);
+            Dialog dialog = new Dialog(this);
 
-        System.out.println(textTitle.getText());
-        System.out.println(textStartRating.getText());
-        System.out.println(textLocation.getText());
-        System.out.println(kbvImage.getTag());
+            box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                MainActivity.this, R.style.bt_sheet_dialog
-
-        );
-        ///getAct..
-
-        View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
-                R.layout.bt_sheet, (LinearLayout) findViewById(R.id.bt_sheet_container)
-        );
-        bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
-            @Override
-
-            public void onClick(View view) {
-                goWeb((String) textTitle.getTag());
-
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-        KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
-        TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
-        TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
-
-        bottonSheetView.findViewById(R.id.share).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View viewe) {
-                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-                whatsappIntent.setType("text/plain");
-                whatsappIntent.setPackage("com.whatsapp");
-                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " +
-                        "expediciones programadas a distintos lugares de Colombia. " +
-                        "Una diversidad de destinos, itinerarios llenos de momentos" +
-                        " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
-                try {
-                    MainActivity.this.startActivity(whatsappIntent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    System.out.println("Whatsapp have not been installed.");
+                    dialog.dismiss();
                 }
-            }
-        });
+            });
 
-        textViewexp.setText(textTitle.getText());
-        textViewlugar.setText(textLocation.getText());
-        Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
-        bottomSheetDialog.setContentView(bottonSheetView);
-        bottomSheetDialog.show();
+            dialog.setContentView(box);
+            dialog.show();
 
+        }
+        else {
+            KenBurnsView kbvImage;
+            TextView textTitle, textLocation, textStartRating;
+            kbvImage = view.findViewById(R.id.kbvLocation);
+            textTitle = view.findViewById(R.id.textTitle);
+            textStartRating = view.findViewById(R.id.textStartRating);
+            textLocation = view.findViewById(R.id.textLocation);
+
+            System.out.println(textTitle.getText());
+            System.out.println(textStartRating.getText());
+            System.out.println(textLocation.getText());
+            System.out.println(kbvImage.getTag());
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    MainActivity.this, R.style.bt_sheet_dialog
+
+            );
+
+
+            View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
+                    R.layout.bt_sheet, (LinearLayout) findViewById(R.id.bt_sheet_container)
+            );
+            bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(new View.OnClickListener() {
+                @Override
+
+                public void onClick(View view) {
+                    goWeb((String) textTitle.getTag());
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            KenBurnsView kenBurnsView = bottonSheetView.findViewById(R.id.imageRes);
+            TextView textViewexp = bottonSheetView.findViewById(R.id.expedicion);
+            TextView textViewlugar = bottonSheetView.findViewById(R.id.lugar);
+
+            bottonSheetView.findViewById(R.id.share).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View viewe) {
+                    Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                    whatsappIntent.setType("text/plain");
+                    whatsappIntent.setPackage("com.whatsapp");
+                    whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " +
+                            "expediciones programadas a distintos lugares de Colombia. " +
+                            "Una diversidad de destinos, itinerarios llenos de momentos" +
+                            " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
+                    try {
+                        MainActivity.this.startActivity(whatsappIntent);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        System.out.println("Whatsapp have not been installed.");
+                    }
+                }
+            });
+
+            textViewexp.setText(textTitle.getText());
+            textViewlugar.setText(textLocation.getText());
+            Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
+            bottomSheetDialog.setContentView(bottonSheetView);
+            bottomSheetDialog.show();
+        }
     }
 
     public void showImageOp(View view) {
@@ -249,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
-
 
     private void fromCamera() {
 
@@ -308,8 +326,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
 
     private void uploadImage(Uri filePath) {
 

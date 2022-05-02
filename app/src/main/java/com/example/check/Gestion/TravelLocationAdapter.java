@@ -69,10 +69,6 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
 
             textTitle.setTag(travelLocation.url);
 
-
-
-
-
         }
     }
 }
