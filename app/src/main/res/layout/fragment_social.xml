@@ -71,6 +71,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/offimg"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_baseline_signal_wifi_off_24">
+
+                </ImageView>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,17 +124,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:visibility="invisible"
-                    android:id="@+id/offimg"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="center"
-                    android:tint="@color/white"
-                    android:src="@drawable/ic_baseline_signal_wifi_off_24">
 
-                </ImageView>
             </LinearLayout>
 
 
