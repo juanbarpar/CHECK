@@ -119,18 +119,20 @@ public class SocialFragment extends Fragment {
         recyclerView = view.findViewById(R.id.view_photo);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
-
+        ImageView imageView = view.findViewById(R.id.offimg);
         if(!new Connection().isConnected()){
 
             TextView textView = view.findViewById(R.id.offtext1);
             textView.setText("No tiene conexión a internet.");
             TextView textView2 = view.findViewById(R.id.offtext2);
             textView2.setText("Cuando tenga conexión a internet sus imagenes seran cargadas.");
-            ImageView imageView = view.findViewById(R.id.offimg);
+
             imageView.setVisibility(View.VISIBLE);
 
         }
         else{
+
+
 
             RecyclerView rvAlbum = view.findViewById(R.id.view_album);
             rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));

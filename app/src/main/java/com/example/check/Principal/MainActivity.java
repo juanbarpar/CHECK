@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.example.check.Entidad.Imagedb;
+import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
 import com.example.check.Gestion.GestionTravelLocation;
@@ -48,6 +49,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 import kotlin.jvm.functions.Function1;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
@@ -58,10 +61,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference reference;
     private Connection connection;
+    private GestionOfflineImage offlineImage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        offlineImage = new GestionOfflineImage();
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -71,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
         connection = new Connection();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(connection.isConnected()){
+
+            new GestionOfflineImage().uploadOnline();
+
+        }
 
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
@@ -271,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fromCamera() {
 
-        ImagePicker.with(this)
+        ImagePicker.with(this).saveDir(new File(getFilesDir(), "ImagePicker"))
                 .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
@@ -329,6 +342,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void uploadImage(Uri filePath) {
 
+
+        if(!connection.isConnected()){
+
+            Imagedb imdb2 = new Imagedb();
+            imdb2.setDate("wait");
+            imdb2.setUser(mAuth.getUid());
+            imdb2.setUrl(filePath.toString());
+            offlineImage.saveImage(imdb2);
+            return;
+
+        }
+
+
+
         if (filePath != null) {
 
             ProgressDialog progressDialog
@@ -352,8 +379,6 @@ public class MainActivity extends AppCompatActivity {
                                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                                     while (!uriTask.isSuccessful());
                                     Uri uriImage = uriTask.getResult();
-
-
 
                                     Imagedb imdb = new Imagedb();
                                     imdb.setDate("wait");
@@ -405,11 +430,4 @@ public class MainActivity extends AppCompatActivity {
                             });
         }
     }
-
-
-
-
-
-
-
 }
