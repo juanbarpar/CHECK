@@ -7,10 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.check.R;
+import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.FragmentChatBinding;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,13 +24,15 @@ import com.example.check.databinding.FragmentChatBinding;
  */
 public class ChatFragment extends Fragment {
 
+    private FragmentChatBinding binding;
+    private PreferenceManager preferenceManager;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
-    private PreferenceManager preferenceManager;
+
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -53,7 +60,27 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        binding = FragmentChatBinding.inflate(getLayoutInflater());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        preferenceManager = new PreferenceManager(getContext());
+        getToken();
+        return binding.getRoot();
+    }
+    private void showToast(String message){
+        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+    }
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+    private void updateToken(String token) {
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(Constantes.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(Constantes.KEY_USER_ID)
+                );
+        documentReference.update(Constantes.KEY_FCM_TOKEN, token)
+                .addOnSuccessListener(unused -> showToast("Token updated successfully"))
+                .addOnFailureListener(e -> showToast("Unable to update token"));
     }
 }
