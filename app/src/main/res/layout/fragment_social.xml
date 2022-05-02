@@ -12,7 +12,9 @@
     <!-- Barra superior -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/offline">
+
 
         <View
             android:id="@+id/actionbar"
@@ -62,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Albumes Check"
+                    android:id="@+id/offtext1"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/white"
                     android:textSize="18dp"
@@ -82,11 +85,11 @@
 
 
             <TextView
-                android:id="@+id/text_ultimo"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ultimas fotos"
-
+                android:id="@+id/offtext2"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/white"
                 android:textSize="18dp"
@@ -99,10 +102,28 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="100dp"
                 android:clipToPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/text_ultimo"
+                app:layout_constraintTop_toBottomOf="@id/offtext2"
                 >
             </androidx.recyclerview.widget.RecyclerView>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/offimg"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_baseline_signal_wifi_off_24">
+
+                </ImageView>
+            </LinearLayout>
 
 
 

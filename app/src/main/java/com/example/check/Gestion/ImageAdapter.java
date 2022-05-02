@@ -54,12 +54,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_post);
+
         }
         void setImageView(Imagedb image){
 
             Glide.with(activity)
                     .load(image.getUrl())
                     .into(imageView);
+            imageView.setBackground(null);
 
         }
     }

@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replace(Fragment fragment) {
+    public void replace(Fragment fragment) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frames, fragment);
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         if (!connection.isConnected()){
 
             View box = LayoutInflater.from(getApplicationContext()).inflate(
-                    R.layout.dialog_box_offline, findViewById(R.id.dialog_box_3)
+                    R.layout.offline_box, findViewById(R.id.dialog_box_3)
             );
 
             Dialog dialog = new Dialog(this);
