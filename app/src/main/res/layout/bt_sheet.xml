@@ -45,14 +45,15 @@
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/expedicion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="expedicion"
+                android:text="expedición"
                 android:textColor="@color/check3"
                 android:textSize="17sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/lugar"
                 android:layout_width="match_parent"

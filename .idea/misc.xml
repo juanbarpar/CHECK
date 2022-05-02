@@ -3,21 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/PERSONAL/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.67" />
-        <entry key="..\:/Users/PERSONAL/Documents/GitHub/CHECK/app/src/main/res/layout/bt_sheet.xml" value="0.1" />
-        <entry key="..\:/Users/PERSONAL/Documents/GitHub/CHECK/app/src/main/res/layout/dialog_box.xml" value="0.1" />
-        <entry key="..\:/Users/PERSONAL/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable-v24/bg_box.xml" value="0.1015" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable-v24/bg_button_delete.xml" value="0.1015" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout-w1240dp/dialog_box_2.xml" value="0.1" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/bt_sheet.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/dialog_box.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_blog.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_chat.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/item_album.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/item_home.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/PC/Documents/GitHub/CHECK/app/src/main/res/layout/item_photo.xml" value="0.14722222222222223" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1945" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/bg_bt.xml" value="0.1085" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/bg_button.xml" value="0.1085" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/bg_date.xml" value="0.1945" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_baseline_today_24.xml" value="0.115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_location.xml" value="0.115" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_op2.xml" value="0.1015" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_photo.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_user.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/drawable/ic_wave__1_.xml" value="0.1" />
@@ -42,15 +47,10 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/layout/item_album.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/layout/item_home.xml" value="0.22" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/layout/item_photo.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/menu/blog_menu.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1945" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1945" />
-        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
-        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
-        <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_login.xml" value="0.2" />
       </map>
     </option>
   </component>
