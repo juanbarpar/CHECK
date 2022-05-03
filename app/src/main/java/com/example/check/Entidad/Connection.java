@@ -14,10 +14,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 
 public class Connection extends AsyncTask <String,String,String>{
 
+
+    Context context;
+
+    public Connection(Context context) {
+        this.context = context;
+    }
 
     @Override
     protected String doInBackground(String... strings) {
@@ -54,18 +61,13 @@ public class Connection extends AsyncTask <String,String,String>{
 
     public boolean isConnected(){
 
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return true;
-        /*
-
-            try {
-                String command = "ping -c 1 google.com";
-                return (Runtime.getRuntime().exec(command).waitFor() == 0);
-            } catch (Exception e) {
-                return false;
-            }
-
-         */
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
 
     }
 }

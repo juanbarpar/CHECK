@@ -120,7 +120,7 @@ public class SocialFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
         ImageView imageView = view.findViewById(R.id.offimg);
-        if(!new Connection().isConnected()){
+        if(!new Connection(getActivity()).isConnected()){
 
             TextView textView = view.findViewById(R.id.offtext1);
             textView.setText("No tiene conexión a internet.");
@@ -138,7 +138,7 @@ public class SocialFragment extends Fragment {
             rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
             try {
-                rvAlbum.setAdapter(new AlbumAdapter(new GestionTravelLocation().getAllAlbum(new Connection().execute("").get())));
+                rvAlbum.setAdapter(new AlbumAdapter(new GestionTravelLocation().getAllAlbum(new Connection(getActivity()).execute("").get())));
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

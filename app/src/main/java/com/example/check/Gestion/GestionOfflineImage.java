@@ -33,12 +33,12 @@ public class GestionOfflineImage {
     private FirebaseStorage storage;
     private StorageReference reference;
 
-    public GestionOfflineImage() {
+    public GestionOfflineImage(File fi) {
 
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
 
-        this.ruta = "/data/user/0/com.example.check/files/offlineImages.txt";
+        this.ruta = fi.getPath()+"/LocalImages.txt";
         this.verificarArchivo();
 
     }
@@ -71,6 +71,7 @@ public class GestionOfflineImage {
 
         for (Imagedb imagedb : imagedbs){
             Uri filePath = Uri.parse(imagedb.getUrl());
+            System.out.println("File off: " + filePath);
 
             if (filePath != null) {
 
@@ -90,6 +91,8 @@ public class GestionOfflineImage {
                                         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                                         while (!uriTask.isSuccessful());
                                         Uri uriImage = uriTask.getResult();
+
+                                        System.out.println("onSuccess");
 
                                         Imagedb imdb = new Imagedb();
                                         imdb.setDate("wait");
@@ -142,7 +145,9 @@ public class GestionOfflineImage {
         Imagedb im = null;
 
         ArrayList<Imagedb> ims = new ArrayList();
+        System.out.println(this.ruta);
         try {
+
             file = new FileReader(this.ruta);
             br = new BufferedReader(file);
             while ((registro = br.readLine()) != null) {
@@ -152,6 +157,7 @@ public class GestionOfflineImage {
             }
 
         } catch (IOException ex) {
+            System.out.println(ex);
             System.out.println("Problemas con la ruta...");
         }
         return ims;

@@ -19,6 +19,7 @@ import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Principal.Fragmentos.HomeFragment;
+import com.example.check.Principal.Fragmentos.OfflineFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
 import com.example.check.Principal.Fragmentos.UserFragment;
@@ -62,29 +63,32 @@ public class MainActivity extends AppCompatActivity {
     private StorageReference reference;
     private Connection connection;
     private GestionOfflineImage offlineImage;
+    private File DIR_SAVE_IMAGES;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
-        offlineImage = new GestionOfflineImage();
-
-
         mAuth = FirebaseAuth.getInstance();
         gesExp = new GestionTravelLocation();
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
-        connection = new Connection();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DIR_SAVE_IMAGES = new File(getFilesDir(), "ImagePicker");
+        offlineImage = new GestionOfflineImage(DIR_SAVE_IMAGES);
+        System.out.println("File: "+DIR_SAVE_IMAGES.getPath());
+
+        connection = new Connection(this);
+
         if(connection.isConnected()){
 
-            new GestionOfflineImage().uploadOnline();
+            offlineImage.uploadOnline();
 
         }
-
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         System.out.println(connection.isConnected() + "------------");
@@ -160,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void getView(View view) {
 
+
+
         if (!connection.isConnected()){
 
             View box = LayoutInflater.from(getApplicationContext()).inflate(
@@ -171,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
             box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     dialog.dismiss();
                 }
             });
@@ -284,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fromCamera() {
 
-        ImagePicker.with(this).saveDir(new File(getFilesDir(), "ImagePicker"))
+        ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
                 .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
@@ -293,11 +298,10 @@ public class MainActivity extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        System.out.println("Code: "+ requestCode);
 
         if (resultCode != Activity.RESULT_OK) {
             return;
@@ -307,9 +311,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
 
                 Uri currentUri = data.getData();
-                System.out.println(currentUri);
-                System.out.println(requestCode);
-
+                System.out.println("Saved Uri: " + currentUri);
                 View box = LayoutInflater.from(getApplicationContext()).inflate(
                         R.layout.dialog_box, findViewById(R.id.dialog_box_con)
                 );
@@ -317,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageView imageView = box.findViewById(R.id.selectedimage);
                 Picasso.get().load(currentUri).into(imageView);
                 Dialog dialog = new Dialog(this);
+
 
                 box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -329,7 +332,6 @@ public class MainActivity extends AppCompatActivity {
                 box.findViewById(R.id.rojo).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         dialog.dismiss();
                     }
                 });

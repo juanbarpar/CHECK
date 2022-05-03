@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
         GestionTravelLocation gesExp = new GestionTravelLocation();
-        Connection connection = new Connection();
+        Connection connection = new Connection(getActivity());
 
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager);
 
