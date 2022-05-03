@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CHECK" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.CHECK" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/check1</item>
-        <item name="colorPrimaryVariant">@color/check1</item>
+        <item name="colorPrimary">@color/check1.2</item>
+        <item name="colorPrimaryVariant">@color/check1.2</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

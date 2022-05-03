@@ -7,8 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.check.R;
+import com.example.check.Utilities.Constantes;
+import com.example.check.Utilities.PreferenceManager;
+import com.example.check.databinding.FragmentChatBinding;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,12 +24,12 @@ import com.example.check.R;
  */
 public class ChatFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentChatBinding binding;
+    private PreferenceManager preferenceManager;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -30,15 +37,6 @@ public class ChatFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ChatFragment newInstance(String param1, String param2) {
         ChatFragment fragment = new ChatFragment();
         Bundle args = new Bundle();
@@ -48,9 +46,11 @@ public class ChatFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -60,7 +60,27 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        binding = FragmentChatBinding.inflate(getLayoutInflater());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        preferenceManager = new PreferenceManager(getContext());
+        getToken();
+        return binding.getRoot();
+    }
+    private void showToast(String message){
+        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+    }
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    }
+    private void updateToken(String token) {
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(Constantes.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(Constantes.KEY_USER_ID)
+                );
+        documentReference.update(Constantes.KEY_FCM_TOKEN, token)
+                .addOnSuccessListener(unused -> showToast("Token creado"))
+                .addOnFailureListener(e -> showToast("Unable to update token"));
     }
 }
