@@ -4,28 +4,54 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.check.Principal.LoginActivity;
 import com.example.check.Principal.MainActivity;
+import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Test_login_Activity extends AppCompatActivity {
     private ActivityTestLoginBinding binding;
     private PreferenceManager preferenceManager;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         binding = ActivityTestLoginBinding.inflate(getLayoutInflater());
+        mAuth = FirebaseAuth.getInstance();
         setContentView(binding.getRoot());
         setListeners();
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogAuthentication();
+    }
+    private void LogAuthentication() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent Log = new Intent(this, MainActivity.class);
+            startActivity(Log);
+        }
+    }
+
     private void  setListeners() {
         binding.buttonSignUp.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(),Test_Sign_Up_Activity.class)));
@@ -38,6 +64,28 @@ public class Test_login_Activity extends AppCompatActivity {
    }
 
    private void signIn() {
+
+       String user = binding.inputEmail.getText().toString().trim();
+       String pass = binding.inputPassword.getText().toString().trim();
+
+       if (!user.equals("") && !pass.equals("")) {
+           mAuth.signInWithEmailAndPassword(user, pass)
+                   .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                       @Override
+                       public void onComplete(@NonNull Task<AuthResult> task) {
+                           if (task.isSuccessful()) {
+
+                               LogAuthentication();
+
+                           } else {
+                               Toast.makeText(Test_login_Activity.this, "Authentication failed.",
+                                       Toast.LENGTH_SHORT).show();
+                           }
+                       }
+                   });
+       }
+
+
         loading(true);
        FirebaseFirestore database = FirebaseFirestore.getInstance();
        database.collection(Constantes.KEY_COLLECTION_USERS)
@@ -90,4 +138,5 @@ public class Test_login_Activity extends AppCompatActivity {
            return true;
         }
    }
+
 }
