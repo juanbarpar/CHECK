@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Gestion.AlbumAdapter;
+import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.ImageAdapter;
@@ -37,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -105,10 +107,16 @@ public class SocialFragment extends Fragment {
     private RecyclerView recyclerView;
     List<Imagedb> imageList = new ArrayList<>();
 
+    private GestionOfflineImage offlineImage;
+    private File DIR_SAVE_IMAGES;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
 
 
 
@@ -118,6 +126,16 @@ public class SocialFragment extends Fragment {
         view =  inflater.inflate(R.layout.fragment_social, container, false);
         recyclerView = view.findViewById(R.id.view_photo);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+
+        DIR_SAVE_IMAGES = new File(getActivity().getFilesDir(), "ImagePicker");
+        offlineImage = new GestionOfflineImage(DIR_SAVE_IMAGES);
+        System.out.println("File: "+DIR_SAVE_IMAGES.getPath());
+
+        if(new Connection(getActivity()).isConnected()){
+
+            offlineImage.uploadOnline();
+
+        }
 
         ImageView imageView = view.findViewById(R.id.offimg);
         if(!new Connection(getActivity()).isConnected()){

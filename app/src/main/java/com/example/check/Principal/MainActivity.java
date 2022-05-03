@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
 
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             offlineImage.uploadOnline();
 
         }
+
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         System.out.println(connection.isConnected() + "------------");
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void replace(Fragment fragment) {
 
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frames, fragment);
         transaction.commit();
@@ -136,9 +140,12 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
 
+
         if (currentUser == null) {
             goLogin();
         }
+
+
 
     }
 

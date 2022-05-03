@@ -80,6 +80,8 @@ public class HomeFragment extends Fragment {
         GestionTravelLocation gesExp = new GestionTravelLocation();
         Connection connection = new Connection(getActivity());
 
+
+
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager);
 
         if(connection.isConnected()){
