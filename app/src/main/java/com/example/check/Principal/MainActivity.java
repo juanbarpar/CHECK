@@ -165,11 +165,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void logout(View view) {
-        mAuth.signOut();
-        goLogin();
-    }
-
     public void getView(View view) {
 
 
@@ -347,6 +342,11 @@ public class MainActivity extends AppCompatActivity {
                 dialog.setContentView(box);
                 dialog.show();
         }
+
+    }
+    public void logout(View view) {
+        mAuth.signOut();
+        goLogin();
 
     }
 

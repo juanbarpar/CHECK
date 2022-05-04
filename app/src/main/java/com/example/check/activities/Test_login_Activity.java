@@ -62,9 +62,7 @@ public class Test_login_Activity extends AppCompatActivity {
         });
 
    }
-
-   private void signIn() {
-
+   private void Authentication(){
        String user = binding.inputEmail.getText().toString().trim();
        String pass = binding.inputPassword.getText().toString().trim();
 
@@ -84,6 +82,9 @@ public class Test_login_Activity extends AppCompatActivity {
                        }
                    });
        }
+   }
+
+   private void signIn() {
 
 
         loading(true);
@@ -95,6 +96,7 @@ public class Test_login_Activity extends AppCompatActivity {
                .addOnCompleteListener(task -> {
                    if(task.isSuccessful() && task.getResult() !=null
                             && task.getResult().getDocuments().size() > 0){
+                       Authentication();
                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
                        preferenceManager.putBoolean(Constantes.KEY_IS_SIGNED_IN,true);
                        preferenceManager.putString(Constantes.KEY_USER_ID,documentSnapshot.getId());

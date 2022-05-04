@@ -19,6 +19,7 @@ import com.example.check.Utilities.PreferenceManager;
 import com.example.check.activities.Test_login_Activity;
 import com.example.check.databinding.ActivityMainBinding;
 import com.example.check.databinding.FragmentUserBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +34,7 @@ import java.util.HashMap;
 public class UserFragment extends Fragment {
     private FragmentUserBinding binding;
     private PreferenceManager preferenceManager;
+    private FirebaseAuth mAuth;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -83,6 +85,7 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         preferenceManager = new PreferenceManager(getContext());
         binding= FragmentUserBinding.inflate(getLayoutInflater());
+        mAuth = FirebaseAuth.getInstance();
         // Inflate the layout for this fragment
         loadUserDetails();
         setListeners();
@@ -110,9 +113,12 @@ public class UserFragment extends Fragment {
         documentReference.update(updates)
                 .addOnSuccessListener(unused -> {
                     preferenceManager.clear();
+                    mAuth.signOut();
                     startActivity(new Intent(getContext(), Test_login_Activity.class));
                     getActivity().finish();
                 })
                 .addOnFailureListener(e -> showToast("No es posible cerrar sesion"));
+
     }
+
 }
