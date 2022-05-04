@@ -4,7 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nuestras_expediciones">Nuestras expediciones</string>
     <string-array name="expediciones">
+        <item>En Busca del Paraíso Teyuna</item>
         <item>En Busca del Safari Marino</item>
+        <item>En Busca de Perezosos</item>
         <item>En Busca de un Jeeptrip con Olor a Café</item>
         <item>En Busca de un Pueblito Mágico</item>
         </string-array>

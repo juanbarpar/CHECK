@@ -3,12 +3,27 @@ package com.example.check.Principal.Fragmentos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.check.Gestion.GestionItinerario;
+import com.example.check.Gestion.ItineraryAdapter;
 import com.example.check.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +31,8 @@ import com.example.check.R;
  * create an instance of this fragment.
  */
 public class UserFragment extends Fragment {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,12 +72,55 @@ public class UserFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        View view =  inflater.inflate(R.layout.fragment_user, container, false);
+        GestionItinerario gesIti = new GestionItinerario();
+
+
+        ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager2);
+
+        db.collection("Users").document(mAuth.getCurrentUser().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    String expedition = documentSnapshot.getString("Expedicion");
+                    locationViewPager.setAdapter(new ItineraryAdapter(gesIti.getItinerario(expedition)));
+
+
+                }
+            }
+        });
+
+
+
+
+
+        locationViewPager.setClipToPadding(false);
+        locationViewPager.setClipChildren(false);
+        locationViewPager.setOffscreenPageLimit(3);
+        locationViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
+        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                float r = 1 - Math.abs(position);
+                page.setScaleY(0.90f + r * 0.04f);
+            }
+        });
+        locationViewPager.setPageTransformer(compositePageTransformer);
+
+
+
+        return view;
     }
 }

@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
         user.put("Nick", nick);
         user.put("Expedicion", expedicion);
 
-        mFirestore.collection("Users").document(mAuth.getCurrentUser().getEmail())
+        mFirestore.collection("Users").document(mAuth.getCurrentUser().getUid())
                 .set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
