@@ -14,17 +14,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
-            android:name=".Principal.LoginActivity"
+            android:name=".Prueba"
             android:exported="false" />
         <activity
-            android:name=".Principal.MainActivity"
-            android:exported="true">
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".activities.Test_login_Activity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Principal.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Principal.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Test_Sign_Up_Activity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name=".Firebase.Servicio_Mensajeria"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
