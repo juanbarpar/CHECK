@@ -25,6 +25,7 @@ import com.example.check.Principal.Fragmentos.OfflineFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
 import com.example.check.Principal.Fragmentos.UserFragment;
+import com.example.check.activities.Test_login_Activity;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -155,8 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void goLogin() {
 
-
-        Intent Log = new Intent(this, LoginActivity.class);
+        Intent Log = new Intent(this, Test_login_Activity.class);
         startActivity(Log);
 
     }

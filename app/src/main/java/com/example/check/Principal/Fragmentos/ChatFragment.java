@@ -68,7 +68,7 @@ public class ChatFragment extends Fragment {
         return binding.getRoot();
     }
     private void showToast(String message){
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
     }
     private void getToken(){
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);

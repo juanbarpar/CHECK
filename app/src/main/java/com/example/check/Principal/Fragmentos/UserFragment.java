@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.example.check.Principal.LoginActivity;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.activities.Test_login_Activity;
 import com.example.check.databinding.ActivityMainBinding;
 import com.example.check.databinding.FragmentUserBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,6 +68,8 @@ public class UserFragment extends Fragment {
         return fragment;
     }
 
+    private FirebaseAuth mAuth;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,8 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         loadUserDetails();
         setListeners();
+
+        mAuth = FirebaseAuth.getInstance();
         return binding.getRoot();
     }
     private void loadUserDetails(){
@@ -99,20 +105,19 @@ public class UserFragment extends Fragment {
     }
     private void signOut(){
 
-        showToast("Cerrando sesion");
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference =
-                database.collection(Constantes.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constantes.KEY_USER_ID)
-                );
-        HashMap<String,Object> updates =new HashMap<>();
-        updates.put(Constantes.KEY_FCM_TOKEN, FieldValue.delete());
-        documentReference.update(updates)
-                .addOnSuccessListener(unused -> {
-                    preferenceManager.clear();
-                    startActivity(new Intent(getContext(), Test_login_Activity.class));
-                    getActivity().finish();
-                })
-                .addOnFailureListener(e -> showToast("No es posible cerrar sesion"));
+
+        mAuth.signOut();
+        goLogin();
+
     }
+
+    private void goLogin() {
+
+
+        Intent Log = new Intent(getActivity(), Test_login_Activity.class);
+        startActivity(Log);
+
+    }
+
+
 }

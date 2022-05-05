@@ -4,28 +4,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.check.Principal.LoginActivity;
 import com.example.check.Principal.MainActivity;
+import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Test_login_Activity extends AppCompatActivity {
     private ActivityTestLoginBinding binding;
     private PreferenceManager preferenceManager;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());
         binding = ActivityTestLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mAuth = FirebaseAuth.getInstance();
         setListeners();
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogAuthentication();
+    }
+
     private void  setListeners() {
         binding.buttonSignUp.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(),Test_Sign_Up_Activity.class)));
@@ -37,29 +56,45 @@ public class Test_login_Activity extends AppCompatActivity {
 
    }
 
+    private void LogAuthentication() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent Log = new Intent(this, MainActivity.class);
+            startActivity(Log);
+        }
+    }
+
    private void signIn() {
         loading(true);
-       FirebaseFirestore database = FirebaseFirestore.getInstance();
-       database.collection(Constantes.KEY_COLLECTION_USERS)
-               .whereEqualTo(Constantes.KEY_EMAIL,binding.inputEmail.getText().toString())
-               .whereEqualTo(Constantes.KEY_PASSWORD, binding.inputPassword.getText().toString())
-               .get()
-               .addOnCompleteListener(task -> {
-                   if(task.isSuccessful() && task.getResult() !=null
-                            && task.getResult().getDocuments().size() > 0){
-                       DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                       preferenceManager.putBoolean(Constantes.KEY_IS_SIGNED_IN,true);
-                       preferenceManager.putString(Constantes.KEY_USER_ID,documentSnapshot.getId());
-                       preferenceManager.putString(Constantes.KEY_NAME, documentSnapshot.getString(Constantes.KEY_NAME));
-                       preferenceManager.putString(Constantes.KEY_IMAGE, documentSnapshot.getString(Constantes.KEY_IMAGE));
-                       Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                       startActivity(intent);
-                   }else{
-                       loading(false);
-                       showToast("No es posible iniciar sesion");
-                   }
-               });
+
+
+       String user = binding.inputEmail.getText().toString();
+
+       String pass = binding.inputPassword.getText().toString();
+
+       if(!user.equals("") && !pass.equals("")){
+           mAuth.signInWithEmailAndPassword(user, pass)
+                   .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                       @Override
+                       public void onComplete(@NonNull Task<AuthResult> task) {
+                           if (task.isSuccessful()) {
+
+                               LogAuthentication();
+
+                           } else {
+
+                           }
+                       }
+                   });
+       }
+       else{
+
+           Toast.makeText(this, "Los campos estan vacios.",
+                   Toast.LENGTH_SHORT).show();
+
+       }
+
+
    }
 
    private void loading(Boolean isLoading) {
