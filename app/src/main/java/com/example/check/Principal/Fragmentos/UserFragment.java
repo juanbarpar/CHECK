@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.example.check.Entidad.Itineraries;
 import com.example.check.Gestion.GestionItinerario;
 import com.example.check.Gestion.ItineraryAdapter;
 import com.example.check.R;
@@ -24,6 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +79,7 @@ public class UserFragment extends Fragment {
         }
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
     }
 
     @Override
@@ -81,26 +87,11 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_user, container, false);
-        GestionItinerario gesIti = new GestionItinerario();
-
 
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager2);
+        GestionItinerario itinerario = new GestionItinerario();
 
-        db.collection("Users").document(mAuth.getCurrentUser().getUid())
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()){
-                    String expedition = documentSnapshot.getString("Expedicion");
-                    locationViewPager.setAdapter(new ItineraryAdapter(gesIti.getItinerario(expedition)));
-
-
-                }
-            }
-        });
-
-
-
+        itinerario.setAdapter(locationViewPager);
 
 
         locationViewPager.setClipToPadding(false);
@@ -108,7 +99,7 @@ public class UserFragment extends Fragment {
         locationViewPager.setOffscreenPageLimit(3);
         locationViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+       CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
         compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
             @Override
