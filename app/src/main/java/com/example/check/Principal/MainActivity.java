@@ -286,6 +286,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fromFiles() {
+        ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
+                .galleryOnly()
+                .crop()
+                .start(REQUEST_IMAGE_CAPTURE);
+
+        /*
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
 
@@ -295,11 +301,14 @@ public class MainActivity extends AppCompatActivity {
 
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+         */
     }
 
     private void fromCamera() {
 
         ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
+                .crop()
                 .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
@@ -312,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         if (resultCode != Activity.RESULT_OK) {
             return;
@@ -400,6 +410,8 @@ public class MainActivity extends AppCompatActivity {
                                     FirebaseDatabase db = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = db.getReference("Images");
                                     databaseReference.push().setValue(imdb);
+
+                                    offlineImage.eliminar(imdb.getUrl());
 
                                     progressDialog.dismiss();
                                     Toast

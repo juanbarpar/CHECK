@@ -99,7 +99,7 @@ public class GestionOfflineImage {
                                         imdb.setUser(imagedb.getUser());
                                         imdb.setUrl(uriImage.toString());
 
-                                        eliminar(imagedb.getUser());
+                                        eliminar(imagedb.getUrl());
 
                                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                                         DatabaseReference databaseReference = db.getReference("Images");
@@ -165,10 +165,45 @@ public class GestionOfflineImage {
 
     public void eliminar(String code) {
 
-        File fi = new File(this.ruta);
+        File fi = new File(code);
         fi.delete();
 
+        ArrayList<Imagedb> rooms = this.getTodos();
+        for (Imagedb room : rooms) {
+
+            if (room.getUrl().equals(code)) {
+                rooms.remove(room);
+                System.out.println("Eliminando: " + code);
+                this.remplazarArchivo(rooms);
+                break;
+            }
+        }
+
+
     }
+
+    private void remplazarArchivo(ArrayList<Imagedb> rooms) {
+
+        try {
+            File fi = new File(this.ruta);
+            FileWriter fr = new FileWriter(fi, false);
+            PrintWriter pw = new PrintWriter(fr);
+
+            for (Imagedb room : rooms) {
+
+                pw.println(room);
+
+            }
+            pw.close();
+
+        } catch (IOException f) {
+            System.out.println("Error al remp");
+
+        }
+
+    }
+
+
 
 }
 
