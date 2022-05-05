@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.check.Entidad.Album;
+import com.example.check.Entidad.TravelLocation;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -17,8 +18,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder>{
-    private List<Album> albums;
-    public AlbumAdapter(List<Album> travelLocations) {
+    private List<TravelLocation> albums;
+    public AlbumAdapter(List<TravelLocation> travelLocations) {
         this.albums = travelLocations;
     }
     @NonNull
@@ -48,11 +49,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
             kbvLocation = itemView.findViewById(R.id.kbvAlbum);
             textTitle = itemView.findViewById(R.id.text_album);
         }
-            void setLocationData(Album album){
+            void setLocationData(TravelLocation album){
 
-            kbvLocation.setTag(album.imageUrl);
-            Picasso.get().load(album.imageUrl).into(kbvLocation);
-            textTitle.setText(album.title);
+            kbvLocation.setTag(album.imagen);
+            Picasso.get().load(album.imagen).into(kbvLocation);
+            textTitle.setText(album.Nombre);
 
 
         }

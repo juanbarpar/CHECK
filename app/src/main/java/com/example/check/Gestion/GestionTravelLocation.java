@@ -1,7 +1,15 @@
 package com.example.check.Gestion;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.check.Entidad.Album;
 import com.example.check.Entidad.TravelLocation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,76 +21,6 @@ import java.util.List;
 public class GestionTravelLocation {
 
 
-    public List<TravelLocation> getAll(String response) {
-
-        List<TravelLocation> travelLocations = new ArrayList<>();
-
-        try {
-
-            try {
-
-                JSONArray jresponse = new JSONArray(response);
-
-                for (int i = 0;i<jresponse.length();i++) {
-                    JSONObject jsonObject = jresponse.getJSONObject(i);
-                    TravelLocation travelLocation = new TravelLocation();
-                    travelLocation.imageUrl = (jsonObject.getString("imagen"));
-                    travelLocation.title = (jsonObject.getString("Nombre"));
-                    travelLocation.location = (jsonObject.getString("ubicación"));
-                    travelLocation.startRating = (jsonObject.getString("fecha"));
-                    travelLocation.url = (jsonObject.getString("url"));
-
-                    travelLocations.add(travelLocation);
 
 
-                    System.out.println(jsonObject);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            System.out.printf("g");
-            e.printStackTrace();
-        }
-
-        return travelLocations;
-    }
-
-    public List<Album> getAllAlbum(String response) {
-
-        List<Album> travelLocations = new ArrayList<>();
-
-        try {
-
-            try {
-
-                JSONArray jresponse = new JSONArray(response);
-
-                for (int i = 0;i<jresponse.length();i++) {
-                    JSONObject jsonObject = jresponse.getJSONObject(i);
-                    Album travelLocation = new Album();
-                    travelLocation.imageUrl = (jsonObject.getString("imagen"));
-                    travelLocation.title = (jsonObject.getString("Nombre"));
-                    travelLocation.location = (jsonObject.getString("ubicación"));
-
-
-                    travelLocations.add(travelLocation);
-
-
-                    System.out.println(jsonObject);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        } catch (Exception e) {
-            System.out.printf("g");
-            e.printStackTrace();
-        }
-
-        return travelLocations;
-    }
 }

@@ -22,12 +22,16 @@ import android.widget.TextView;
 
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Imagedb;
+import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.AlbumAdapter;
+import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.ImageAdapter;
 import com.example.check.Principal.MainActivity;
 import com.example.check.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -89,9 +94,6 @@ public class SocialFragment extends Fragment {
     }
 
 
-
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -104,6 +106,8 @@ public class SocialFragment extends Fragment {
     private View view;
     private RecyclerView recyclerView;
     List<Imagedb> imageList = new ArrayList<>();
+    private GestionOfflineImage offlineImage;
+    private File DIR_SAVE_IMAGES;
 
 
     @Override
@@ -111,16 +115,25 @@ public class SocialFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
-        view =  inflater.inflate(R.layout.fragment_social, container, false);
+        view = inflater.inflate(R.layout.fragment_social, container, false);
         recyclerView = view.findViewById(R.id.view_photo);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+        DIR_SAVE_IMAGES = new File(getActivity().getFilesDir(), "ImagePicker");
+        offlineImage = new GestionOfflineImage(DIR_SAVE_IMAGES);
+        System.out.println("File: " + DIR_SAVE_IMAGES.getPath());
+
+        if (new Connection(getActivity()).isConnected()) {
+
+            offlineImage.uploadOnline();
+
+        }
 
         ImageView imageView = view.findViewById(R.id.offimg);
-        if(!new Connection(getActivity()).isConnected()){
+        if (!new Connection(getActivity()).isConnected()) {
 
             TextView textView = view.findViewById(R.id.offtext1);
             textView.setText("No tiene conexión a internet.");
@@ -129,42 +142,53 @@ public class SocialFragment extends Fragment {
 
             imageView.setVisibility(View.VISIBLE);
 
-        }
-        else{
-
-
+        } else {
+            List<TravelLocation> travelLocations = new ArrayList<>();
 
             RecyclerView rvAlbum = view.findViewById(R.id.view_album);
-            rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+            rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+            GestionTravelLocation gest = new GestionTravelLocation();
+            rvAlbum.setAdapter(new AlbumAdapter(travelLocations));
 
-            try {
-                rvAlbum.setAdapter(new AlbumAdapter(new GestionTravelLocation().getAllAlbum(new Connection(getActivity()).execute("").get())));
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            StorageReference listRef = storage.getReference().child("images/"
-                    + mAuth.getUid());
-
-
-            recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs,getActivity()));
 
             FirebaseDatabase db = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = db.getReference("Images");
-            databaseReference.addChildEventListener(new ChildEventListener() {
+            DatabaseReference databaseReference = db.getReference("Expediciones");
+            databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                    if (!task.isSuccessful()) {
+                        System.out.println("fallo");
+                    } else {
+                        for (DataSnapshot ds : task.getResult().getChildren()) {
+
+                            TravelLocation travelLocation = ds.getValue(TravelLocation.class);
+                            System.out.println(travelLocation.toString());
+                            travelLocations.add(travelLocation);
+                            rvAlbum.getAdapter().notifyDataSetChanged();
+                        }
+
+                        System.out.println("AQUI???? " + String.valueOf(task.getResult().getValue()));
+                    }
+                }
+            });
+
+
+            rvAlbum.getAdapter().notifyDataSetChanged();
+
+            recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs, getActivity()));
+
+            FirebaseDatabase db1 = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference1 = db1.getReference("Images");
+            databaseReference1.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    if(!GestionImage.imagedbs.contains(snapshot.getValue(Imagedb.class))){
+                    if (!GestionImage.imagedbs.contains(snapshot.getValue(Imagedb.class))) {
                         Imagedb imagedb = snapshot.getValue(Imagedb.class);
                         GestionImage.addImage(imagedb);
-
                     }
                     recyclerView.getAdapter().notifyDataSetChanged();
-
-
                 }
 
                 @Override

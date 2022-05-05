@@ -13,7 +13,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Imagedb;
+import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
@@ -25,12 +27,14 @@ import com.example.check.Principal.Fragmentos.SocialFragment;
 import com.example.check.Principal.Fragmentos.UserFragment;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,7 +54,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import kotlin.jvm.functions.Function1;
 import me.ibrahimsn.lib.SmoothBottomBar;
@@ -134,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
 
         if (currentUser == null) {
             goLogin();

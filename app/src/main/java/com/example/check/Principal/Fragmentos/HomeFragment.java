@@ -19,6 +19,11 @@ import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.TravelLocationAdapter;
 import com.example.check.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,24 +89,43 @@ public class HomeFragment extends Fragment {
 
         if(connection.isConnected()){
 
-            try {
-                locationViewPager.setAdapter(new TravelLocationAdapter(gesExp.getAll(connection.execute("").get())));
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            List<TravelLocation> travelLocations = new ArrayList<>();
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = db.getReference("Expediciones");
+            databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@androidx.annotation.NonNull Task<DataSnapshot> task) {
+
+                    if (!task.isSuccessful()) {
+                        System.out.println("fallo");
+                    }
+                    else {
+                        for (DataSnapshot ds : task.getResult().getChildren()) {
+
+                            TravelLocation travelLocation = ds.getValue(TravelLocation.class);
+                            System.out.println(travelLocation.toString());
+                            travelLocations.add(travelLocation);
+                        }
+                        locationViewPager.getAdapter().notifyDataSetChanged();
+                        System.out.println("AQUI???? "+String.valueOf(task.getResult().getValue()));
+                    }
+                }
+            });
+
+            locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
+
+            locationViewPager.getAdapter().notifyDataSetChanged();
 
         }else {
-            List<TravelLocation> travelLocations = new ArrayList<>();
 
+            List<TravelLocation> travelLocations = new ArrayList<>();
             TravelLocation travelLocation = new TravelLocation();
             travelLocation.url = "";
-            travelLocation.location="No logramos conectar con el servidor";
-            travelLocation.title="Offline";
-            travelLocation.startRating = "";
+            travelLocation.ubicación="No logramos conectar con el servidor";
+            travelLocation.Nombre="Offline";
+            travelLocation.fecha = "";
             Uri uri = Uri.parse("android.resource://com.example.check/" + R.drawable.signal);
-            travelLocation.imageUrl=uri.toString();
+            travelLocation.imagen=uri.toString();
             travelLocations.add(travelLocation);
             locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
 
