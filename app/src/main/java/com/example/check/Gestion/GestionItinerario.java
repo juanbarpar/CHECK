@@ -28,7 +28,7 @@ public class GestionItinerario {
     private FirebaseFirestore db;
 
 
-    public void setAdapter(ViewPager2 locationViewPager) {
+    public void updatelocationViewPager(ViewPager2 locationViewPager) {
         List<Itineraries> itinerarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -53,12 +53,15 @@ public class GestionItinerario {
                                             itinerario.setDia("Día "+i);
                                             itinerario.setFecha(ds.child("Día " + i).child(String.valueOf(0)).getValue().toString());
                                             for (DataSnapshot ds2: ds.child("Día " + i).getChildren()) {
-                                                if(!ds2.getChildren().equals("0")){
+                                                if(!ds2.getKey().equals("0")){
                                                     eventos += "•"+ ds2.getValue().toString() +"\n";
                                                 }
 
                                             }
                                             itinerario.setEventos(eventos);
+                                            System.out.println(itinerario.getDia()+", "
+                                                    +itinerario.getFecha()+ ", "
+                                                    +itinerario.getEventos());
 
 
                                             itinerarios.add(itinerario);

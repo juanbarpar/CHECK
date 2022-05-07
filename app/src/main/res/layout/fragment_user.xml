@@ -7,7 +7,8 @@
     android:background="@color/check1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Principal.Fragmentos.HomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,12 +42,13 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/locationViewPager2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
+            android:layout_height="0dp"
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintTop_toBottomOf="@id/View"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
