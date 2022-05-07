@@ -29,6 +29,7 @@ public class Test_login_Activity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     private FirebaseAuth mAuth;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferenceManager = new PreferenceManager(getApplicationContext());

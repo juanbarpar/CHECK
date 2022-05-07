@@ -9,10 +9,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
@@ -42,6 +44,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import android.content.Intent;
@@ -50,6 +53,7 @@ import androidx.annotation.NonNull;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -152,31 +156,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
     private void goLogin() {
 
         Intent Log = new Intent(this, Test_login_Activity.class);
         startActivity(Log);
 
     }
-
     private void goWeb(String inURL) {
 
         Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(inURL));
         startActivity(browse);
 
     }
-
     public void logout(View view) {
         mAuth.signOut();
         goLogin();
     }
 
+
+
+
     public void getView(View view) {
-
-
-
         if (!connection.isConnected()){
 
             View box = LayoutInflater.from(getApplicationContext()).inflate(
@@ -258,6 +258,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     public void showImageOp(View view) {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.bt_sheet_dialog);
@@ -283,6 +286,34 @@ public class MainActivity extends AppCompatActivity {
 
         bottomSheetDialog.setContentView(bottonSheetView);
         bottomSheetDialog.show();
+
+    }
+
+    public void showImage(View view){
+
+        View box = LayoutInflater.from(getApplicationContext()).inflate(
+                R.layout.image_layout, findViewById(R.id.image_container)
+        );
+
+        Dialog dialog = new Dialog(this);
+
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        RoundedImageView imageView = box.findViewById(R.id.imageFS);
+        Glide.with(this)
+                .load(view.getTag())
+                .into(imageView);
+        imageView.setBackground(null);
+
+        dialog.setContentView(box);
+        dialog.show();
 
     }
 

@@ -58,6 +58,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         }
         void setImageView(Imagedb image){
 
+            imageView.setTag(image.getUrl());
+
             Glide.with(activity)
                     .load(image.getUrl())
                     .into(imageView);
