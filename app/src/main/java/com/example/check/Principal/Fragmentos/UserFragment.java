@@ -91,7 +91,7 @@ public class UserFragment extends Fragment {
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager2);
         GestionItinerario itinerario = new GestionItinerario();
 
-        itinerario.setAdapter(locationViewPager);
+        itinerario.updatelocationViewPager(locationViewPager);
 
 
         locationViewPager.setClipToPadding(false);

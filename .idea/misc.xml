@@ -52,6 +52,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1945" />
         <entry key="..\:/Users/User/AndroidStudioProjects/CHECK/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1945" />
+>>>>>>>HEAD
+=======
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.22" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/item_home.xml" value="0.25" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/item_photo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/andre/Documents/GitHub/CHECK/app/src/main/res/layout/item_user_itinerary.xml" value="0.36666666666666664" />
+>>>>>>> 49552bb21ff18a617a92b263a19f323741dff3b8
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.12894736842105264" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_user_itinerary.xml" value="0.2" />
