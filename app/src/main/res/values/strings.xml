@@ -30,4 +30,5 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="seleccionar_usuario">Seleccionar Usuario</string>
+    <string name="escribe_un_mensaje">Escribe un mensaje</string>
 </resources>

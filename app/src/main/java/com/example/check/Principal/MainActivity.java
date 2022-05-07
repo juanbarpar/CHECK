@@ -22,6 +22,7 @@ import com.example.check.Principal.Fragmentos.HomeFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
 import com.example.check.Principal.Fragmentos.UserFragment;
+import com.example.check.activities.Test_login_Activity;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -119,16 +120,14 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
 
-        if (currentUser == null) {
-            goLogin();
-        }
+
     }
 
 
     private void goLogin() {
 
 
-        Intent Log = new Intent(this, LoginActivity.class);
+        Intent Log = new Intent(this, Test_login_Activity.class);
         startActivity(Log);
 
     }
