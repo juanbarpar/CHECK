@@ -1,5 +1,6 @@
 package com.example.check.Principal.Fragmentos;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
+import com.example.check.activities.UsersActivity;
 import com.example.check.databinding.FragmentChatBinding;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +34,10 @@ public class ChatFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
+    private void setListeners() {
+        binding.fabNewChat.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), UsersActivity.class)));
+    }
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -65,6 +70,7 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         preferenceManager = new PreferenceManager(getContext());
         getToken();
+        setListeners();
         return binding.getRoot();
     }
     private void showToast(String message){
@@ -80,7 +86,6 @@ public class ChatFragment extends Fragment {
                         preferenceManager.getString(Constantes.KEY_USER_ID)
                 );
         documentReference.update(Constantes.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(unused -> showToast("Token creado"))
                 .addOnFailureListener(e -> showToast("Unable to update token"));
     }
 }
