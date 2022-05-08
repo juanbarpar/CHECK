@@ -50,6 +50,7 @@
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/background_content_bottom2.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_box.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_button_delete.xml" value="0.2105" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_chat_input.xml" value="0.1" />
@@ -69,7 +70,7 @@
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_round_send_24.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.10408299866131192" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w936dp/activity_login2.xml" value="0.121484375" />
-        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_chat.xml" value="0.2" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login2.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
@@ -78,11 +79,14 @@
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_login.xml" value="0.152" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_up.xml" value="0.176" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_users.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.196875" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_sheet.xml" value="0.196875" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/dialog_box.xml" value="0.196875" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.2" />
-        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_received_message.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_received_message.xml" value="0.4" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_sent_message.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_user.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_home.xml" value="0.1793478260869565" />

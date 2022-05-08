@@ -81,7 +81,7 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        preferenceManager = new PreferenceManager(getContext());
+        preferenceManager = new PreferenceManager(getActivity());
         binding= FragmentUserBinding.inflate(getLayoutInflater());
         // Inflate the layout for this fragment
         loadUserDetails();
@@ -95,7 +95,7 @@ public class UserFragment extends Fragment {
         binding.imagenPerfil.setImageBitmap(bitmap);
     }
     private void showToast(String message){
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
     }
     private void signOut(){
 
@@ -110,7 +110,7 @@ public class UserFragment extends Fragment {
         documentReference.update(updates)
                 .addOnSuccessListener(unused -> {
                     preferenceManager.clear();
-                    startActivity(new Intent(getContext(), Test_login_Activity.class));
+                    startActivity(new Intent(getActivity(), Test_login_Activity.class));
                     getActivity().finish();
                 })
                 .addOnFailureListener(e -> showToast("No es posible cerrar sesion"));
