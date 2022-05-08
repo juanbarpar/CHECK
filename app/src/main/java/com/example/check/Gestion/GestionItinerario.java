@@ -34,12 +34,12 @@ public class GestionItinerario {
         db = FirebaseFirestore.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        db.collection("Users").document(mAuth.getCurrentUser().getUid())
+        db.collection("users").document(mAuth.getCurrentUser().getUid())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
-                    String expedition = documentSnapshot.getString("Expedicion");
+                    String expedition = documentSnapshot.getString("expedicion");
 
                     mDatabase.child("Itinerarios").addValueEventListener(new ValueEventListener() {
                         @Override
