@@ -3,6 +3,7 @@ package com.example.check.Principal.Fragmentos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import com.example.check.Entidad.Itineraries;
 import com.example.check.Gestion.GestionItinerario;
 import com.example.check.Gestion.ItineraryAdapter;
+import com.example.check.Principal.MainActivity;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -38,6 +40,8 @@ import java.util.List;
 public class UserFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,6 +84,8 @@ public class UserFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+
+
     }
 
     @Override
@@ -87,28 +93,17 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_user, container, false);
-
-        ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager2);
         GestionItinerario itinerario = new GestionItinerario();
+        RecyclerView vista = view.findViewById(R.id.vistaItinerarios);
+        vista.setHasFixedSize(true);
+        vista.setLayoutManager(new LinearLayoutManager(getContext()));
+        itinerario.updateRecyclerView(vista);
 
-        itinerario.updatelocationViewPager(locationViewPager);
 
 
-        locationViewPager.setClipToPadding(false);
-        locationViewPager.setClipChildren(false);
-        locationViewPager.setOffscreenPageLimit(3);
-        locationViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-       CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
-        compositePageTransformer.addTransformer(new MarginPageTransformer(40));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.90f + r * 0.04f);
-            }
-        });
-        locationViewPager.setPageTransformer(compositePageTransformer);
+
+
 
 
 

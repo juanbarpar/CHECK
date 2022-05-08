@@ -3,6 +3,7 @@ package com.example.check.Gestion;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.check.Entidad.Itineraries;
@@ -28,7 +29,7 @@ public class GestionItinerario {
     private FirebaseFirestore db;
 
 
-    public void updatelocationViewPager(ViewPager2 locationViewPager) {
+    public void updateRecyclerView(RecyclerView vista) {
         List<Itineraries> itinerarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -67,10 +68,10 @@ public class GestionItinerario {
                                             itinerarios.add(itinerario);
                                         }
                                     }
-                                    locationViewPager.setAdapter(new ItineraryAdapter(itinerarios));
+
                                 }
                             }
-
+                            vista.setAdapter(new ItineraryAdapter(itinerarios));
                         }
 
                         @Override
