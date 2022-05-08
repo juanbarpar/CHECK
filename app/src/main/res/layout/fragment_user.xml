@@ -39,15 +39,27 @@
 
     </TextView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/vistaItinerarios"
             android:layout_marginTop="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/View"
+            app:layout_constraintTop_toBottomOf="@+id/View">
 
-            />
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="50dp"
+                android:id="@+id/viewPager">
+
+
+            </androidx.viewpager.widget.ViewPager>
+
+
+
+
+        </RelativeLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,13 +1,12 @@
 package com.example.check.Gestion;
 
-import android.app.Activity;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.check.Entidad.Itineraries;
-import com.example.check.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +28,7 @@ public class GestionItinerario {
     private FirebaseFirestore db;
 
 
-    public void updateRecyclerView(RecyclerView vista) {
+    public void updateView(ViewPager viewPager, Context context) {
         List<Itineraries> itinerarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -55,7 +54,7 @@ public class GestionItinerario {
                                             itinerario.setFecha(ds.child("Día " + i).child(String.valueOf(0)).getValue().toString());
                                             for (DataSnapshot ds2: ds.child("Día " + i).getChildren()) {
                                                 if(!ds2.getKey().equals("0")){
-                                                    eventos += "•"+ ds2.getValue().toString() +"\n";
+                                                    eventos += "☑️    "+ ds2.getValue().toString() +"\n\n";
                                                 }
 
                                             }
@@ -71,7 +70,7 @@ public class GestionItinerario {
 
                                 }
                             }
-                            vista.setAdapter(new ItineraryAdapter(itinerarios));
+                            viewPager.setAdapter(new ItinerayAdapter(context, itinerarios));
                         }
 
                         @Override

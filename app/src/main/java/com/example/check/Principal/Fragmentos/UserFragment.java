@@ -3,34 +3,16 @@ package com.example.check.Principal.Fragmentos;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager.widget.ViewPager;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.example.check.Entidad.Itineraries;
 import com.example.check.Gestion.GestionItinerario;
-import com.example.check.Gestion.ItineraryAdapter;
-import com.example.check.Principal.MainActivity;
 import com.example.check.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +22,9 @@ import java.util.List;
 public class UserFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private ViewPager viewPager;
+
+
 
 
 
@@ -86,6 +71,8 @@ public class UserFragment extends Fragment {
 
 
 
+
+
     }
 
     @Override
@@ -93,11 +80,9 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_user, container, false);
+        viewPager = view.findViewById(R.id.viewPager);
         GestionItinerario itinerario = new GestionItinerario();
-        RecyclerView vista = view.findViewById(R.id.vistaItinerarios);
-        vista.setHasFixedSize(true);
-        vista.setLayoutManager(new LinearLayoutManager(getContext()));
-        itinerario.updateRecyclerView(vista);
+        itinerario.updateView(viewPager,getContext());
 
 
 
