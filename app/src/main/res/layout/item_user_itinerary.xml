@@ -1,93 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    app:cardCornerRadius="30dp"
+    android:background="@drawable/itinerario_fondo"
+    app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    >
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/check1.2"
+        android:layout_height="152dp"
+        android:background="@drawable/itinerario_fondo2op"
+        android:isScrollContainer="true"
         android:orientation="vertical"
-        android:elevation="10dp"
-        >
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:background="#00FFFFFF"
+            android:backgroundTint="@color/check1"
+            android:backgroundTintMode="screen"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_boldcondital"
+                android:paddingLeft="9dp"
+                android:text="Día 1"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/eventsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_boldcondital"
+                android:paddingLeft="9dp"
+                android:text="Viernes 17 de Junio"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <view
+                android:id="@+id/view"
+                class="androidx.appcompat.widget.LinearLayoutCompat"
+                android:layout_width="385dp"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:clipToPadding="false" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/dayTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Día 1"
-            android:textAlignment="center"
+            android:fontFamily="@font/roboto_regular"
+            android:paddingLeft="27dp"
+            android:paddingRight="9dp"
+            android:text="Eventos"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="50dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/black"
-            android:layout_marginHorizontal="20dp"/>
-        <TextView
-            android:id="@+id/dateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="17 de junio"
-            android:textAlignment="center"
-            android:textColor="@color/teal_200"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginHorizontal="50dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/black"
-            android:layout_marginHorizontal="20dp"/>
-
-        <TextView
-            android:id="@+id/eventsTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:text="•Vuelo Bogotá – San José del Guaviare
-            \n•Instalación en el hotel
-            \n•Ruta acuátia: mirador de los vientos, caverna, ciudad de Piedra
-            \n•Almuerzo
-            \n•Pozos naturales
-            \n•Tiempo libre
-            \n•Cena"
-            android:textAlignment="viewStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-
-            />
-
-
-
-
-
-
-
-
+            android:textSize="16sp" />
 
     </LinearLayout>
-
-
-
-
-
-
 
 
 </androidx.cardview.widget.CardView>
