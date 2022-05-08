@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.check.Entidad.TravelLocation;
 import com.example.check.Entidad.User;
+import com.example.check.Gestion.GestionItinerario;
 import com.example.check.Principal.LoginActivity;
 import com.example.check.R;
 import com.example.check.Utilities.Constantes;
@@ -86,6 +88,7 @@ public class UserFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private User user;
+    private ViewPager viewPager;
 
 
     @Override
@@ -155,6 +158,12 @@ public class UserFragment extends Fragment {
                 }
             }
         });
+
+        viewPager = view.findViewById(R.id.viewPager);
+        GestionItinerario itinerario = new GestionItinerario();
+        itinerario.updateView(viewPager,getContext());
+
+
 
 
         return view;

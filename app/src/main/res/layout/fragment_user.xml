@@ -9,6 +9,7 @@
     tools:context=".Principal.Fragmentos.UserFragment"
     android:orientation="vertical"
 
+
     >
 
 
@@ -95,35 +96,48 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_marginHorizontal="@dimen/_30sdp"
-        app:riv_corner_radius="8dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="center_horizontal"
-        android:elevation="10dp"
-        android:id="@+id/imageUserExp"
-        android:src="@drawable/signal"
-        android:scaleType="centerCrop"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    </com.makeramen.roundedimageview.RoundedImageView>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_marginHorizontal="@dimen/_30sdp"
+            app:riv_corner_radius="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center_horizontal"
+            android:elevation="10dp"
+            android:id="@+id/imageUserExp"
+            android:src="@drawable/signal"
+            android:scaleType="centerCrop"
+            >
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/itinerary"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        </com.makeramen.roundedimageview.RoundedImageView>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_marginHorizontal="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:id="@+id/viewPager"
+            >
+
+
+
+        </androidx.viewpager.widget.ViewPager>
+
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
 
-   <LinearLayout
+    <LinearLayout
         android:id="@+id/logout"
         android:padding="5dp"
         android:layout_gravity="bottom"
@@ -136,8 +150,7 @@
         android:onClick="logout"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        >
 
         <ImageView
             android:layout_width="30dp"
@@ -154,6 +167,8 @@
 
 
     </LinearLayout>
+
+
 
 
 </FrameLayout>
