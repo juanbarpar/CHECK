@@ -166,6 +166,7 @@ public class SocialFragment extends Fragment {
                             System.out.println(travelLocation.toString());
                             travelLocations.add(travelLocation);
                             rvAlbum.getAdapter().notifyDataSetChanged();
+
                         }
 
                         System.out.println("AQUI???? " + String.valueOf(task.getResult().getValue()));

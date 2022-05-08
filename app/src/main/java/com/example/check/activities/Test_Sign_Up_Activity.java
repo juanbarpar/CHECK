@@ -155,10 +155,10 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
                                 //HashMap<String,Object> user = new HashMap<>();
 
                                 User user = new User();
-                                user.name = binding.inputName.getText().toString();
-                                user.email = binding.inputEmail.getText().toString().trim();
-                                user.expedicion = ("En Busca de la Identidad");
-                                user.image = encodedImage;
+                                user.setName(binding.inputName.getText().toString());
+                                user.setEmail(binding.inputEmail.getText().toString().trim());
+                                user.setExpedicion(("En Busca de la Identidad"));
+                                user.setImage(encodedImage);
 
 
                                 database.collection(Constantes.KEY_COLLECTION_USERS).document(task.getResult().getUser().getUid())

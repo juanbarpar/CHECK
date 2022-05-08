@@ -6,76 +6,124 @@
     android:layout_height="match_parent"
     android:background="@color/check1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Principal.Fragmentos.HomeFragment"
+    tools:context=".Principal.Fragmentos.UserFragment"
     android:orientation="vertical"
+
     >
 
-    
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <androidx.cardview.widget.CardView
-        android:layout_margin="@dimen/_30sdp"
+
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_30sdp"
         app:cardCornerRadius="8dp"
+        android:padding="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="@dimen/_20sdp"
         android:elevation="10dp"
-        android:backgroundTint="#0085ca"
+        android:backgroundTint="@color/check1.2"
 
         >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/_8sdp">
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="@dimen/_90sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="right"
-                android:layout_marginEnd="20dp"
-                app:srcCompat="@drawable/check_png" />
+                <TextView
 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/imagenPerfil"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="left"
-                android:layout_marginStart="22dp"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="@dimen/_30sdp"
-                android:background="@drawable/background_icon"
-                android:scaleType="centerCrop"
-                app:riv_corner_radius="@dimen/_8sdp" />
+                    android:text="Perfil"
 
-            <TextView
-                android:id="@+id/nombreUsuario"
-                android:layout_width="@dimen/_160sdp"
-                android:layout_height="75dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="112dp"
-                android:layout_marginEnd="0dp"
-                android:text="Carlos Fernando Gaviria Hernandez"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_18ssp" />
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imagenPerfil"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/signal"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius="@dimen/_8sdp" />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/nombreUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
 
+                    android:text="Usuiario"
 
+                    android:textColor="@color/white"
+                    android:textSize="22dp" />
+                <TextView
+                    android:id="@+id/expedicion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+
+                    android:text="Expedicion"
+
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <LinearLayout
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        app:riv_corner_radius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center_horizontal"
+        android:elevation="10dp"
+        android:id="@+id/imageUserExp"
+        android:src="@drawable/signal"
+        android:scaleType="centerCrop"
+        >
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/itinerary"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</LinearLayout>
+
+   <LinearLayout
         android:id="@+id/logout"
         android:padding="5dp"
         android:layout_gravity="bottom"
