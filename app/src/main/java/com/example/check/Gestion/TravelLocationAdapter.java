@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
+import com.example.check.Principal.MainActivity;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.squareup.picasso.Picasso;
@@ -21,6 +23,8 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
     public TravelLocationAdapter(List<TravelLocation> travelLocations) {
         this.travelLocations = travelLocations;
     }
+
+
     @NonNull
     @Override
     public TravelLocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
@@ -114,7 +115,6 @@ public class SocialFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -148,8 +148,9 @@ public class SocialFragment extends Fragment {
             RecyclerView rvAlbum = view.findViewById(R.id.view_album);
             rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
             GestionTravelLocation gest = new GestionTravelLocation();
-            rvAlbum.setAdapter(new AlbumAdapter(travelLocations));
 
+            AlbumAdapter albumAdapter = new AlbumAdapter(travelLocations);
+            rvAlbum.setAdapter(albumAdapter);
 
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = db.getReference("Expediciones");
@@ -160,11 +161,21 @@ public class SocialFragment extends Fragment {
                     if (!task.isSuccessful()) {
                         System.out.println("fallo");
                     } else {
+                        TravelLocation travelLocation1 = new TravelLocation();
+                        travelLocation1.Nombre = "Todas las expediciones";
+                        travelLocation1.imagen = "https://checknewplaces.com/wp-content/uploads/2021/09/Puerta-de-Orion-@ecoturismoguaviare-2.jpg";
+                        travelLocations.add(travelLocation1);
                         for (DataSnapshot ds : task.getResult().getChildren()) {
 
                             TravelLocation travelLocation = ds.getValue(TravelLocation.class);
                             System.out.println(travelLocation.toString());
                             travelLocations.add(travelLocation);
+                            rvAlbum.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    System.out.println("Hola");
+                                }
+                            });
                             rvAlbum.getAdapter().notifyDataSetChanged();
 
                         }
@@ -174,13 +185,13 @@ public class SocialFragment extends Fragment {
                 }
             });
 
-
             rvAlbum.getAdapter().notifyDataSetChanged();
 
             recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs, getActivity()));
-
             FirebaseDatabase db1 = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference1 = db1.getReference("Images");
+
+
             databaseReference1.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

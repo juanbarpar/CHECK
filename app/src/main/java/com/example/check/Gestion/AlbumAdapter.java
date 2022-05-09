@@ -19,19 +19,24 @@ import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder>{
     private List<TravelLocation> albums;
+    private List<TravelLocation> filtalbums;
     public AlbumAdapter(List<TravelLocation> travelLocations) {
         this.albums = travelLocations;
+        this.filtalbums = travelLocations;
     }
     @NonNull
     @Override
     public TravelLocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         return new TravelLocationViewHolder(
                 LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.item_album,
                         parent, false
                 )
+
         );
     }
+
     @Override
     public void onBindViewHolder(@NonNull TravelLocationViewHolder holder, int position) {
         holder.setLocationData(albums.get(position));
@@ -54,8 +59,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
             kbvLocation.setTag(album.imagen);
             Picasso.get().load(album.imagen).into(kbvLocation);
             textTitle.setText(album.Nombre);
-
+            itemView.setTag(album.Nombre);
 
         }
+
     }
+
 }

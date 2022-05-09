@@ -18,7 +18,10 @@ import com.bumptech.glide.Glide;
 import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
+import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.GestionOfflineImage;
+import com.example.check.Gestion.ImageAdapter;
+import com.example.check.Gestion.TravelLocationAdapter;
 import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
 import com.example.check.Gestion.GestionTravelLocation;
@@ -50,6 +53,7 @@ import com.squareup.picasso.Picasso;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -340,7 +344,6 @@ public class MainActivity extends AppCompatActivity {
     private void fromCamera() {
 
         ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
-                .crop()
                 .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
@@ -486,4 +489,34 @@ public class MainActivity extends AppCompatActivity {
                             });
         }
     }
+
+    public void filter(View view){
+
+        RecyclerView recyclerView = findViewById(R.id.view_photo);
+        List<Imagedb> imagedbs = new ArrayList<>();
+        imagedbs.addAll(GestionImage.imagedbs);
+
+        System.out.println(GestionImage.imagedbs.get(1).getDate());
+        imagedbs.clear();
+
+        String tag = view.getTag().toString();
+        if(tag.equals("Todas las expediciones")){
+            imagedbs.addAll(GestionImage.imagedbs);
+
+        }
+        else {
+            for(Imagedb item: GestionImage.imagedbs){
+                if(item.getDate().equals("wait")){
+                    imagedbs.add(item);
+                }
+            }
+
+        }
+
+        recyclerView.setAdapter(new ImageAdapter(imagedbs, this));
+        recyclerView.getAdapter().notifyDataSetChanged();
+
+    }
+
+
 }
