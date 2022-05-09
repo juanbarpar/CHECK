@@ -13,10 +13,13 @@ import android.widget.Toast;
 import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
+import com.example.check.activities.ChatActivity;
 import com.example.check.activities.UsersActivity;
 import com.example.check.adaptadores.RecentConversationsAdapter;
 import com.example.check.databinding.FragmentChatBinding;
+import com.example.check.listeners.ConversionListener;
 import com.example.check.modelos.ChatMessage;
+import com.example.check.modelos.User;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
@@ -33,7 +36,7 @@ import java.util.List;
  * Use the {@link ChatFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements ConversionListener {
 
     private FragmentChatBinding binding;
     private PreferenceManager preferenceManager;
@@ -76,7 +79,7 @@ public class ChatFragment extends Fragment {
 
     private void init() {
         conversations = new ArrayList<>();
-        conversationsAdapter = new RecentConversationsAdapter(conversations);
+        conversationsAdapter = new RecentConversationsAdapter(conversations, this);
         binding.conversationsRecyclerView.setAdapter(conversationsAdapter);
         database = FirebaseFirestore.getInstance();
     }
@@ -159,5 +162,12 @@ public class ChatFragment extends Fragment {
                 );
         documentReference.update(Constantes.KEY_FCM_TOKEN, token)
                 .addOnFailureListener(e -> showToast("Unable to update token"));
+    }
+
+    @Override
+    public void onConversionClicked(User user) {
+      Intent intent = new Intent(getActivity(), ChatActivity.class);
+      intent.putExtra(Constantes.KEY_USER, user);
+      startActivity(intent);
     }
 }
