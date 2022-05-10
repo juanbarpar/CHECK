@@ -136,7 +136,6 @@ public class UserFragment extends Fragment {
             }
         });
 
-
         DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

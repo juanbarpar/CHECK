@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide;
 import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
+import com.example.check.Entidad.User;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.GestionOfflineImage;
+import com.example.check.Gestion.GestionUser;
 import com.example.check.Gestion.ImageAdapter;
 import com.example.check.Gestion.TravelLocationAdapter;
 import com.example.check.Principal.Fragmentos.ChatFragment;
@@ -30,6 +32,7 @@ import com.example.check.Principal.Fragmentos.OfflineFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
 import com.example.check.Principal.Fragmentos.UserFragment;
+import com.example.check.Utilities.Constantes;
 import com.example.check.activities.Test_login_Activity;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -43,6 +46,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -104,11 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         connection = new Connection(this);
 
-        if(connection.isConnected()){
-
-            offlineImage.uploadOnline();
-
-        }
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         System.out.println(connection.isConnected() + "------------");
@@ -349,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static final int PICK_IMAGE = 1;
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
@@ -402,22 +403,39 @@ public class MainActivity extends AppCompatActivity {
 
         if(!connection.isConnected()){
 
-            Imagedb imdb2 = new Imagedb();
-            imdb2.setDate("wait");
-            imdb2.setUser(mAuth.getUid());
-            imdb2.setUrl(filePath.toString());
+
+            Dialog dialog = new Dialog(this);
+            View box = LayoutInflater.from(getApplicationContext()).inflate(
+                    R.layout.offline_image_box, findViewById(R.id.dialog_box_image_offline)
+            );
+            box.findViewById(R.id.azul).setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view) {
+
+                    dialog.dismiss();
+                }
+            });
+
+
+            dialog.setContentView(box);
+            dialog.show();
+
+
+
+            Imagedb imdb2 = new Imagedb("wait",mAuth.getUid(),filePath.toString(),"placeholder");
             offlineImage.saveImage(imdb2);
+
+
             return;
 
         }
-
-
 
         if (filePath != null) {
 
             ProgressDialog progressDialog
                     = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
+            progressDialog.setTitle("Subiendo tu foto...");
             progressDialog.show();
 
             StorageReference ref
@@ -436,24 +454,38 @@ public class MainActivity extends AppCompatActivity {
                                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                                     while (!uriTask.isSuccessful());
                                     Uri uriImage = uriTask.getResult();
+                                    FirebaseFirestore database = FirebaseFirestore.getInstance();
+                                    DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid());
+                                    docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            User user = documentSnapshot.toObject(User.class);
+                                            System.out.println("Exp: "+user.getExpedicion());
 
-                                    Imagedb imdb = new Imagedb();
-                                    imdb.setDate("wait");
-                                    imdb.setUser(mAuth.getUid());
-                                    imdb.setUrl(uriImage.toString());
+                                            Imagedb imdb = new Imagedb("wait",mAuth.getUid(),uriImage.toString(),user.getExpedicion());
+                                            System.out.println("Exp: "+imdb.getExpedicion());
 
-                                    FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                    DatabaseReference databaseReference = db.getReference("Images");
-                                    databaseReference.push().setValue(imdb);
+                                            FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                            DatabaseReference databaseReference = db.getReference("Images");
+                                            databaseReference.push().setValue(imdb);
 
-                                    offlineImage.eliminar(imdb.getUrl());
+                                            offlineImage.eliminar(imdb.getUrl());
 
-                                    progressDialog.dismiss();
-                                    Toast
-                                            .makeText(MainActivity.this,
-                                                    "Imagen Actualizada!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
+                                            progressDialog.dismiss();
+                                            Toast
+                                                    .makeText(MainActivity.this,
+                                                            "Imagen Actualizada!!",
+                                                            Toast.LENGTH_SHORT)
+                                                    .show();
+
+
+
+                                        }
+                                    });
+
+
+
+
                                 }
                             })
 
@@ -483,8 +515,8 @@ public class MainActivity extends AppCompatActivity {
                                             * taskSnapshot.getBytesTransferred()
                                             / taskSnapshot.getTotalByteCount());
                                     progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
+                                            "Subiendo... ("
+                                                    + (int) progress + "%)");
                                 }
                             });
         }

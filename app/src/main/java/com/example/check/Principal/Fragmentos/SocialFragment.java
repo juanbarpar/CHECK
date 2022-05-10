@@ -152,6 +152,7 @@ public class SocialFragment extends Fragment {
             AlbumAdapter albumAdapter = new AlbumAdapter(travelLocations);
             rvAlbum.setAdapter(albumAdapter);
 
+
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = db.getReference("Expediciones");
             databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -196,6 +197,8 @@ public class SocialFragment extends Fragment {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+
+                    System.out.println(snapshot.getValue());
                     if (!GestionImage.imagedbs.contains(snapshot.getValue(Imagedb.class))) {
                         Imagedb imagedb = snapshot.getValue(Imagedb.class);
                         GestionImage.addImage(imagedb);

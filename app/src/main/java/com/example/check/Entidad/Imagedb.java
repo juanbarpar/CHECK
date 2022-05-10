@@ -6,17 +6,28 @@ public class Imagedb {
     String date;
     String url;
     String user;
+    String expedicion;
 
+
+    public Imagedb(String date,  String user, String url, String expedicion) {
+
+        this.date = date;
+        this.url = url;
+        this.user = user;
+        this.expedicion = expedicion;
+
+    }
 
     public Imagedb() {
 
     }
 
-    public Imagedb(String date, String url, String user) {
+    public String getExpedicion() {
+        return expedicion;
+    }
 
-        this.date = date;
-        this.url = url;
-        this.user = user;
+    public void setExpedicion(String expedicion) {
+        this.expedicion = expedicion;
     }
 
     public String getDate() {
@@ -43,13 +54,13 @@ public class Imagedb {
         this.user = user;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Imagedb imagedb = (Imagedb) o;
-
-        return Objects.equals(date, imagedb.date) && Objects.equals(url, imagedb.url) && Objects.equals(user, imagedb.user);
+        return Objects.equals(date, imagedb.date) && Objects.equals(url, imagedb.url) && Objects.equals(user, imagedb.user) && Objects.equals(expedicion, imagedb.expedicion);
     }
 
     @Override

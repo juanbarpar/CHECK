@@ -7,12 +7,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.check.Entidad.Imagedb;
+import com.example.check.Entidad.User;
 import com.example.check.Principal.MainActivity;
+import com.example.check.Utilities.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -94,16 +99,29 @@ public class GestionOfflineImage {
 
                                         System.out.println("onSuccess");
 
-                                        Imagedb imdb = new Imagedb();
-                                        imdb.setDate("wait");
-                                        imdb.setUser(imagedb.getUser());
-                                        imdb.setUrl(uriImage.toString());
 
-                                        eliminar(imagedb.getUrl());
 
-                                        FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                        DatabaseReference databaseReference = db.getReference("Images");
-                                        databaseReference.push().setValue(imdb);
+                                        FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+
+                                        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(imagedb.getUser());
+                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                User user = documentSnapshot.toObject(User.class);
+                                                System.out.println("name: "+ user.getName());
+
+                                                Imagedb imdb = new Imagedb("wait",imagedb.getUser(),uriImage.toString(), user.getExpedicion());
+
+                                                eliminar(imagedb.getUrl());
+
+                                                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                                DatabaseReference databaseReference = db.getReference("Images");
+                                                databaseReference.push().setValue(imdb);
+
+
+                                            }
+                                        });
 
                                     }
                                 })
@@ -152,7 +170,7 @@ public class GestionOfflineImage {
             br = new BufferedReader(file);
             while ((registro = br.readLine()) != null) {
                 String[] campos = registro.split(",");
-                im = new Imagedb(campos[0], campos[1], campos[2]);
+                im = new Imagedb(campos[0], campos[1], campos[2], campos[3]);
                 ims.add(im);
             }
 
