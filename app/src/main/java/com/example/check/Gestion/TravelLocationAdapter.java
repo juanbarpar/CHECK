@@ -63,7 +63,9 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
         }
         void setLocationData(TravelLocation travelLocation){
 
-            kbvLocation.setTag(travelLocation.imagen);
+            kbvLocation.setTag(travelLocation.Nombre);
+
+            itemView.setTag(travelLocation.Nombre);
 
 
             Picasso.get().load(travelLocation.imagen).into(kbvLocation);

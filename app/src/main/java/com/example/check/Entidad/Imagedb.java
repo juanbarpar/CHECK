@@ -70,6 +70,6 @@ public class Imagedb {
 
     @Override
     public String toString() {
-        return date +"," +url + ","+user;
+        return date +"," +user+","+url + ","+expedicion;
     }
 }

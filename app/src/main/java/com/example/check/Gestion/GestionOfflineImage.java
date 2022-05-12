@@ -13,6 +13,7 @@ import com.example.check.Utilities.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +31,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class GestionOfflineImage {
@@ -111,7 +113,8 @@ public class GestionOfflineImage {
                                                 User user = documentSnapshot.toObject(User.class);
                                                 System.out.println("name: "+ user.getName());
 
-                                                Imagedb imdb = new Imagedb("wait",imagedb.getUser(),uriImage.toString(), user.getExpedicion());
+
+                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(),imagedb.getUser(),uriImage.toString(), user.getExpedicion());
 
                                                 eliminar(imagedb.getUrl());
 

@@ -54,7 +54,7 @@ public class GestionItinerario {
                                             itinerario.setFecha(ds.child("Día " + i).child(String.valueOf(0)).getValue().toString());
                                             for (DataSnapshot ds2: ds.child("Día " + i).getChildren()) {
                                                 if(!ds2.getKey().equals("0")){
-                                                    eventos += "☑️    "+ ds2.getValue().toString() +"\n\n";
+                                                    eventos += "☑️ "+ ds2.getValue().toString() +"\n\n";
                                                 }
 
                                             }

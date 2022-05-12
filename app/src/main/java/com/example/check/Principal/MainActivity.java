@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -255,6 +256,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+
+
+            bottonSheetView.findViewById(R.id.set).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View viewe) {
+                    System.out.println("Set: expe");
+                    FirebaseFirestore database = FirebaseFirestore.getInstance();
+                    database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            bottomSheetDialog.dismiss();
+                            User user = documentSnapshot.toObject(User.class);
+                            System.out.println("tag: " + kbvImage.getTag().toString());
+                            user.setExpedicion(kbvImage.getTag().toString());
+                            database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid()).set(user);
+                        }
+                    });
+                }
+            });
+
+
+
             textViewexp.setText(textTitle.getText());
             textViewlugar.setText(textLocation.getText());
             Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
@@ -423,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            Imagedb imdb2 = new Imagedb("wait",mAuth.getUid(),filePath.toString(),"placeholder");
+            Imagedb imdb2 = new Imagedb("wait",mAuth.getUid(),filePath.toString(),"placeholderw");
             offlineImage.saveImage(imdb2);
 
 
@@ -462,7 +485,7 @@ public class MainActivity extends AppCompatActivity {
                                             User user = documentSnapshot.toObject(User.class);
                                             System.out.println("Exp: "+user.getExpedicion());
 
-                                            Imagedb imdb = new Imagedb("wait",mAuth.getUid(),uriImage.toString(),user.getExpedicion());
+                                            Imagedb imdb = new Imagedb(Timestamp.now().toString(),mAuth.getUid(),uriImage.toString(),user.getExpedicion());
                                             System.out.println("Exp: "+imdb.getExpedicion());
 
                                             FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -538,7 +561,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             for(Imagedb item: GestionImage.imagedbs){
-                if(item.getDate().equals("wait")){
+                if(item.getExpedicion().equals(tag)){
                     imagedbs.add(item);
                 }
             }

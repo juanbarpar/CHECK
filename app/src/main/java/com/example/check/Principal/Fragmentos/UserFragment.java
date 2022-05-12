@@ -163,8 +163,6 @@ public class UserFragment extends Fragment {
         itinerario.updateView(viewPager,getContext());
 
 
-
-
         return view;
     }
 
