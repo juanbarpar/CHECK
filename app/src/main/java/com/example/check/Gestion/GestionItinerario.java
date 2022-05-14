@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.check.Entidad.Itineraries;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,7 +29,8 @@ public class GestionItinerario {
     private FirebaseFirestore db;
 
 
-    public void updateView(ViewPager viewPager, Context context) {
+    public void updateView(ViewPager2 viewPager, Context context, String image) {
+
         List<Itineraries> itinerarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -54,7 +56,7 @@ public class GestionItinerario {
                                             itinerario.setFecha(ds.child("Día " + i).child(String.valueOf(0)).getValue().toString());
                                             for (DataSnapshot ds2: ds.child("Día " + i).getChildren()) {
                                                 if(!ds2.getKey().equals("0")){
-                                                    eventos += "☑️ "+ ds2.getValue().toString() +"\n\n";
+                                                    eventos += "✓ "+ ds2.getValue().toString() +"\n\n";
                                                 }
 
                                             }
@@ -63,14 +65,16 @@ public class GestionItinerario {
                                                     +itinerario.getFecha()+ ", "
                                                     +itinerario.getEventos());
 
-
+                                            System.out.println(image);
+                                            
                                             itinerarios.add(itinerario);
                                         }
                                     }
 
                                 }
                             }
-                            viewPager.setAdapter(new ItinerayAdapter(context, itinerarios));
+                            viewPager.setAdapter(new ItineraryAdapter(context, itinerarios,image));
+
                         }
 
                         @Override
