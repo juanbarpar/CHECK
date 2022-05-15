@@ -3,6 +3,7 @@ package com.example.check.Principal.Fragmentos;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -154,6 +157,9 @@ public class UserFragment extends Fragment {
                 textView2.setText(user.getExpedicion());
                 for (TravelLocation t : travelLocations){
                     if(t.Nombre.equals(user.getExpedicion())){
+
+                        ImageView imageView = view.findViewById(R.id.banner);
+                        Picasso.get().load(t.imagen).into(imageView);
 
                         GestionItinerario itinerario = new GestionItinerario();
                         itinerario.updateView(viewPager,getContext(), t.imagen);

@@ -9,12 +9,22 @@
     tools:context=".Principal.Fragmentos.UserFragment"
     android:orientation="vertical"
 
-
     >
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/banner"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:scaleType="center"
+        android:src="@drawable/signal">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+
 <LinearLayout
     app:layout_constraintTop_toTopOf="parent"
     android:id="@+id/card"
