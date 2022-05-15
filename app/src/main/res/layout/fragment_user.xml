@@ -101,33 +101,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_marginHorizontal="@dimen/_30sdp"
-            app:riv_corner_radius="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_gravity="center_horizontal"
-            android:elevation="10dp"
-            android:id="@+id/imageUserExp"
-            android:src="@drawable/signal"
-            android:scaleType="centerCrop"
-            >
+        <androidx.viewpager2.widget.ViewPager2
 
-        </com.makeramen.roundedimageview.RoundedImageView>
-
-        <androidx.viewpager.widget.ViewPager
-            android:layout_marginHorizontal="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
             android:layout_marginBottom="50dp"
             android:id="@+id/viewPager"
             >
 
 
 
-        </androidx.viewpager.widget.ViewPager>
+        </androidx.viewpager2.widget.ViewPager2>
 
 
     </LinearLayout>

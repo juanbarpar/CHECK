@@ -7,7 +7,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -135,7 +139,9 @@ public class UserFragment extends Fragment {
                 }
             }
         });
+        ViewPager2 viewPager = view.findViewById(R.id.viewPager);
 
+        final String[] image = new String[1];
         DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -148,19 +154,34 @@ public class UserFragment extends Fragment {
                 textView2.setText(user.getExpedicion());
                 for (TravelLocation t : travelLocations){
                     if(t.Nombre.equals(user.getExpedicion())){
-                        RoundedImageView imageView = view.findViewById(R.id.imageUserExp);
-                        Glide.with(getActivity())
-                                .load(t.imagen)
-                                .into(imageView);
-                        imageView.setBackground(null);
+
+                        GestionItinerario itinerario = new GestionItinerario();
+                        itinerario.updateView(viewPager,getContext(), t.imagen);
+                        break;
+
                     }
                 }
             }
         });
 
-        viewPager = view.findViewById(R.id.viewPager);
-        GestionItinerario itinerario = new GestionItinerario();
-        itinerario.updateView(viewPager,getContext());
+        viewPager.setClipToPadding(false);
+        viewPager.setClipChildren(false);
+        viewPager.setOffscreenPageLimit(5);
+        viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
+        compositePageTransformer.addTransformer(new MarginPageTransformer(20));
+        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@android.support.annotation.NonNull View page, float position) {
+                float r = 1 - Math.abs(position);
+                page.setScaleY(0.90f + r * 0.04f);
+            }
+        });
+        viewPager.setPageTransformer(compositePageTransformer);
+
+
+
 
 
         return view;
