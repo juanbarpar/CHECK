@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
 
             textViewexp.setText(textTitle.getText());
             textViewlugar.setText(textLocation.getText());
-            Picasso.get().load((String) kbvImage.getTag()).into(kenBurnsView);
+            Picasso.get().load(textLocation.getTag().toString()).into(kenBurnsView);
             bottomSheetDialog.setContentView(bottonSheetView);
             bottomSheetDialog.show();
         }

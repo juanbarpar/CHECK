@@ -70,6 +70,7 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
 
             Picasso.get().load(travelLocation.imagen).into(kbvLocation);
             textTitle.setText(travelLocation.Nombre);
+            textLocation.setTag(travelLocation.imagen);
             textLocation.setText(travelLocation.ubicación);
             textStartRating.setText(String.valueOf(travelLocation.fecha));
 
