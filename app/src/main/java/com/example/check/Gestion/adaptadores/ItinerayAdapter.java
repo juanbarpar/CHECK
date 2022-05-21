@@ -1,4 +1,4 @@
-package com.example.check.Gestion;
+package com.example.check.Gestion.adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;

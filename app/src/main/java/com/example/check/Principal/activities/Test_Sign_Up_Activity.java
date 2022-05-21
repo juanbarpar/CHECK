@@ -1,4 +1,4 @@
-package com.example.check.activities;
+package com.example.check.Principal.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.check.Entidad.User;
-import com.example.check.Principal.LoginActivity;
 import com.example.check.Principal.MainActivity;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
@@ -29,13 +28,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
 
 public class Test_Sign_Up_Activity extends AppCompatActivity {
 

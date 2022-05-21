@@ -1,4 +1,4 @@
-package com.example.check.Gestion;
+package com.example.check.Gestion.adaptadores;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import com.example.check.Entidad.Imagedb;
 import com.example.check.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>{

@@ -1,8 +1,7 @@
-package com.example.check.adaptadores;
+package com.example.check.Gestion.adaptadores;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.text.Layout;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

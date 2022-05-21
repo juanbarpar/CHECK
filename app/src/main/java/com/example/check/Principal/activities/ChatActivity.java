@@ -1,4 +1,4 @@
-package com.example.check.activities;
+package com.example.check.Principal.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
-import com.example.check.adaptadores.ChatAdapter;
+import com.example.check.Gestion.adaptadores.ChatAdapter;
 import com.example.check.databinding.ActivityChatBinding;
-import com.example.check.modelos.ChatMessage;
+import com.example.check.Entidad.ChatMessage;
 import com.example.check.modelos.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentChange;

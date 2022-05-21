@@ -1,4 +1,4 @@
-package com.example.check.activities;
+package com.example.check.Principal.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
-import com.example.check.adaptadores.UsersAdapter;
+import com.example.check.Gestion.adaptadores.UsersAdapter;
 import com.example.check.databinding.ActivityUsersBinding;
 import com.example.check.listeners.UserListener;
 import com.example.check.modelos.User;

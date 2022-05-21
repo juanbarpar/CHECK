@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.GestionTravelLocation;
-import com.example.check.Gestion.TravelLocationAdapter;
+import com.example.check.Gestion.adaptadores.TravelLocationAdapter;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.

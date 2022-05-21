@@ -9,7 +9,7 @@
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
     android:scrollbars="none"
-    tools:context=".activities.Test_login_Activity"
+    tools:context=".Principal.activities.Test_login_Activity"
     android:background="#003552"
     >
 

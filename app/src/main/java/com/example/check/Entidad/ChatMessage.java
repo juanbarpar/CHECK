@@ -1,4 +1,4 @@
-package com.example.check.modelos;
+package com.example.check.Entidad;
 
 import java.util.Date;
 

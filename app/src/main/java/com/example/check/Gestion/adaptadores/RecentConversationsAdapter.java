@@ -1,4 +1,4 @@
-package com.example.check.adaptadores;
+package com.example.check.Gestion.adaptadores;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.check.databinding.ItemRecentConversationBinding;
 import com.example.check.listeners.ConversionListener;
-import com.example.check.modelos.ChatMessage;
+import com.example.check.Entidad.ChatMessage;
 import com.example.check.modelos.User;
 
 import java.util.List;

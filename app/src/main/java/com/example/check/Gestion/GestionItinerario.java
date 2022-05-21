@@ -3,11 +3,10 @@ package com.example.check.Gestion;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.check.Entidad.Itineraries;
+import com.example.check.Gestion.adaptadores.ItineraryAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

@@ -1,4 +1,4 @@
-package com.example.check.adaptadores;
+package com.example.check.Gestion.adaptadores;
 
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.check.databinding.ItemContainerReceivedMessageBinding;
 import com.example.check.databinding.ItemContainerSentMessageBinding;
-import com.example.check.modelos.ChatMessage;
+import com.example.check.Entidad.ChatMessage;
 
 import java.util.List;
 

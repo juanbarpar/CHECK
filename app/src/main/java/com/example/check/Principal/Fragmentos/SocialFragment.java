@@ -1,35 +1,28 @@
 package com.example.check.Principal.Fragmentos;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.check.Entidad.Album;
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
-import com.example.check.Gestion.AlbumAdapter;
+import com.example.check.Gestion.adaptadores.AlbumAdapter;
 import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.GestionImage;
-import com.example.check.Gestion.ImageAdapter;
-import com.example.check.Principal.MainActivity;
+import com.example.check.Gestion.adaptadores.ImageAdapter;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +38,6 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.

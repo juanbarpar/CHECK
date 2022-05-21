@@ -10,7 +10,7 @@
     android:paddingVertical="@dimen/_30sdp"
     android:paddingHorizontal="@dimen/_30sdp"
     android:scrollbars="none"
-    tools:context=".activities.Test_login_Activity"
+    tools:context=".Principal.activities.Test_login_Activity"
     android:background="#003552"
     >
 

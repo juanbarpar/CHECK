@@ -1,8 +1,6 @@
-package com.example.check.Gestion;
+package com.example.check.Gestion.adaptadores;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.check.Entidad.Itineraries;
-import com.example.check.Entidad.TravelLocation;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.google.type.Color;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.TravelLocationViewHolder>{

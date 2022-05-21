@@ -14,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
-            android:name=".activities.ChatActivity"
+            android:name=".Principal.activities.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activities.UsersActivity"
+            android:name=".Principal.activities.UsersActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Test_login_Activity"
+            android:name=".Principal.activities.Test_login_Activity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -37,7 +37,7 @@
             android:name=".Principal.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Test_Sign_Up_Activity"
+            android:name=".Principal.activities.Test_Sign_Up_Activity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
