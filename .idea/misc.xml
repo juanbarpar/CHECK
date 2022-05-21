@@ -63,29 +63,50 @@
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_home.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/layout/item_user_itinerary.xml" value="0.12894736842105264" />
         <entry key="..\:/Users/migue/CHECK/app/src/main/res/menu/nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/background_content_bottom2.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_box.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable-v24/bg_button_delete.xml" value="0.2105" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_chat_input.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_content_bottom.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_content_top.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_icon.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_image.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_input.xml" value="0.2105" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_received_message.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/background_sent_message.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/bg_date.xml" value="0.2105" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_add.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_baseline_chat_bubble_24.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_baseline_today_24.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_exit.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_info.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/drawable/ic_round_send_24.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-notlong/activity_test_login.xml" value="0.25" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w1240dp/activity_login2.xml" value="0.10408299866131192" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-w936dp/activity_login2.xml" value="0.121484375" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-xxxhdpi/item_container_recent_conversation.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout-xxxhdpi/item_container_user.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_chat.xml" value="0.2" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_login2.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_prueba.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_login.xml" value="0.152" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_login.xml" value="0.136" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_test_sign_up.xml" value="0.176" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/activity_users.xml" value="0.1" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_image.xml" value="0.196875" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/bt_sheet.xml" value="0.196875" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/dialog_box.xml" value="0.196875" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_home.xml" value="0.19791666666666666" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_social.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/fragment_user.xml" value="0.2" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_received_message.xml" value="0.4" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_sent_message.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_container_user.xml" value="0.1" />
         <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_home.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/nachi/Documents/GitHub/CHECK/app/src/main/res/layout/item_recent_conversation.xml" value="0.2" />
       </map>
     </option>
   </component>

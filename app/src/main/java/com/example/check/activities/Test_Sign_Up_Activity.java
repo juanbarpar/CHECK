@@ -9,7 +9,6 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.check.Entidad.User;
 import com.example.check.Principal.LoginActivity;
 import com.example.check.Principal.MainActivity;
-import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestSignUpBinding;

@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:overScrollMode="never"
-    android:padding="@dimen/_24sdp"
+    android:paddingVertical="@dimen/_30sdp"
+    android:paddingHorizontal="@dimen/_30sdp"
     android:scrollbars="none"
     tools:context=".activities.Test_login_Activity"
     android:background="#003552"
@@ -24,13 +25,14 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_140sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="@dimen/_100sdp"
+
             app:srcCompat="@drawable/imagen_check" />
 
 
         <ImageView
             android:id="@+id/imageView3"
+            android:layout_marginHorizontal="@dimen/_40sdp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginTop="@dimen/_10sdp"
@@ -39,8 +41,9 @@
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_42sdp"
             android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
             android:background="@drawable/background_input"
             android:hint="@string/em"
             android:imeOptions="actionNext"
@@ -55,7 +58,8 @@
         <EditText
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@drawable/background_input"
             android:hint="@string/contrase_a2"
@@ -71,14 +75,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
             android:animateLayoutChanges="true">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonSignIn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/entra"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
@@ -99,15 +103,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@color/check2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSignUp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_42sdp"
             android:layout_marginHorizontal="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
 
             android:text="@string/registrate"
             android:textColor="@color/white"
