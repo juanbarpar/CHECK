@@ -114,12 +114,14 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     private void listenMessages(){
+
         database.collection(Constantes.KEY_COLLECTION_CHAT)
                 .whereEqualTo(Constantes.KEY_SENDER_ID,mAuth.getUid())
                 .whereEqualTo(Constantes.KEY_RECEIVER_ID,receiverId)
                 .addSnapshotListener(eventListener);
+
         database.collection(Constantes.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constantes.KEY_SENDER_ID, receiverUser)
+                .whereEqualTo(Constantes.KEY_SENDER_ID, receiverId)
                 .whereEqualTo(Constantes.KEY_RECEIVER_ID,mAuth.getUid())
                 .addSnapshotListener(eventListener);
     }

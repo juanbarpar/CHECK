@@ -58,7 +58,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         }
         void setUserData(User user,String uid){
             binding.textName.setText(user.getName());
-            binding.textEmail.setText(user.getEmail());
+            binding.textEmail.setText(user.getExpedicion());
 
             System.out.println("UID: " + uid);
             binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(uid));
