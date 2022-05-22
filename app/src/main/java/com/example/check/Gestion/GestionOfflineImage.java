@@ -114,7 +114,7 @@ public class GestionOfflineImage {
                                                 System.out.println("name: "+ user.getName());
 
 
-                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(),imagedb.getUser(),uriImage.toString(), user.getExpedicion());
+                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(), user.getName(), uriImage.toString(), user.getExpedicion());
 
                                                 eliminar(imagedb.getUrl());
 

@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.check.Entidad.User;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.Gestion.adaptadores.UsersAdapter;
 import com.example.check.databinding.ActivityUsersBinding;
 import com.example.check.listeners.UserListener;
-import com.example.check.modelos.User;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -21,9 +24,12 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
 
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
+    private FirebaseAuth mAuth;
+    private  String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
@@ -41,23 +47,24 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                 .get()
                 .addOnCompleteListener(task -> {
                     loading(false);
-                    String currentUserId = preferenceManager.getString(Constantes.KEY_USER_ID);
+                    String currentUserId = mAuth.getUid();
                     if(task.isSuccessful() && task.getResult() != null){
                         List<User> users = new ArrayList<>();
-                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()){
-                            if(currentUserId.equals(queryDocumentSnapshot.getId())){
+                        List<String> uids = new ArrayList<>();
+                        for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                            if (currentUserId.equals(queryDocumentSnapshot.getId())) {
                                 continue;
                             }
-                            User user = new User();
-                            user.name = queryDocumentSnapshot.getString(Constantes.KEY_NAME);
-                            user.email = queryDocumentSnapshot.getString(Constantes.KEY_EMAIL);
-                            user.image = queryDocumentSnapshot.getString(Constantes.KEY_IMAGE);
-                            user.token = queryDocumentSnapshot.getString(Constantes.KEY_FCM_TOKEN);
-                            user.id = queryDocumentSnapshot.getId();
+                            User user = queryDocumentSnapshot.toObject(User.class);
+                            String uid = queryDocumentSnapshot.getId();
+
+                            System.out.println("UID: " + uid);
                             users.add(user);
+                            uids.add(uid);
+
                         }
                         if(users.size() >0) {
-                            UsersAdapter usersAdapter = new UsersAdapter(users,this);
+                            UsersAdapter usersAdapter = new UsersAdapter(users,this,uids);
                             binding.usersRecyclerView.setAdapter(usersAdapter);
                             binding.usersRecyclerView.setVisibility(View.VISIBLE);
                         }else {
@@ -81,9 +88,9 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
     }
 
     @Override
-    public void onUserClicked(User user) {
+    public void onUserClicked(String uid) {
         Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
-        intent.putExtra(Constantes.KEY_USER,user);
+        intent.putExtra(Constantes.KEY_USER,uid);
         startActivity(intent);
         finish();
     }

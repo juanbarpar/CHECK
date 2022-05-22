@@ -1,26 +1,35 @@
 package com.example.check.Principal.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.check.Entidad.TravelLocation;
+import com.example.check.Gestion.GestionItinerario;
+import com.example.check.R;
 import com.example.check.Utilities.Constantes;
 import com.example.check.Utilities.PreferenceManager;
 import com.example.check.Gestion.adaptadores.ChatAdapter;
 import com.example.check.databinding.ActivityChatBinding;
 import com.example.check.Entidad.ChatMessage;
-import com.example.check.modelos.User;
+import com.example.check.Entidad.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,72 +45,92 @@ public class ChatActivity extends AppCompatActivity {
     private User receiverUser;
     private List<ChatMessage> chatMessages;
     private ChatAdapter chatAdapter;
-    private PreferenceManager preferenceManager;
+
     private FirebaseFirestore database;
     private String conversionId = null;
+    private String receiverId;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
-        loadReceiverDetails();
         init();
+        loadReceiverDetails();
+
         listenMessages();
     }
     private void init(){
-        preferenceManager = new PreferenceManager(getApplicationContext());
+
         chatMessages = new ArrayList<>();
         chatAdapter = new ChatAdapter(
                 chatMessages,
-                getBitmapFromEncodedString(receiverUser.image),
-                preferenceManager.getString(Constantes.KEY_USER_ID)
+                mAuth.getUid()
         );
+
         binding.chatRecyclerView.setAdapter(chatAdapter);
         database = FirebaseFirestore.getInstance();
+
     }
     private void sendMessage(){
+
         HashMap<String,Object> message = new HashMap<>();
-        message.put(Constantes.KEY_SENDER_ID,preferenceManager.getString(Constantes.KEY_USER_ID));
-        message.put(Constantes.KEY_RECEIVER_ID,receiverUser.id);
+        message.put(Constantes.KEY_SENDER_ID,mAuth.getUid());
+        message.put(Constantes.KEY_RECEIVER_ID,receiverId);
         message.put(Constantes.KEY_MESSAGE, binding.inputMessage.getText().toString());
         message.put(Constantes.KEY_TIMESTAMP, new Date());
         database.collection(Constantes.KEY_COLLECTION_CHAT).add(message);
+
         if(conversionId != null){
             updateConversion(binding.inputMessage.getText().toString());
+
         } else {
             HashMap<String, Object> conversion = new HashMap<>();
-            conversion.put(Constantes.KEY_SENDER_ID, preferenceManager.getString(Constantes.KEY_USER_ID));
-            conversion.put(Constantes.KEY_SENDER_NAME, preferenceManager.getString(Constantes.KEY_NAME));
-            conversion.put(Constantes.KEY_SENDER_IMAGE, preferenceManager.getString(Constantes.KEY_IMAGE));
-            conversion.put(Constantes.KEY_RECEIVER_ID,receiverUser.id);
-            conversion.put(Constantes.KEY_RECEIVER_NAME, receiverUser.name);
-            conversion.put(Constantes.KEY_RECEIVER_IMAGE, receiverUser.image);
-            conversion.put(Constantes.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
-            conversion.put(Constantes.KEY_TIMESTAMP, new Date());
-            addConversion(conversion);
+
+            DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    User user = documentSnapshot.toObject(User.class);
+
+                    conversion.put(Constantes.KEY_SENDER_ID, mAuth.getUid());
+                    conversion.put(Constantes.KEY_SENDER_NAME, user.getName());
+                    conversion.put(Constantes.KEY_SENDER_IMAGE, user.getImage());
+                    conversion.put(Constantes.KEY_RECEIVER_ID,receiverId);
+                    conversion.put(Constantes.KEY_RECEIVER_NAME, receiverUser.getName());
+                    conversion.put(Constantes.KEY_RECEIVER_IMAGE, receiverUser.getImage());
+                    conversion.put(Constantes.KEY_LAST_MESSAGE, binding.inputMessage.getText().toString());
+                    conversion.put(Constantes.KEY_TIMESTAMP, new Date());
+                    addConversion(conversion);
+                    binding.inputMessage.setText(null);
+                }
+            });
+
+
         }
-        binding.inputMessage.setText(null);
+
     }
     private void listenMessages(){
         database.collection(Constantes.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constantes.KEY_SENDER_ID,preferenceManager.getString(Constantes.KEY_USER_ID))
-                .whereEqualTo(Constantes.KEY_RECEIVER_ID,receiverUser.id)
+                .whereEqualTo(Constantes.KEY_SENDER_ID,mAuth.getUid())
+                .whereEqualTo(Constantes.KEY_RECEIVER_ID,receiverId)
                 .addSnapshotListener(eventListener);
         database.collection(Constantes.KEY_COLLECTION_CHAT)
-                .whereEqualTo(Constantes.KEY_SENDER_ID, receiverUser.id)
-                .whereEqualTo(Constantes.KEY_RECEIVER_ID,preferenceManager.getString(Constantes.KEY_USER_ID))
+                .whereEqualTo(Constantes.KEY_SENDER_ID, receiverUser)
+                .whereEqualTo(Constantes.KEY_RECEIVER_ID,mAuth.getUid())
                 .addSnapshotListener(eventListener);
     }
 
     private final EventListener<QuerySnapshot> eventListener = ((value, error) -> {
-        if(error != null) {
-            return;
-        }
         if(value != null){
-            int count = chatMessages.size();
+
             for (DocumentChange documentChange : value.getDocumentChanges()) {
+
+                System.out.println("message: "+documentChange.getDocument().getString(Constantes.KEY_MESSAGE));
+
                 if(documentChange.getType() == DocumentChange.Type.ADDED){
                     ChatMessage chatMessage = new ChatMessage();
                     chatMessage.senderId = documentChange.getDocument().getString(Constantes.KEY_SENDER_ID);
@@ -110,9 +139,11 @@ public class ChatActivity extends AppCompatActivity {
                     chatMessage.datetime = getReadableDateTime(documentChange.getDocument().getDate(Constantes.KEY_TIMESTAMP));
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constantes.KEY_TIMESTAMP);
                     chatMessages.add(chatMessage);
+                    chatAdapter.notifyDataSetChanged();
                 }
             }
             Collections.sort(chatMessages, (obj1, obj2) -> obj1.dateObject.compareTo(obj2.dateObject));
+            int count = chatMessages.size();
             if(count ==0){
                 chatAdapter.notifyDataSetChanged();
             } else{
@@ -133,8 +164,26 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     private void loadReceiverDetails() {
-        receiverUser = (User) getIntent().getSerializableExtra(Constantes.KEY_USER);
-        binding.textName.setText(receiverUser.name);
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+        if(b!=null)
+        {
+            String j =(String) b.get(Constantes.KEY_USER);
+            receiverId = j;
+        }
+
+
+        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(receiverId);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                receiverUser = documentSnapshot.toObject(User.class);
+                System.out.println("name"+receiverUser.getName());
+                binding.textName.setText(receiverUser.getName());
+            }
+        });
+
+
     }
 
     private void setListeners(){
@@ -157,17 +206,18 @@ public class ChatActivity extends AppCompatActivity {
                 Constantes.KEY_LAST_MESSAGE, message,
                 Constantes.KEY_TIMESTAMP, new Date()
         );
+        binding.inputMessage.setText(null);
     }
 
     private void checkForConversion() {
         if(chatMessages.size() != 0){
             checkForConversionRemotely(
-                    preferenceManager.getString(Constantes.KEY_USER_ID),
-                    receiverUser.id
+                    mAuth.getUid(),
+                    receiverId
             );
             checkForConversionRemotely(
-                    receiverUser.id,
-                    preferenceManager.getString(Constantes.KEY_USER_ID)
+                    receiverId,
+                    mAuth.getUid()
             );
         }
     }

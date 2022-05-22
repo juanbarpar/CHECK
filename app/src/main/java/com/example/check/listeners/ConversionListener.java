@@ -1,9 +1,9 @@
 package com.example.check.listeners;
 
-import com.example.check.modelos.User;
+import com.example.check.Entidad.User;
 
 public interface ConversionListener {
-    void onConversionClicked(User user);
+    void onConversionClicked(String user);
 
 
 }

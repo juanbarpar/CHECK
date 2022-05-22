@@ -38,6 +38,7 @@
         android:layout_marginHorizontal="@dimen/_30sdp"
         app:cardCornerRadius="8dp"
         android:padding="@dimen/_8sdp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,20 +59,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
-
-                    android:text="Perfil"
-
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_marginTop="10dp"
                     android:id="@+id/imagenPerfil"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -103,6 +94,7 @@
                     android:layout_gravity="center"
 
                     android:text="Expedicion"
+                    android:layout_marginBottom="10dp"
 
                     android:textColor="@color/white"
                     android:textSize="15dp" />

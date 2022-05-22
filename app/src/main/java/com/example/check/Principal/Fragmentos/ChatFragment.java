@@ -10,21 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.check.Entidad.User;
 import com.example.check.Utilities.Constantes;
-import com.example.check.Utilities.PreferenceManager;
 import com.example.check.Principal.activities.ChatActivity;
 import com.example.check.Principal.activities.UsersActivity;
 import com.example.check.Gestion.adaptadores.RecentConversationsAdapter;
 import com.example.check.databinding.FragmentChatBinding;
 import com.example.check.listeners.ConversionListener;
 import com.example.check.Entidad.ChatMessage;
-import com.example.check.modelos.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,10 +36,11 @@ import java.util.List;
 public class ChatFragment extends Fragment implements ConversionListener {
 
     private FragmentChatBinding binding;
-    private PreferenceManager preferenceManager;
+
     private List<ChatMessage> conversations;
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore database;
+    private FirebaseAuth mAuth;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -66,6 +65,7 @@ public class ChatFragment extends Fragment implements ConversionListener {
     }
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,11 +87,11 @@ public class ChatFragment extends Fragment implements ConversionListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mAuth = FirebaseAuth.getInstance();
+
         binding = FragmentChatBinding.inflate(getLayoutInflater());
-        // Inflate the layout for this fragment
-        preferenceManager = new PreferenceManager(getActivity());
         init();
-        getToken();
+        //getToken();
         setListeners();
         listenConversations();
         return binding.getRoot();
@@ -102,12 +102,14 @@ public class ChatFragment extends Fragment implements ConversionListener {
 
     private void listenConversations(){
         database.collection(Constantes.KEY_COLLECTION_CONVERSATIONS)
-                .whereEqualTo(Constantes.KEY_SENDER_ID, preferenceManager.getString(Constantes.KEY_USER_ID))
+                .whereEqualTo(Constantes.KEY_SENDER_ID, mAuth.getUid())
                 .addSnapshotListener(eventListener);
         database.collection(Constantes.KEY_COLLECTION_CONVERSATIONS)
-                .whereEqualTo(Constantes.KEY_RECEIVER_ID, preferenceManager.getString(Constantes.KEY_USER_ID))
+                .whereEqualTo(Constantes.KEY_RECEIVER_ID, mAuth.getUid())
                 .addSnapshotListener(eventListener);
     }
+
+
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if (error != null) {
             return;
@@ -116,10 +118,11 @@ public class ChatFragment extends Fragment implements ConversionListener {
                 if(documentChange.getType() == DocumentChange.Type.ADDED) {
                     String senderId = documentChange.getDocument().getString(Constantes.KEY_SENDER_ID);
                     String receiverId = documentChange.getDocument().getString(Constantes.KEY_RECEIVER_ID);
+
                     ChatMessage chatMessage = new ChatMessage();
                     chatMessage.senderId = senderId;
                     chatMessage.receiverId = receiverId;
-                    if(preferenceManager.getString(Constantes.KEY_USER_ID).equals(senderId)){
+                    if(mAuth.getUid().equals(senderId)){
                         chatMessage.conversionImage = documentChange.getDocument().getString(Constantes.KEY_RECEIVER_IMAGE);
                         chatMessage.conversionName = documentChange.getDocument().getString(Constantes.KEY_RECEIVER_NAME);
                         chatMessage.conversionId = documentChange.getDocument().getString(Constantes.KEY_RECEIVER_ID);
@@ -150,21 +153,9 @@ public class ChatFragment extends Fragment implements ConversionListener {
             binding.progressBar.setVisibility(View.GONE);
         }
     };
-    private void getToken(){
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
-    }
-    private void updateToken(String token) {
-        FirebaseFirestore database= FirebaseFirestore.getInstance();
-        DocumentReference documentReference =
-                database.collection(Constantes.KEY_COLLECTION_USERS).document(
-                        preferenceManager.getString(Constantes.KEY_USER_ID)
-                );
-        documentReference.update(Constantes.KEY_FCM_TOKEN, token)
-                .addOnFailureListener(e -> showToast("Unable to update token"));
-    }
 
     @Override
-    public void onConversionClicked(User user) {
+    public void onConversionClicked(String user) {
       Intent intent = new Intent(getActivity(), ChatActivity.class);
       intent.putExtra(Constantes.KEY_USER, user);
       startActivity(intent);

@@ -9,10 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.check.Entidad.User;
+import com.example.check.Utilities.Constantes;
 import com.example.check.databinding.ItemRecentConversationBinding;
 import com.example.check.listeners.ConversionListener;
 import com.example.check.Entidad.ChatMessage;
-import com.example.check.modelos.User;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -61,11 +66,16 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
             binding.textName.setText(chatMessage.conversionName);
             binding.textRecentMessage.setText(chatMessage.message);
             binding.getRoot().setOnClickListener(view ->{
-                User user = new User();
-                user.id = chatMessage.conversionId;
-                user.name = chatMessage.conversionName;
-                user.image = chatMessage.conversionImage;
-                conversionListener.onConversionClicked(user);
+
+                FirebaseFirestore database = FirebaseFirestore.getInstance();
+                DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(chatMessage.conversionId);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        conversionListener.onConversionClicked(chatMessage.receiverId);
+                    }
+                });
             });
 
         }

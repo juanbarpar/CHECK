@@ -11,19 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.check.databinding.ItemContainerUserBinding;
 import com.example.check.listeners.UserListener;
-import com.example.check.modelos.User;
+import com.example.check.Entidad.User;
 
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
     private final List<User> users;
+    private final List<String> uids;
     private UserListener userListener;
 
-    public UsersAdapter(List<User> users,UserListener userListener) {
-
+    public UsersAdapter(List<User> users,UserListener userListener,List<String> uids) {
         this.users = users;
         this.userListener = userListener;
+        this.uids = uids;
     }
 
     @NonNull
@@ -40,7 +41,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        holder.setUserData(users.get(position));
+        holder.setUserData(users.get(position),uids.get(position));
     }
 
     @Override
@@ -55,16 +56,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             super(itemContainerUserBinding.getRoot());
             binding = itemContainerUserBinding;
         }
-        void setUserData(User user){
-            binding.textName.setText(user.name);
-            binding.textEmail.setText(user.email);
-            binding.imageProfile.setImageBitmap(getUserImage(user.image));
-            binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(user));
+        void setUserData(User user,String uid){
+            binding.textName.setText(user.getName());
+            binding.textEmail.setText(user.getEmail());
+
+            System.out.println("UID: " + uid);
+            binding.getRoot().setOnClickListener(view -> userListener.onUserClicked(uid));
         }
     }
 
-    private Bitmap getUserImage(String encodedImage){
-        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-    }
+
 }

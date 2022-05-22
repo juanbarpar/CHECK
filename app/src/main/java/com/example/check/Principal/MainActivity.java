@@ -331,6 +331,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(box);
         dialog.show();
 
+
+        CharSequence text = view.getTag().toString();
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(this, text, duration);
+        toast.show();
+
     }
 
     public void fromFiles() {
@@ -473,7 +480,7 @@ public class MainActivity extends AppCompatActivity {
                                             User user = documentSnapshot.toObject(User.class);
                                             System.out.println("Exp: "+user.getExpedicion());
 
-                                            Imagedb imdb = new Imagedb(Timestamp.now().toString(),mAuth.getUid(),uriImage.toString(),user.getExpedicion());
+                                            Imagedb imdb = new Imagedb(Timestamp.now().toString(),user.getName(),uriImage.toString(),user.getExpedicion());
                                             System.out.println("Exp: "+imdb.getExpedicion());
 
                                             FirebaseDatabase db = FirebaseDatabase.getInstance();
