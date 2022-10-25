@@ -11,15 +11,11 @@
         android:onClick="getView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <com.flaviofaria.kenburnsview.KenBurnsView
             android:id="@+id/kbvLocation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-
-            
             />
         <LinearLayout
             android:orientation="horizontal"
