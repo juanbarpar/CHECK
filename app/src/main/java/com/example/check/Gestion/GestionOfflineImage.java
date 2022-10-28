@@ -101,10 +101,7 @@ public class GestionOfflineImage {
 
                                         System.out.println("onSuccess");
 
-
-
                                         FirebaseFirestore database = FirebaseFirestore.getInstance();
-
 
                                         DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(imagedb.getUser());
                                         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

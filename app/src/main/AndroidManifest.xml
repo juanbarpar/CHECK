@@ -14,13 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
-            android:name=".Principal.activities.ChatActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Principal.activities.UsersActivity"
-            android:exported="false" />
-        <activity
             android:name=".Principal.activities.Test_login_Activity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

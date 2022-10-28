@@ -1,4 +1,4 @@
-3package com.example.check;
+package com.example.check;
 
 import android.content.Context;
 

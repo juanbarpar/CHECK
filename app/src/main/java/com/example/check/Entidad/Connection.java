@@ -14,7 +14,6 @@ public class Connection {
 
 
     public boolean isConnected(){
-
         ConnectivityManager cm =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 

@@ -20,9 +20,7 @@ import com.example.check.Entidad.User;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.GestionOfflineImage;
 import com.example.check.Gestion.adaptadores.ImageAdapter;
-import com.example.check.Principal.Fragmentos.ChatFragment;
 import com.example.check.Entidad.Connection;
-import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Principal.Fragmentos.HomeFragment;
 import com.example.check.R;
 import com.example.check.Principal.Fragmentos.SocialFragment;
@@ -73,7 +71,6 @@ import me.ibrahimsn.lib.SmoothBottomBar;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private GestionTravelLocation gesExp;
     private FirebaseStorage storage;
     private StorageReference reference;
     private Connection connection;
@@ -86,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        gesExp = new GestionTravelLocation();
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
 
@@ -117,14 +113,9 @@ public class MainActivity extends AppCompatActivity {
                     replace(new SocialFragment());
                     break;
                 case 2:
-                    replace(new ChatFragment());
-                    break;
-                case 3:
                     replace(new UserFragment());
                     break;
             }
-
-
             return null;
         });
 
@@ -166,9 +157,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth.signOut();
         goLogin();
     }
-
-
-
 
     public void getView(View view) {
         if (!connection.isConnected()){

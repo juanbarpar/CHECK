@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.check.Entidad.Connection;
 import com.example.check.Entidad.TravelLocation;
-import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.adaptadores.TravelLocationAdapter;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,8 +82,6 @@ public class HomeFragment extends Fragment {
 
 
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
-        GestionTravelLocation gesExp = new GestionTravelLocation();
         Connection connection = new Connection(getActivity());
 
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager);
@@ -109,7 +106,7 @@ public class HomeFragment extends Fragment {
                             travelLocations.add(travelLocation);
                         }
                         locationViewPager.getAdapter().notifyDataSetChanged();
-                        System.out.println("AQUI???? "+String.valueOf(task.getResult().getValue()));
+
                     }
                 }
             });

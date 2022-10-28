@@ -45,9 +45,6 @@ import java.util.List;
  */
 public class UserFragment extends Fragment {
 
-
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -111,6 +108,7 @@ public class UserFragment extends Fragment {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference("Expediciones");
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
             @Override
             public void onComplete(@androidx.annotation.NonNull Task<DataSnapshot> task) {
 

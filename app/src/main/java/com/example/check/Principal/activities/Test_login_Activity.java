@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.check.Principal.MainActivity;
-import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,13 +20,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Test_login_Activity extends AppCompatActivity {
     private ActivityTestLoginBinding binding;
-    private PreferenceManager preferenceManager;
     private FirebaseAuth mAuth;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferenceManager = new PreferenceManager(getApplicationContext());
         binding = ActivityTestLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
@@ -87,10 +84,7 @@ public class Test_login_Activity extends AppCompatActivity {
 
            Toast.makeText(this, "Los campos estan vacios.",
                    Toast.LENGTH_SHORT).show();
-
        }
-
-
    }
 
    private void loading(Boolean isLoading) {

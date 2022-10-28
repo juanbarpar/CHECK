@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.check.Entidad.User;
 import com.example.check.Principal.MainActivity;
 import com.example.check.Utilities.Constantes;
-import com.example.check.Utilities.PreferenceManager;
 import com.example.check.databinding.ActivityTestSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,7 +36,6 @@ import java.io.InputStream;
 public class Test_Sign_Up_Activity extends AppCompatActivity {
 
     private String encodedImage;
-    private PreferenceManager preferenceManager;
     private ActivityTestSignUpBinding binding;
     private FirebaseAuth mAuth;
     @Override
@@ -47,7 +45,6 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTestSignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        preferenceManager = new PreferenceManager(getApplicationContext());
         setListeners();
     }
     private void setListeners(){
