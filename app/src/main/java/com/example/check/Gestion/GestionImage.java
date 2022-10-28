@@ -12,6 +12,4 @@ public class GestionImage {
         imagedbs.add(0,image);
     }
 
-
-
 }

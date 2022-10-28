@@ -20,7 +20,6 @@ import com.example.check.Entidad.Imagedb;
 import com.example.check.Entidad.TravelLocation;
 import com.example.check.Gestion.adaptadores.AlbumAdapter;
 import com.example.check.Gestion.GestionOfflineImage;
-import com.example.check.Gestion.GestionTravelLocation;
 import com.example.check.Gestion.GestionImage;
 import com.example.check.Gestion.adaptadores.ImageAdapter;
 import com.example.check.R;
@@ -139,8 +138,6 @@ public class SocialFragment extends Fragment {
 
             RecyclerView rvAlbum = view.findViewById(R.id.view_album);
             rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-            GestionTravelLocation gest = new GestionTravelLocation();
-
             AlbumAdapter albumAdapter = new AlbumAdapter(travelLocations);
             rvAlbum.setAdapter(albumAdapter);
 
