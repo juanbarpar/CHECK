@@ -16,8 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.repositorio.dao.ItinerarioDao;
 import com.example.check.R;
@@ -103,7 +102,10 @@ public class FragmentoPerfil extends Fragment {
         //HashMap<String,Object> user = new HashMap<>();
 
 
-        List<TravelLocation> travelLocations = new ArrayList<>();
+
+
+        List<DestinosViaje> destinosViajes = new ArrayList<>();
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference("Expediciones");
         databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -115,8 +117,10 @@ public class FragmentoPerfil extends Fragment {
                     System.out.println("fallo");
                 } else {
                     for (DataSnapshot ds : task.getResult().getChildren()) {
-                        TravelLocation travelLocation = ds.getValue(TravelLocation.class);
-                        travelLocations.add(travelLocation);
+
+                        DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
+                        destinosViajes.add(destinosViaje);
+
                     }
                 }
             }
@@ -132,6 +136,7 @@ public class FragmentoPerfil extends Fragment {
                 TextView textView = view.findViewById(R.id.nombreUsuario);
                 textView.setText(usuario.getNombre());
                 TextView textView2 = view.findViewById(R.id.expedicion);
+
                 textView2.setText(usuario.getExpedicion());
                 for (TravelLocation t : travelLocations) {
                     if (t.Nombre.equals(usuario.getExpedicion())) {

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -16,11 +16,11 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder>{
-    private List<TravelLocation> albums;
-    private List<TravelLocation> filtalbums;
-    public AlbumAdapter(List<TravelLocation> travelLocations) {
-        this.albums = travelLocations;
-        this.filtalbums = travelLocations;
+    private List<DestinosViaje> albums;
+    private List<DestinosViaje> filtalbums;
+    public AlbumAdapter(List<DestinosViaje> destinosViajes) {
+        this.albums = destinosViajes;
+        this.filtalbums = destinosViajes;
     }
     @NonNull
     @Override
@@ -52,7 +52,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
             kbvLocation = itemView.findViewById(R.id.kbvAlbum);
             textTitle = itemView.findViewById(R.id.text_album);
         }
-            void setLocationData(TravelLocation album){
+            void setLocationData(DestinosViaje album){
 
             kbvLocation.setTag(album.imagen);
             Picasso.get().load(album.imagen).into(kbvLocation);
