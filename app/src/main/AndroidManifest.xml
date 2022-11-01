@@ -14,6 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHECK">
         <activity
+            android:name=".LogActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Principal.activities.Test_login_Activity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
@@ -27,7 +34,7 @@
             android:name=".Principal.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Principal.MainActivity"
+            android:name=".ActividadPrincipal"
             android:exported="false" />
         <activity
             android:name=".Principal.activities.Test_Sign_Up_Activity"

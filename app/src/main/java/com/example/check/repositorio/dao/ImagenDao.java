@@ -1,11 +1,11 @@
-package com.example.check.Gestion;
+package com.example.check.repositorio.dao;
 
-import com.example.check.Entidad.Imagedb;
+import com.example.check.repositorio.entidad.Imagedb;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionImage {
+public class ImagenDao {
 
     public static List<Imagedb> imagedbs = new ArrayList<>();
     public static void addImage(Imagedb image){

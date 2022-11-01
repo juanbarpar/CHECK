@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/check1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Principal.Fragmentos.HomeFragment"
+    tools:context=".controlador.fragmento.FragmentoInicio"
     android:orientation="vertical">
 
     <!-- Barra superior -->

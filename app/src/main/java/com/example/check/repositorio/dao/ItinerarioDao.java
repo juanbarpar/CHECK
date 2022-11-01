@@ -1,12 +1,12 @@
-package com.example.check.Gestion;
+package com.example.check.repositorio.dao;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.check.Entidad.Itineraries;
-import com.example.check.Gestion.adaptadores.ItineraryAdapter;
+import com.example.check.repositorio.entidad.Itineraries;
+import com.example.check.controlador.adaptador.ItineraryAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GestionItinerario {
+public class ItinerarioDao {
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;

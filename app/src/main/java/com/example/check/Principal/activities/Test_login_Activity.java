@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.check.Principal.MainActivity;
+import com.example.check.ActividadPrincipal;
 import com.example.check.databinding.ActivityTestLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +52,7 @@ public class Test_login_Activity extends AppCompatActivity {
     private void LogAuthentication() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent Log = new Intent(this, MainActivity.class);
+            Intent Log = new Intent(this, ActividadPrincipal.class);
             startActivity(Log);
         }
     }
@@ -71,9 +71,7 @@ public class Test_login_Activity extends AppCompatActivity {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {
                            if (task.isSuccessful()) {
-
                                LogAuthentication();
-
                            } else {
 
                            }

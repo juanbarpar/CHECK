@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:title="Iniciar Sesion"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"/>
+
+        />
+    <item
+        android:id="@+id/share"
+        android:title="Inscribirse"
+        android:icon="@drawable/ic_photo"
+        app:cnb_backgroundColor="@color/check1.2"
+        app:cnb_iconColor="@color/check2"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/white"
+        />
+
+
+</menu>

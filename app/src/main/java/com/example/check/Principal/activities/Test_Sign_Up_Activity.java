@@ -16,9 +16,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.check.Entidad.User;
-import com.example.check.Principal.MainActivity;
-import com.example.check.Utilities.Constantes;
+import com.example.check.repositorio.entidad.User;
+import com.example.check.ActividadPrincipal;
+import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.databinding.ActivityTestSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -184,7 +184,7 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent Log = new Intent(this, MainActivity.class);
+            Intent Log = new Intent(this, ActividadPrincipal.class);
             startActivity(Log);
         }
     }

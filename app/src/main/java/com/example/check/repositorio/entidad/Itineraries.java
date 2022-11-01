@@ -1,4 +1,4 @@
-package com.example.check.Entidad;
+package com.example.check.repositorio.entidad;
 
 import java.util.ArrayList;
 
