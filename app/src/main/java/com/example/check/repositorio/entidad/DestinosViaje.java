@@ -2,7 +2,7 @@ package com.example.check.repositorio.entidad;
 
 import java.util.Objects;
 
-public class TravelLocation {
+public class DestinosViaje {
     public String Nombre, ubicación, imagen, url;
     public String fecha;
 
@@ -10,7 +10,7 @@ public class TravelLocation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TravelLocation that = (TravelLocation) o;
+        DestinosViaje that = (DestinosViaje) o;
         return Objects.equals(Nombre, that.Nombre) && Objects.equals(ubicación, that.ubicación) && Objects.equals(imagen, that.imagen) && Objects.equals(url, that.url) && Objects.equals(fecha, that.fecha);
     }
 

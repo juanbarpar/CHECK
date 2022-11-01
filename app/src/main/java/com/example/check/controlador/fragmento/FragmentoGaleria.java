@@ -1,5 +1,6 @@
 package com.example.check.controlador.fragmento;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.check.repositorio.entidad.Connection;
 import com.example.check.repositorio.entidad.Imagedb;
-import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.controlador.adaptador.AlbumAdapter;
 import com.example.check.repositorio.dao.GestionOfflineImage;
 import com.example.check.repositorio.dao.ImagenDao;
@@ -37,71 +38,32 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentoGaleria#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentoGaleria extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FragmentoGaleria() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SocialFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentoGaleria newInstance(String param1, String param2) {
-        FragmentoGaleria fragment = new FragmentoGaleria();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
     }
 
+
+
+    //Implementar un servicio para firebase
     private FirebaseStorage storage;
     private StorageReference reference;
     private FirebaseAuth mAuth;
-    private View view;
-    private RecyclerView recyclerView;
-    List<Imagedb> imageList = new ArrayList<>();
-    private GestionOfflineImage offlineImage;
-    private File DIR_SAVE_IMAGES;
 
 
+    private RecyclerView vistaReciclada;
+
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -109,75 +71,67 @@ public class FragmentoGaleria extends Fragment {
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
-        view = inflater.inflate(R.layout.fragment_social, container, false);
-        recyclerView = view.findViewById(R.id.view_photo);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-        DIR_SAVE_IMAGES = new File(getActivity().getFilesDir(), "ImagePicker");
-        offlineImage = new GestionOfflineImage(DIR_SAVE_IMAGES);
+        View vista = inflater.inflate(R.layout.fragment_social, container, false);
+        vistaReciclada = vista.findViewById(R.id.view_photo);
+        vistaReciclada.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+        File DIR_SAVE_IMAGES = new File(requireActivity().getFilesDir(), "ImagePicker");
+        GestionOfflineImage imagenLocal = new GestionOfflineImage(DIR_SAVE_IMAGES);
         System.out.println("File: " + DIR_SAVE_IMAGES.getPath());
 
-        if (new Connection(getActivity()).isConnected()) {
-
-            offlineImage.uploadOnline();
-
-        }
-
-        ImageView imageView = view.findViewById(R.id.offimg);
+        ImageView imageView = vista.findViewById(R.id.offimg);
         if (!new Connection(getActivity()).isConnected()) {
 
-            TextView textView = view.findViewById(R.id.offtext1);
+            TextView textView = vista.findViewById(R.id.offtext1);
             textView.setText("No tiene conexión a internet.");
-            TextView textView2 = view.findViewById(R.id.offtext2);
+            TextView textView2 = vista.findViewById(R.id.offtext2);
             textView2.setText("Cuando tenga conexión a internet sus imagenes seran cargadas.");
 
             imageView.setVisibility(View.VISIBLE);
 
         } else {
-            List<TravelLocation> travelLocations = new ArrayList<>();
+            imagenLocal.uploadOnline();
+            List<DestinosViaje> destinosViajes = new ArrayList<>();
 
-            RecyclerView rvAlbum = view.findViewById(R.id.view_album);
-            rvAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-            AlbumAdapter albumAdapter = new AlbumAdapter(travelLocations);
-            rvAlbum.setAdapter(albumAdapter);
+            RecyclerView vistaRecicladaAlbum = vista.findViewById(R.id.view_album);
+            vistaRecicladaAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+            AlbumAdapter adaptadorAlbum = new AlbumAdapter(destinosViajes);
+            vistaRecicladaAlbum.setAdapter(adaptadorAlbum);
 
 
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = db.getReference("Expediciones");
             databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
 
+
+                    //wip-invertir-excepcion
+
                     if (!task.isSuccessful()) {
-                        System.out.println("fallo");
+                        //lanzar excepcion
                     } else {
-                        TravelLocation travelLocation1 = new TravelLocation();
-                        travelLocation1.Nombre = "Todas las expediciones";
-                        travelLocation1.imagen = "https://checknewplaces.com/wp-content/uploads/2021/09/Puerta-de-Orion-@ecoturismoguaviare-2.jpg";
-                        travelLocations.add(travelLocation1);
+                        DestinosViaje destinosViaje1 = new DestinosViaje();
+                        destinosViaje1.Nombre = "Todas las expediciones";
+                        destinosViaje1.imagen = "https://checknewplaces.com/wp-content/uploads/2021/09/Puerta-de-Orion-@ecoturismoguaviare-2.jpg";
+                        destinosViajes.add(destinosViaje1);
                         for (DataSnapshot ds : task.getResult().getChildren()) {
 
-                            TravelLocation travelLocation = ds.getValue(TravelLocation.class);
-                            System.out.println(travelLocation.toString());
-                            travelLocations.add(travelLocation);
-                            rvAlbum.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    System.out.println("Hola");
-                                }
-                            });
-                            rvAlbum.getAdapter().notifyDataSetChanged();
+                            DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
+                            destinosViajes.add(destinosViaje);
+                            Objects.requireNonNull(vistaRecicladaAlbum.getAdapter()).notifyDataSetChanged();
 
                         }
 
-                        System.out.println("AQUI???? " + String.valueOf(task.getResult().getValue()));
                     }
                 }
             });
 
-            rvAlbum.getAdapter().notifyDataSetChanged();
+            Objects.requireNonNull(vistaRecicladaAlbum.getAdapter()).notifyDataSetChanged();
 
-            recyclerView.setAdapter(new ImageAdapter(ImagenDao.imagedbs, getActivity()));
+            vistaReciclada.setAdapter(new ImageAdapter(ImagenDao.imagedbs, getActivity()));
             FirebaseDatabase db1 = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference1 = db1.getReference("Images");
 
@@ -186,13 +140,12 @@ public class FragmentoGaleria extends Fragment {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-
-                    System.out.println(snapshot.getValue());
                     if (!ImagenDao.imagedbs.contains(snapshot.getValue(Imagedb.class))) {
                         Imagedb imagedb = snapshot.getValue(Imagedb.class);
                         ImagenDao.addImage(imagedb);
                     }
-                    recyclerView.getAdapter().notifyDataSetChanged();
+
+                    Objects.requireNonNull(vistaReciclada.getAdapter()).notifyDataSetChanged();
                 }
 
                 @Override
@@ -217,8 +170,7 @@ public class FragmentoGaleria extends Fragment {
             });
 
         }
-
-        return view;
+        return vista;
     }
 
 
