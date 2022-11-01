@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.check.repositorio.entidad.Itineraries;
+import com.example.check.repositorio.entidad.Itinerarios;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.squareup.picasso.Picasso;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.TravelLocationViewHolder>{
     Context context;
-    List<Itineraries> itinerarios;
+    List<Itinerarios> itinerarios;
 
     String image;
-    public ItineraryAdapter(Context context, List<Itineraries> itinerarios, String image) {
+    public ItineraryAdapter(Context context, List<Itinerarios> itinerarios, String image) {
         this.context = context;
         this.itinerarios = itinerarios;
         this.image=image;
@@ -64,7 +64,7 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.Trav
 
 
         }
-        void setLocationData(Itineraries itinerarios, Context context, String image){
+        void setLocationData(Itinerarios itinerarios, Context context, String image){
 
             dayTextView.setText(itinerarios.getDia());
             dateTextView.setText(itinerarios.getFecha());

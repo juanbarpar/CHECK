@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 
 import com.example.check.repositorio.entidad.TravelLocation;
-import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.repositorio.dao.ItinerarioDao;
 import com.example.check.R;
 import com.example.check.servicio.utilidades.Constantes;
@@ -77,8 +77,7 @@ public class FragmentoPerfil extends Fragment {
     }
 
     private FirebaseAuth mAuth;
-    private User user;
-    private ViewPager viewPager;
+    private Usuario usuario;
 
 
     @Override
@@ -89,6 +88,7 @@ public class FragmentoPerfil extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,12 +96,11 @@ public class FragmentoPerfil extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
 
-        user = new User();
+        usuario = new Usuario();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         //HashMap<String,Object> user = new HashMap<>();
-
 
 
         List<TravelLocation> travelLocations = new ArrayList<>();
@@ -114,15 +113,11 @@ public class FragmentoPerfil extends Fragment {
 
                 if (!task.isSuccessful()) {
                     System.out.println("fallo");
-                }
-                else {
+                } else {
                     for (DataSnapshot ds : task.getResult().getChildren()) {
-
                         TravelLocation travelLocation = ds.getValue(TravelLocation.class);
-                        System.out.println(travelLocation.toString());
                         travelLocations.add(travelLocation);
                     }
-                    System.out.println("AQUI???? "+String.valueOf(task.getResult().getValue()));
                 }
             }
         });
@@ -133,20 +128,19 @@ public class FragmentoPerfil extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                user = documentSnapshot.toObject(User.class);
-                System.out.println(user.getName());
+                usuario = documentSnapshot.toObject(Usuario.class);
                 TextView textView = view.findViewById(R.id.nombreUsuario);
-                textView.setText(user.getName());
+                textView.setText(usuario.getNombre());
                 TextView textView2 = view.findViewById(R.id.expedicion);
-                textView2.setText(user.getExpedicion());
-                for (TravelLocation t : travelLocations){
-                    if(t.Nombre.equals(user.getExpedicion())){
+                textView2.setText(usuario.getExpedicion());
+                for (TravelLocation t : travelLocations) {
+                    if (t.Nombre.equals(usuario.getExpedicion())) {
 
                         ImageView imageView = view.findViewById(R.id.banner);
                         Picasso.get().load(t.imagen).into(imageView);
 
                         ItinerarioDao itinerario = new ItinerarioDao();
-                        itinerario.updateView(viewPager,getContext(), t.imagen);
+                        itinerario.updateView(viewPager, getContext(), t.imagen);
                         break;
 
                     }
@@ -171,14 +165,11 @@ public class FragmentoPerfil extends Fragment {
         viewPager.setPageTransformer(compositePageTransformer);
 
 
-
-
-
         return view;
     }
 
 
-    private void signOut(){
+    private void signOut() {
         mAuth.signOut();
         goLogin();
 
