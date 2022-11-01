@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.squareup.picasso.Picasso;
@@ -17,9 +17,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAdapter.TravelLocationViewHolder>{
-    private List<TravelLocation> travelLocations;
-    public TravelLocationAdapter(List<TravelLocation> travelLocations) {
-        this.travelLocations = travelLocations;
+    private List<DestinosViaje> destinosViajes;
+    public TravelLocationAdapter(List<DestinosViaje> destinosViajes) {
+        this.destinosViajes = destinosViajes;
     }
 
 
@@ -35,11 +35,11 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
     }
     @Override
     public void onBindViewHolder(@NonNull TravelLocationViewHolder holder, int position) {
-        holder.setLocationData(travelLocations.get(position));
+        holder.setLocationData(destinosViajes.get(position));
     }
     @Override
     public int getItemCount() {
-        return travelLocations.size();
+        return destinosViajes.size();
     }
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
         private KenBurnsView kbvLocation;
@@ -59,20 +59,20 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
 
 
         }
-        void setLocationData(TravelLocation travelLocation){
+        void setLocationData(DestinosViaje destinosViaje){
 
-            kbvLocation.setTag(travelLocation.Nombre);
+            kbvLocation.setTag(destinosViaje.Nombre);
 
-            itemView.setTag(travelLocation.Nombre);
+            itemView.setTag(destinosViaje.Nombre);
 
 
-            Picasso.get().load(travelLocation.imagen).into(kbvLocation);
-            textTitle.setText(travelLocation.Nombre);
-            textLocation.setTag(travelLocation.imagen);
-            textLocation.setText(travelLocation.ubicación);
-            textStartRating.setText(String.valueOf(travelLocation.fecha));
+            Picasso.get().load(destinosViaje.imagen).into(kbvLocation);
+            textTitle.setText(destinosViaje.Nombre);
+            textLocation.setTag(destinosViaje.imagen);
+            textLocation.setText(destinosViaje.ubicación);
+            textStartRating.setText(String.valueOf(destinosViaje.fecha));
 
-            textTitle.setTag(travelLocation.url);
+            textTitle.setTag(destinosViaje.url);
 
         }
     }

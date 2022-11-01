@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.check.repositorio.entidad.Connection;
-import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.controlador.adaptador.TravelLocationAdapter;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -78,17 +78,14 @@ public class FragmentoInicio extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        Connection connection = new Connection(getActivity());
+        Connection conexion = new Connection(getActivity());
 
         ViewPager2 locationViewPager = view.findViewById(R.id.locationViewPager);
 
-        if(connection.isConnected()){
+        if(conexion.isConnected()){
 
-            List<TravelLocation> travelLocations = new ArrayList<>();
+            List<DestinosViaje> destinosViajes = new ArrayList<>();
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = db.getReference("Expediciones");
             databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -101,9 +98,8 @@ public class FragmentoInicio extends Fragment {
                     else {
                         for (DataSnapshot ds : task.getResult().getChildren()) {
 
-                            TravelLocation travelLocation = ds.getValue(TravelLocation.class);
-                            System.out.println(travelLocation.toString());
-                            travelLocations.add(travelLocation);
+                            DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
+                            destinosViajes.add(destinosViaje);
                         }
                         locationViewPager.getAdapter().notifyDataSetChanged();
 
@@ -111,22 +107,22 @@ public class FragmentoInicio extends Fragment {
                 }
             });
 
-            locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
+            locationViewPager.setAdapter(new TravelLocationAdapter(destinosViajes));
 
             locationViewPager.getAdapter().notifyDataSetChanged();
 
         }else {
 
-            List<TravelLocation> travelLocations = new ArrayList<>();
-            TravelLocation travelLocation = new TravelLocation();
-            travelLocation.url = "";
-            travelLocation.ubicación="No logramos conectar con el servidor";
-            travelLocation.Nombre="Offline";
-            travelLocation.fecha = "";
+            List<DestinosViaje> destinosViajes = new ArrayList<>();
+            DestinosViaje destinosViaje = new DestinosViaje();
+            destinosViaje.url = "";
+            destinosViaje.ubicación="No logramos conectar con el servidor";
+            destinosViaje.Nombre="Offline";
+            destinosViaje.fecha = "";
             Uri uri = Uri.parse("android.resource://com.example.check/" + R.drawable.signal);
-            travelLocation.imagen=uri.toString();
-            travelLocations.add(travelLocation);
-            locationViewPager.setAdapter(new TravelLocationAdapter(travelLocations));
+            destinosViaje.imagen=uri.toString();
+            destinosViajes.add(destinosViaje);
+            locationViewPager.setAdapter(new TravelLocationAdapter(destinosViajes));
 
         }
 
