@@ -22,7 +22,7 @@
         app:cnb_textColor="@color/white"
         />
     <item
-        android:id="@+id/user"
+        android:id="@+id/usuario"
         android:title="Perfil"
         android:icon="@drawable/ic_user"
         app:cnb_backgroundColor="@color/check1.2"

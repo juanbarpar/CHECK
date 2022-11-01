@@ -1,4 +1,4 @@
-# Aplicacion para Android de Check-In
+# Aplicacion para Android de Check New Places
 
 ## Integrantes del equipo
 

@@ -16,7 +16,7 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.example.check.repositorio.entidad.Imagedb;
-import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.repositorio.dao.ImagenDao;
 import com.example.check.repositorio.dao.GestionOfflineImage;
 import com.example.check.controlador.adaptador.ImageAdapter;
@@ -242,7 +242,7 @@ public class ActividadPrincipal extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             bottomSheetDialog.dismiss();
-                            User user = documentSnapshot.toObject(User.class);
+                            Usuario user = documentSnapshot.toObject(Usuario.class);
                             System.out.println("tag: " + kbvImage.getTag().toString());
                             user.setExpedicion(kbvImage.getTag().toString());
                             database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid()).set(user);
@@ -464,10 +464,10 @@ public class ActividadPrincipal extends AppCompatActivity {
                                     docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            User user = documentSnapshot.toObject(User.class);
-                                            System.out.println("Exp: "+user.getExpedicion());
+                                            Usuario usuario = documentSnapshot.toObject(Usuario.class);
+                                            System.out.println("Exp: "+ usuario.getExpedicion());
 
-                                            Imagedb imdb = new Imagedb(Timestamp.now().toString(),user.getName(),uriImage.toString(),user.getExpedicion());
+                                            Imagedb imdb = new Imagedb(Timestamp.now().toString(), usuario.getNombre(),uriImage.toString(), usuario.getExpedicion());
                                             System.out.println("Exp: "+imdb.getExpedicion());
 
                                             FirebaseDatabase db = FirebaseDatabase.getInstance();
