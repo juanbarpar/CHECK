@@ -1,15 +1,12 @@
-package com.example.check.Gestion;
+package com.example.check.repositorio.dao;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.check.Entidad.Imagedb;
-import com.example.check.Entidad.User;
-import com.example.check.Principal.MainActivity;
-import com.example.check.Utilities.Constantes;
+import com.example.check.repositorio.entidad.Imagedb;
+import com.example.check.repositorio.entidad.User;
+import com.example.check.servicio.utilidades.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -20,18 +17,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class GestionOfflineImage {

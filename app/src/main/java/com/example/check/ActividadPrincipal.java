@@ -1,4 +1,4 @@
-package com.example.check.Principal;
+package com.example.check;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -15,17 +15,16 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
-import com.example.check.Entidad.Imagedb;
-import com.example.check.Entidad.User;
-import com.example.check.Gestion.GestionImage;
-import com.example.check.Gestion.GestionOfflineImage;
-import com.example.check.Gestion.adaptadores.ImageAdapter;
-import com.example.check.Entidad.Connection;
-import com.example.check.Principal.Fragmentos.HomeFragment;
-import com.example.check.R;
-import com.example.check.Principal.Fragmentos.SocialFragment;
-import com.example.check.Principal.Fragmentos.UserFragment;
-import com.example.check.Utilities.Constantes;
+import com.example.check.repositorio.entidad.Imagedb;
+import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.dao.ImagenDao;
+import com.example.check.repositorio.dao.GestionOfflineImage;
+import com.example.check.controlador.adaptador.ImageAdapter;
+import com.example.check.repositorio.entidad.Connection;
+import com.example.check.controlador.fragmento.FragmentoInicio;
+import com.example.check.controlador.fragmento.FragmentoGaleria;
+import com.example.check.controlador.fragmento.FragmentoPerfil;
+import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.Principal.activities.Test_login_Activity;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -68,7 +67,7 @@ import java.util.List;
 import kotlin.jvm.functions.Function1;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-public class MainActivity extends AppCompatActivity {
+public class ActividadPrincipal extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseStorage storage;
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         System.out.println(connection.isConnected() + "------------");
-        replace(new HomeFragment());
+        replace(new FragmentoInicio());
 
 
         smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
@@ -107,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
             switch (o) {
                 case 0:
-                    replace(new HomeFragment());
+                    replace(new FragmentoInicio());
                     break;
                 case 1:
-                    replace(new SocialFragment());
+                    replace(new FragmentoGaleria());
                     break;
                 case 2:
-                    replace(new UserFragment());
+                    replace(new FragmentoPerfil());
                     break;
             }
             return null;
@@ -192,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(kbvImage.getTag());
 
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                    MainActivity.this, R.style.bt_sheet_dialog
+                    ActividadPrincipal.this, R.style.bt_sheet_dialog
 
             );
 
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
                             "Una diversidad de destinos, itinerarios llenos de momentos" +
                             " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
                     try {
-                        MainActivity.this.startActivity(whatsappIntent);
+                        ActividadPrincipal.this.startActivity(whatsappIntent);
                     } catch (android.content.ActivityNotFoundException ex) {
                         System.out.println("Whatsapp have not been installed.");
                     }
@@ -267,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showImageOp(View view) {
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(MainActivity.this, R.style.bt_sheet_dialog);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ActividadPrincipal.this, R.style.bt_sheet_dialog);
 
         View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
                 R.layout.bt_image, (LinearLayout) findViewById(R.id.bt_image_container)
@@ -479,7 +478,7 @@ public class MainActivity extends AppCompatActivity {
 
                                             progressDialog.dismiss();
                                             Toast
-                                                    .makeText(MainActivity.this,
+                                                    .makeText(ActividadPrincipal.this,
                                                             "Imagen Actualizada!!",
                                                             Toast.LENGTH_SHORT)
                                                     .show();
@@ -502,7 +501,7 @@ public class MainActivity extends AppCompatActivity {
                             // Error, Image not uploaded
                             progressDialog.dismiss();
                             Toast
-                                    .makeText(MainActivity.this,
+                                    .makeText(ActividadPrincipal.this,
                                             "Failed " + e.getMessage(),
                                             Toast.LENGTH_SHORT)
                                     .show();
@@ -532,18 +531,18 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.view_photo);
         List<Imagedb> imagedbs = new ArrayList<>();
-        imagedbs.addAll(GestionImage.imagedbs);
+        imagedbs.addAll(ImagenDao.imagedbs);
 
-        System.out.println(GestionImage.imagedbs.get(1).getDate());
+        System.out.println(ImagenDao.imagedbs.get(1).getDate());
         imagedbs.clear();
 
         String tag = view.getTag().toString();
         if(tag.equals("Todas las expediciones")){
-            imagedbs.addAll(GestionImage.imagedbs);
+            imagedbs.addAll(ImagenDao.imagedbs);
 
         }
         else {
-            for(Imagedb item: GestionImage.imagedbs){
+            for(Imagedb item: ImagenDao.imagedbs){
                 if(item.getExpedicion().equals(tag)){
                     imagedbs.add(item);
                 }

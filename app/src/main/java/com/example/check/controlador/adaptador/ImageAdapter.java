@@ -1,4 +1,4 @@
-package com.example.check.Gestion.adaptadores;
+package com.example.check.controlador.adaptador;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.check.Entidad.Imagedb;
+import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.R;
 import com.makeramen.roundedimageview.RoundedImageView;
 

@@ -1,4 +1,4 @@
-package com.example.check.Principal.Fragmentos;
+package com.example.check.controlador.fragmento;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.check.Entidad.TravelLocation;
-import com.example.check.Entidad.User;
-import com.example.check.Gestion.GestionItinerario;
+import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.dao.ItinerarioDao;
 import com.example.check.R;
-import com.example.check.Utilities.Constantes;
+import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.Principal.activities.Test_login_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,10 +40,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserFragment#newInstance} factory method to
+ * Use the {@link FragmentoPerfil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserFragment extends Fragment {
+public class FragmentoPerfil extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,7 +54,7 @@ public class UserFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserFragment() {
+    public FragmentoPerfil() {
         // Required empty public constructor
     }
 
@@ -67,8 +67,8 @@ public class UserFragment extends Fragment {
      * @return A new instance of fragment UserFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserFragment newInstance(String param1, String param2) {
-        UserFragment fragment = new UserFragment();
+    public static FragmentoPerfil newInstance(String param1, String param2) {
+        FragmentoPerfil fragment = new FragmentoPerfil();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -145,7 +145,7 @@ public class UserFragment extends Fragment {
                         ImageView imageView = view.findViewById(R.id.banner);
                         Picasso.get().load(t.imagen).into(imageView);
 
-                        GestionItinerario itinerario = new GestionItinerario();
+                        ItinerarioDao itinerario = new ItinerarioDao();
                         itinerario.updateView(viewPager,getContext(), t.imagen);
                         break;
 

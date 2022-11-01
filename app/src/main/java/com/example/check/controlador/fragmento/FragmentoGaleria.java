@@ -1,4 +1,4 @@
-package com.example.check.Principal.Fragmentos;
+package com.example.check.controlador.fragmento;
 
 import android.os.Bundle;
 
@@ -15,13 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.check.Entidad.Connection;
-import com.example.check.Entidad.Imagedb;
-import com.example.check.Entidad.TravelLocation;
-import com.example.check.Gestion.adaptadores.AlbumAdapter;
-import com.example.check.Gestion.GestionOfflineImage;
-import com.example.check.Gestion.GestionImage;
-import com.example.check.Gestion.adaptadores.ImageAdapter;
+import com.example.check.repositorio.entidad.Connection;
+import com.example.check.repositorio.entidad.Imagedb;
+import com.example.check.repositorio.entidad.TravelLocation;
+import com.example.check.controlador.adaptador.AlbumAdapter;
+import com.example.check.repositorio.dao.GestionOfflineImage;
+import com.example.check.repositorio.dao.ImagenDao;
+import com.example.check.controlador.adaptador.ImageAdapter;
 import com.example.check.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,10 +40,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SocialFragment#newInstance} factory method to
+ * Use the {@link FragmentoGaleria#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SocialFragment extends Fragment {
+public class FragmentoGaleria extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,7 +54,7 @@ public class SocialFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SocialFragment() {
+    public FragmentoGaleria() {
         // Required empty public constructor
     }
 
@@ -67,8 +67,8 @@ public class SocialFragment extends Fragment {
      * @return A new instance of fragment SocialFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SocialFragment newInstance(String param1, String param2) {
-        SocialFragment fragment = new SocialFragment();
+    public static FragmentoGaleria newInstance(String param1, String param2) {
+        FragmentoGaleria fragment = new FragmentoGaleria();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -177,7 +177,7 @@ public class SocialFragment extends Fragment {
 
             rvAlbum.getAdapter().notifyDataSetChanged();
 
-            recyclerView.setAdapter(new ImageAdapter(GestionImage.imagedbs, getActivity()));
+            recyclerView.setAdapter(new ImageAdapter(ImagenDao.imagedbs, getActivity()));
             FirebaseDatabase db1 = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference1 = db1.getReference("Images");
 
@@ -188,9 +188,9 @@ public class SocialFragment extends Fragment {
 
 
                     System.out.println(snapshot.getValue());
-                    if (!GestionImage.imagedbs.contains(snapshot.getValue(Imagedb.class))) {
+                    if (!ImagenDao.imagedbs.contains(snapshot.getValue(Imagedb.class))) {
                         Imagedb imagedb = snapshot.getValue(Imagedb.class);
-                        GestionImage.addImage(imagedb);
+                        ImagenDao.addImage(imagedb);
                     }
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }

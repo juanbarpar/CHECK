@@ -1,4 +1,4 @@
-package com.example.check.Gestion.adaptadores;
+package com.example.check.controlador.adaptador;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.check.Entidad.Itineraries;
+import com.example.check.repositorio.entidad.Itineraries;
 import com.example.check.R;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.squareup.picasso.Picasso;

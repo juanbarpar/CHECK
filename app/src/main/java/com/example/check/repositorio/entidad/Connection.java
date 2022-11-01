@@ -1,4 +1,4 @@
-package com.example.check.Entidad;
+package com.example.check.repositorio.entidad;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -18,9 +18,8 @@ public class Connection {
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
+        return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-        return isConnected;
 
     }
 }
