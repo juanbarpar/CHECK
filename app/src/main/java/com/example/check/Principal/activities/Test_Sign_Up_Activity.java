@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.ActividadPrincipal;
 import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.databinding.ActivityTestSignUpBinding;
@@ -146,11 +146,11 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
                                 FirebaseFirestore database = FirebaseFirestore.getInstance();
                                 //HashMap<String,Object> user = new HashMap<>();
 
-                                User user = new User();
-                                user.setName(binding.inputName.getText().toString());
-                                user.setEmail(binding.inputEmail.getText().toString().trim());
+                                Usuario user = new Usuario();
+                                user.setNombre(binding.inputName.getText().toString());
+                                user.setCorreo(binding.inputEmail.getText().toString().trim());
                                 user.setExpedicion(("En Busca de la Identidad"));
-                                user.setImage(encodedImage);
+                                user.setImagen(encodedImage);
 
 
                                 database.collection(Constantes.KEY_COLLECTION_USERS).document(task.getResult().getUser().getUid())

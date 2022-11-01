@@ -1,8 +1,6 @@
 package com.example.check.repositorio.entidad;
 
-import java.util.ArrayList;
-
-public class Itineraries {
+public class Itinerarios {
     String dia;
     String fecha;
     String eventos;

@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.check.repositorio.entidad.Itineraries;
+import com.example.check.repositorio.entidad.Itinerarios;
 import com.example.check.controlador.adaptador.ItineraryAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +30,7 @@ public class ItinerarioDao {
 
     public void updateView(ViewPager2 viewPager, Context context, String image) {
 
-        List<Itineraries> itinerarios = new ArrayList<>();
+        List<Itinerarios> itinerarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -49,7 +49,7 @@ public class ItinerarioDao {
                                 if(ds.child("Nombre").getValue().toString().equals(expedition)){
                                     for (int i = 1; i < 8; i++) {
                                         if(ds.child("Día "+ i).exists()){
-                                            Itineraries itinerario = new Itineraries();
+                                            Itinerarios itinerario = new Itinerarios();
                                             String eventos = "";
                                             itinerario.setDia("Día "+i);
                                             itinerario.setFecha(ds.child("Día " + i).child(String.valueOf(0)).getValue().toString());
@@ -60,12 +60,6 @@ public class ItinerarioDao {
 
                                             }
                                             itinerario.setEventos(eventos);
-                                            System.out.println(itinerario.getDia()+", "
-                                                    +itinerario.getFecha()+ ", "
-                                                    +itinerario.getEventos());
-
-                                            System.out.println(image);
-                                            
                                             itinerarios.add(itinerario);
                                         }
                                     }

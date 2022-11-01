@@ -5,7 +5,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 
 import com.example.check.repositorio.entidad.Imagedb;
-import com.example.check.repositorio.entidad.User;
+import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.servicio.utilidades.Constantes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -101,11 +101,11 @@ public class GestionOfflineImage {
                                         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                User user = documentSnapshot.toObject(User.class);
-                                                System.out.println("name: "+ user.getName());
+                                                Usuario user = documentSnapshot.toObject(Usuario.class);
+                                                System.out.println("name: "+ user.getNombre());
 
 
-                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(), user.getName(), uriImage.toString(), user.getExpedicion());
+                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(), user.getNombre(), uriImage.toString(), user.getExpedicion());
 
                                                 eliminar(imagedb.getUrl());
 
