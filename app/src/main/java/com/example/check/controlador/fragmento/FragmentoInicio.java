@@ -93,7 +93,7 @@ public class FragmentoInicio extends Fragment {
                 public void onComplete(@androidx.annotation.NonNull Task<DataSnapshot> task) {
 
                     if (!task.isSuccessful()) {
-                        System.out.println("fallo");
+                        //lanzar excepcion
                     }
                     else {
                         for (DataSnapshot ds : task.getResult().getChildren()) {

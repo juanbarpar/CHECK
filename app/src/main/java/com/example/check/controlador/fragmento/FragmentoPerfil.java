@@ -101,7 +101,6 @@ public class FragmentoPerfil extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        //HashMap<String,Object> user = new HashMap<>();
 
         List<DestinosViaje> destinosViajes = new ArrayList<>();
 
@@ -113,7 +112,7 @@ public class FragmentoPerfil extends Fragment {
             public void onComplete(@androidx.annotation.NonNull Task<DataSnapshot> task) {
 
                 if (!task.isSuccessful()) {
-                    System.out.println("fallo");
+
                 } else {
                     for (DataSnapshot ds : task.getResult().getChildren()) {
 
