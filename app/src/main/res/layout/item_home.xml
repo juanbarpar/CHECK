@@ -8,7 +8,7 @@
     app:cardElevation="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/waitingforid"
-        android:onClick="getView"
+        android:onClick="desplegarInformacion"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.flaviofaria.kenburnsview.KenBurnsView

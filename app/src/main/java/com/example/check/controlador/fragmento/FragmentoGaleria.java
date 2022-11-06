@@ -20,7 +20,7 @@ import com.example.check.repositorio.entidad.Connection;
 import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.controlador.adaptador.AlbumAdapter;
-import com.example.check.repositorio.dao.GestionOfflineImage;
+import com.example.check.repositorio.dao.ImagenLocalDao;
 import com.example.check.repositorio.dao.ImagenDao;
 import com.example.check.controlador.adaptador.ImageAdapter;
 import com.example.check.R;
@@ -77,7 +77,7 @@ public class FragmentoGaleria extends Fragment {
         vistaReciclada.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
         File DIR_SAVE_IMAGES = new File(requireActivity().getFilesDir(), "ImagePicker");
-        GestionOfflineImage imagenLocal = new GestionOfflineImage(DIR_SAVE_IMAGES);
+        ImagenLocalDao imagenLocal = new ImagenLocalDao(DIR_SAVE_IMAGES);
         System.out.println("File: " + DIR_SAVE_IMAGES.getPath());
 
         ImageView imageView = vista.findViewById(R.id.offimg);

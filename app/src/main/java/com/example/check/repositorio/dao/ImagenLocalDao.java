@@ -28,13 +28,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class GestionOfflineImage {
+public class ImagenLocalDao {
 
     private String ruta;
     private FirebaseStorage storage;
     private StorageReference reference;
 
-    public GestionOfflineImage(File fi) {
+    public ImagenLocalDao(File fi) {
 
         storage = FirebaseStorage.getInstance();
         reference = storage.getReference();

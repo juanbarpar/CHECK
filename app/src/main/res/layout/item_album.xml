@@ -9,7 +9,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_margin="5dp"
     android:elevation="2dp"
-    android:onClick="filter"
+    android:onClick="filtrar"
     android:adjustViewBounds="true"
 
     >
