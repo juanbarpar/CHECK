@@ -119,4 +119,8 @@ public class ServicioFirebase {
                                             + (int) progress + "%)");
                         });
     }
+
+    public void cargarDatos() {
+
+    }
 }

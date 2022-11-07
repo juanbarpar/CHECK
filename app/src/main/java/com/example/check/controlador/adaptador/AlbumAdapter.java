@@ -16,11 +16,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder>{
-    private List<DestinosViaje> albums;
-    private List<DestinosViaje> filtalbums;
+    private final List<DestinosViaje> albums;
+
     public AlbumAdapter(List<DestinosViaje> destinosViajes) {
         this.albums = destinosViajes;
-        this.filtalbums = destinosViajes;
     }
     @NonNull
     @Override
@@ -44,8 +43,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
         return albums.size();
     }
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
-        private RoundedImageView kbvLocation;
-        private TextView textTitle;
+        private final RoundedImageView kbvLocation;
+        private final TextView textTitle;
 
         TravelLocationViewHolder(@NonNull View itemView) {
             super(itemView);

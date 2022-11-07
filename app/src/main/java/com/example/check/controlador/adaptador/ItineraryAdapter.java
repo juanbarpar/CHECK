@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,15 +48,15 @@ public class ItineraryAdapter extends RecyclerView.Adapter<ItineraryAdapter.Trav
         return itinerarios.size();
     }
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
-        private KenBurnsView kbvLocation;
-        private TextView dayTextView , dateTextView, eventsTextView;
-        private LinearLayout action;
+        private final KenBurnsView kbvLocation;
+        private final TextView dayTextView;
+        private final TextView dateTextView;
+        private final TextView eventsTextView;
 
 
         TravelLocationViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            action = itemView.findViewById(R.id.action_bar);
             dayTextView = itemView.findViewById(R.id.dayTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             eventsTextView = itemView.findViewById(R.id.eventsTextView);

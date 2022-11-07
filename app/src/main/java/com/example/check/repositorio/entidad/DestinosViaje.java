@@ -1,5 +1,7 @@
 package com.example.check.repositorio.entidad;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 public class DestinosViaje {
@@ -19,6 +21,7 @@ public class DestinosViaje {
         return Objects.hash(Nombre, ubicación, imagen, url, fecha);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "TravelLocation{" +

@@ -24,9 +24,8 @@ import com.example.check.repositorio.dao.ImagenLocalDao;
 import com.example.check.repositorio.dao.ImagenDao;
 import com.example.check.controlador.adaptador.ImageAdapter;
 import com.example.check.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.check.servicio.firebase.ServicioFirebase;
+import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,9 +55,8 @@ public class FragmentoGaleria extends Fragment {
 
 
     //Implementar un servicio para firebase
-    private FirebaseStorage storage;
-    private StorageReference reference;
-    private FirebaseAuth mAuth;
+    private ServicioFirebase servicioFirebase;
+
 
 
     private RecyclerView vistaReciclada;
@@ -68,9 +66,8 @@ public class FragmentoGaleria extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        storage = FirebaseStorage.getInstance();
-        reference = storage.getReference();
-        mAuth = FirebaseAuth.getInstance();
+
+        servicioFirebase = new ServicioFirebase();
 
         View vista = inflater.inflate(R.layout.fragment_social, container, false);
         vistaReciclada = vista.findViewById(R.id.view_photo);
@@ -102,30 +99,22 @@ public class FragmentoGaleria extends Fragment {
 
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = db.getReference("Expediciones");
-            databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @SuppressLint("NotifyDataSetChanged")
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
+            databaseReference.get().addOnCompleteListener(task -> {
+                if (!task.isSuccessful()) {
+                    throw new ExcepcionTareaFB(Objects.requireNonNull(task.getException()).getMessage());
+                } else {
+                    DestinosViaje destinosViaje1 = new DestinosViaje();
+                    destinosViaje1.Nombre = "Todas las expediciones";
+                    destinosViaje1.imagen = "https://checknewplaces.com/wp-content/uploads/2021/09/Puerta-de-Orion-@ecoturismoguaviare-2.jpg";
+                    destinosViajes.add(destinosViaje1);
+                    for (DataSnapshot ds : task.getResult().getChildren()) {
 
-
-                    //wip-invertir-excepcion
-
-                    if (!task.isSuccessful()) {
-                        //lanzar excepcion
-                    } else {
-                        DestinosViaje destinosViaje1 = new DestinosViaje();
-                        destinosViaje1.Nombre = "Todas las expediciones";
-                        destinosViaje1.imagen = "https://checknewplaces.com/wp-content/uploads/2021/09/Puerta-de-Orion-@ecoturismoguaviare-2.jpg";
-                        destinosViajes.add(destinosViaje1);
-                        for (DataSnapshot ds : task.getResult().getChildren()) {
-
-                            DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
-                            destinosViajes.add(destinosViaje);
-                            Objects.requireNonNull(vistaRecicladaAlbum.getAdapter()).notifyDataSetChanged();
-
-                        }
+                        DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
+                        destinosViajes.add(destinosViaje);
+                        Objects.requireNonNull(vistaRecicladaAlbum.getAdapter()).notifyDataSetChanged();
 
                     }
+
                 }
             });
 
