@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>{
 
-    private List<Imagedb> imageList;
+    private final List<Imagedb> imageList;
     Activity activity;
 
     public ImageAdapter(List<Imagedb> imageList, Activity activity) {
@@ -63,42 +63,34 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             imageView.setTag(image.getUrl());
 
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            imageView.setOnClickListener(view -> {
 
-                    View box = LayoutInflater.from(activity.getApplicationContext()).inflate(
-                            R.layout.image_layout, activity.findViewById(R.id.image_container)
-                    );
+                View box = LayoutInflater.from(activity.getApplicationContext()).inflate(
+                        R.layout.image_layout, activity.findViewById(R.id.image_container)
+                );
 
-                    Dialog dialog = new Dialog(activity);
+                Dialog dialog = new Dialog(activity);
 
-                    dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    box.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
+                dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                box.setOnClickListener(view1 -> dialog.dismiss());
 
-                    RoundedImageView imageView = box.findViewById(R.id.imageFS);
-                    Glide.with(activity)
-                            .load(view.getTag())
-                            .into(imageView);
-                    imageView.setBackground(null);
+                RoundedImageView imageView = box.findViewById(R.id.imageFS);
+                Glide.with(activity)
+                        .load(view.getTag())
+                        .into(imageView);
+                imageView.setBackground(null);
 
-                    dialog.setContentView(box);
-                    dialog.show();
+                dialog.setContentView(box);
+                dialog.show();
 
 
-                    CharSequence text = image.getUser() +" - "+image.getExpedicion();
-                    int duration = Toast.LENGTH_LONG;
+                CharSequence text = image.getUser() +" - "+image.getExpedicion();
+                int duration = Toast.LENGTH_LONG;
 
-                    Toast toast = Toast.makeText(activity, text, duration);
-                    toast.show();
+                Toast toast = Toast.makeText(activity, text, duration);
+                toast.show();
 
-                }
             });
 
             Glide.with(activity)

@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.check.repositorio.entidad.DestinosViaje;
@@ -17,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAdapter.TravelLocationViewHolder>{
-    private List<DestinosViaje> destinosViajes;
+    private final List<DestinosViaje> destinosViajes;
     public TravelLocationAdapter(List<DestinosViaje> destinosViajes) {
         this.destinosViajes = destinosViajes;
     }
@@ -42,14 +41,14 @@ public class TravelLocationAdapter extends RecyclerView.Adapter<TravelLocationAd
         return destinosViajes.size();
     }
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
-        private KenBurnsView kbvLocation;
-        private TextView textTitle, textLocation, textStartRating;
-        private ConstraintLayout constraintLayout;
+        private final KenBurnsView kbvLocation;
+        private final TextView textTitle;
+        private final TextView textLocation;
+        private final TextView textStartRating;
 
         TravelLocationViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            constraintLayout = itemView.findViewById(R.id.waitingforid);
             kbvLocation = itemView.findViewById(R.id.kbvLocation);
             textTitle = itemView.findViewById(R.id.textTitle);
             textStartRating = itemView.findViewById(R.id.textStartRating);

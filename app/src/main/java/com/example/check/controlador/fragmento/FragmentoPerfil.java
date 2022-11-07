@@ -1,11 +1,8 @@
 package com.example.check.controlador.fragmento;
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -22,72 +19,33 @@ import com.example.check.repositorio.entidad.DestinosViaje;
 
 import com.example.check.repositorio.dao.ItinerarioDao;
 import com.example.check.R;
+import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
-import com.example.check.Principal.activities.Test_login_Activity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentoPerfil#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentoPerfil extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FragmentoPerfil() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentoPerfil newInstance(String param1, String param2) {
-        FragmentoPerfil fragment = new FragmentoPerfil();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    private FirebaseAuth mAuth;
     private Usuario usuario;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -98,56 +56,47 @@ public class FragmentoPerfil extends Fragment {
 
 
         usuario = new Usuario();
-
-        mAuth = FirebaseAuth.getInstance();
+        ServicioFirebase servicioFirebase = new ServicioFirebase();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
 
         List<DestinosViaje> destinosViajes = new ArrayList<>();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = db.getReference("Expediciones");
-        databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseReference.get().addOnCompleteListener(task -> {
 
-            @Override
-            public void onComplete(@androidx.annotation.NonNull Task<DataSnapshot> task) {
+            if (!task.isSuccessful()) {
+                throw new ExcepcionTareaFB(Objects.requireNonNull(task.getException()).getMessage());
+            } else {
+                for (DataSnapshot ds : task.getResult().getChildren()) {
 
-                if (!task.isSuccessful()) {
+                    DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
+                    destinosViajes.add(destinosViaje);
 
-                } else {
-                    for (DataSnapshot ds : task.getResult().getChildren()) {
-
-                        DestinosViaje destinosViaje = ds.getValue(DestinosViaje.class);
-                        destinosViajes.add(destinosViaje);
-
-                    }
                 }
             }
         });
         ViewPager2 viewPager = view.findViewById(R.id.viewPager);
 
-        final String[] image = new String[1];
-        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(mAuth.getUid());
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                usuario = documentSnapshot.toObject(Usuario.class);
-                TextView textView = view.findViewById(R.id.nombreUsuario);
-                textView.setText(usuario.getNombre());
-                TextView textView2 = view.findViewById(R.id.expedicion);
+        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getmAuth().getUid()));
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            usuario = documentSnapshot.toObject(Usuario.class);
+            TextView textView = view.findViewById(R.id.nombreUsuario);
+            textView.setText(usuario.getNombre());
+            TextView textView2 = view.findViewById(R.id.expedicion);
 
-                textView2.setText(usuario.getExpedicion());
-                for (DestinosViaje t : destinosViajes){
-                    if (t.Nombre.equals(usuario.getExpedicion())) {
+            textView2.setText(usuario.getExpedicion());
+            for (DestinosViaje t : destinosViajes){
+                if (t.Nombre.equals(usuario.getExpedicion())) {
 
 
-                        ImageView imageView = view.findViewById(R.id.banner);
-                        Picasso.get().load(t.imagen).into(imageView);
+                    ImageView imageView = view.findViewById(R.id.banner);
+                    Picasso.get().load(t.imagen).into(imageView);
 
-                        ItinerarioDao itinerario = new ItinerarioDao();
-                        itinerario.updateView(viewPager, getContext(), t.imagen);
-                        break;
+                    ItinerarioDao itinerario = new ItinerarioDao();
+                    itinerario.updateView(viewPager, getContext(), t.imagen);
+                    break;
 
-                    }
                 }
             }
         });
@@ -159,12 +108,9 @@ public class FragmentoPerfil extends Fragment {
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(20));
-        compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@android.support.annotation.NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.90f + r * 0.04f);
-            }
+        compositePageTransformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.90f + r * 0.04f);
         });
         viewPager.setPageTransformer(compositePageTransformer);
 
@@ -173,18 +119,6 @@ public class FragmentoPerfil extends Fragment {
     }
 
 
-    private void signOut() {
-        mAuth.signOut();
-        goLogin();
-
-    }
-
-    private void goLogin() {
-
-        Intent Log = new Intent(getActivity(), Test_login_Activity.class);
-        startActivity(Log);
-
-    }
 
 
 }

@@ -23,6 +23,7 @@ import com.example.check.controlador.fragmento.FragmentoPerfil;
 import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.Principal.activities.Test_login_Activity;
+import com.example.check.servicio.utilidades.excepciones.ExcepcionConexion;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -36,7 +37,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -53,7 +53,7 @@ public class ActividadPrincipal extends AppCompatActivity{
     private ServicioFirebase servicioFirebase;
     private Connection connection;
     private ImagenLocalDao imagenLocalDao;
-    private File DIR_SAVE_IMAGES;
+    private File archivo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,25 +61,24 @@ public class ActividadPrincipal extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DIR_SAVE_IMAGES = new File(getFilesDir(), "ImagePicker");
-        imagenLocalDao = new ImagenLocalDao(DIR_SAVE_IMAGES);
-
+        archivo = new File(getFilesDir(), "ImagePicker");
+        imagenLocalDao = new ImagenLocalDao(archivo);
         connection = new Connection(this);
 
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
-        replace(new FragmentoInicio());
+        remplazar(new FragmentoInicio());
 
         smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
 
             switch (o) {
                 case 0:
-                    replace(new FragmentoInicio());
+                    remplazar(new FragmentoInicio());
                     break;
                 case 1:
-                    replace(new FragmentoGaleria());
+                    remplazar(new FragmentoGaleria());
                     break;
                 case 2:
-                    replace(new FragmentoPerfil());
+                    remplazar(new FragmentoPerfil());
                     break;
             }
             return null;
@@ -88,7 +87,7 @@ public class ActividadPrincipal extends AppCompatActivity{
 
     }
 
-    public void replace(Fragment fragment) {
+    public void remplazar(Fragment fragment) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frames, fragment);
@@ -123,7 +122,7 @@ public class ActividadPrincipal extends AppCompatActivity{
 
         ////lanzar excepcion
         if (!connection.isConnected()){
-
+            throw new ExcepcionConexion(connection.toString());
         }
         else {
             KenBurnsView kbvImage;
@@ -209,7 +208,7 @@ public class ActividadPrincipal extends AppCompatActivity{
     }
 
     public void seleccionarDeArchivos() {
-        ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
+        ImagePicker.with(this).saveDir(archivo)
                 .galleryOnly()
                 .crop()
                 .start(REQUEST_IMAGE_CAPTURE);
@@ -218,7 +217,7 @@ public class ActividadPrincipal extends AppCompatActivity{
 
     private void seleccionarDeCamara() {
 
-        ImagePicker.with(this).saveDir(DIR_SAVE_IMAGES)
+        ImagePicker.with(this).saveDir(archivo)
                 .cameraOnly()
                 .start(REQUEST_IMAGE_CAPTURE);
 
@@ -273,8 +272,8 @@ public class ActividadPrincipal extends AppCompatActivity{
             dialog.setContentView(box);
             dialog.show();
 
-            Imagedb imdb2 = new Imagedb("wait",servicioFirebase.getmAuth().getUid(),filePath.toString(),"placeholderw");
-            imagenLocalDao.saveImage(imdb2);
+            Imagedb imagenLocal = new Imagedb("wait",servicioFirebase.getmAuth().getUid(),filePath.toString(),"placeholderw");
+            imagenLocalDao.saveImage(imagenLocal);
 
             return;
 
