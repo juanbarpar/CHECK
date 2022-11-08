@@ -37,11 +37,11 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
 
     private String encodedImage;
     private ActivityTestSignUpBinding binding;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth tokenAutenticacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mAuth = FirebaseAuth.getInstance();
+        tokenAutenticacion = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         binding = ActivityTestSignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -136,7 +136,7 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
         String pass = binding.inputPassword.getText().toString().trim();
 
         if(!user.equals("") && !pass.equals("") && isValidSignUpDetails()){
-            mAuth.createUserWithEmailAndPassword(user, pass)
+            tokenAutenticacion.createUserWithEmailAndPassword(user, pass)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -182,7 +182,7 @@ public class Test_Sign_Up_Activity extends AppCompatActivity {
 
     private void LogAuthentication() {
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = tokenAutenticacion.getCurrentUser();
         if(currentUser != null){
             Intent Log = new Intent(this, ActividadPrincipal.class);
             startActivity(Log);

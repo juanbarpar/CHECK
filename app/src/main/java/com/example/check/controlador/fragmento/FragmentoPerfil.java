@@ -78,7 +78,7 @@ public class FragmentoPerfil extends Fragment {
         });
         ViewPager2 viewPager = view.findViewById(R.id.viewPager);
 
-        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getmAuth().getUid()));
+        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getTokenAutenticacion().getUid()));
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             usuario = documentSnapshot.toObject(Usuario.class);
             TextView textView = view.findViewById(R.id.nombreUsuario);

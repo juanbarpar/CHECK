@@ -24,18 +24,18 @@ import java.util.List;
 public class ItinerarioDao {
 
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth tokenAutenticacion;
     private FirebaseFirestore db;
 
 
     public void updateView(ViewPager2 viewPager, Context context, String image) {
 
         List<Itinerarios> itinerarios = new ArrayList<>();
-        mAuth = FirebaseAuth.getInstance();
+        tokenAutenticacion = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        db.collection("users").document(mAuth.getCurrentUser().getUid())
+        db.collection("users").document(tokenAutenticacion.getCurrentUser().getUid())
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

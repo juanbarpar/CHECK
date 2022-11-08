@@ -24,41 +24,41 @@ import java.util.Objects;
 
 public class ServicioFirebase {
 
-    private FirebaseAuth mAuth;
-    private FirebaseStorage storage;
-    private StorageReference reference;
+    private FirebaseAuth tokenAutenticacion;
+    private FirebaseStorage instanciaAlmacenamiento;
+    private StorageReference referenciaAlmacenamiento;
 
     public ServicioFirebase() {
 
-        mAuth = FirebaseAuth.getInstance();
-        storage = FirebaseStorage.getInstance();
-        reference = storage.getReference();
+        tokenAutenticacion = FirebaseAuth.getInstance();
+        instanciaAlmacenamiento = FirebaseStorage.getInstance();
+        referenciaAlmacenamiento = instanciaAlmacenamiento.getReference();
 
     }
 
 
-    public FirebaseAuth getmAuth() {
-        return mAuth;
+    public FirebaseAuth getTokenAutenticacion() {
+        return tokenAutenticacion;
     }
 
-    public void setmAuth(FirebaseAuth mAuth) {
-        this.mAuth = mAuth;
+    public void setTokenAutenticacion(FirebaseAuth tokenAutenticacion) {
+        this.tokenAutenticacion = tokenAutenticacion;
     }
 
-    public FirebaseStorage getStorage() {
-        return storage;
+    public FirebaseStorage getInstanciaAlmacenamiento() {
+        return instanciaAlmacenamiento;
     }
 
-    public void setStorage(FirebaseStorage storage) {
-        this.storage = storage;
+    public void setInstanciaAlmacenamiento(FirebaseStorage instanciaAlmacenamiento) {
+        this.instanciaAlmacenamiento = instanciaAlmacenamiento;
     }
 
     public StorageReference getReference() {
-        return reference;
+        return referenciaAlmacenamiento;
     }
 
-    public void setReference(StorageReference reference) {
-        this.reference = reference;
+    public void setReference(StorageReference referenciaAlmacenamiento) {
+        this.referenciaAlmacenamiento = referenciaAlmacenamiento;
     }
 
     public void subirFoto(Uri filePath, Context context, ImagenLocalDao imagenLocalDao){
@@ -71,7 +71,7 @@ public class ServicioFirebase {
                 = getReference()
                 .child(
                         "images/"
-                                + getmAuth().getUid() + "/" + Math.random());
+                                + getTokenAutenticacion().getUid() + "/" + Math.random());
 
         ref.putFile(filePath)
                 .addOnSuccessListener(
@@ -81,7 +81,7 @@ public class ServicioFirebase {
                             //espera mientras se carga la imagen
                             Uri uriImage = uriTask.getResult();
                             FirebaseFirestore database = FirebaseFirestore.getInstance();
-                            DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(getmAuth().getUid()));
+                            DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(getTokenAutenticacion().getUid()));
                             docRef.get().addOnSuccessListener(documentSnapshot -> {
                                 Usuario usuario = documentSnapshot.toObject(Usuario.class);
                                 Imagedb imdb = new Imagedb(Timestamp.now().toString(), usuario.getNombre(),uriImage.toString(), usuario.getExpedicion());

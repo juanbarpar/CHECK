@@ -20,14 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Test_login_Activity extends AppCompatActivity {
     private ActivityTestLoginBinding binding;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth tokenAutenticacion;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTestLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        mAuth = FirebaseAuth.getInstance();
+        tokenAutenticacion = FirebaseAuth.getInstance();
         setListeners();
 
     }
@@ -50,7 +50,7 @@ public class Test_login_Activity extends AppCompatActivity {
    }
 
     private void LogAuthentication() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = tokenAutenticacion.getCurrentUser();
         if(currentUser != null){
             Intent Log = new Intent(this, ActividadPrincipal.class);
             startActivity(Log);
@@ -66,7 +66,7 @@ public class Test_login_Activity extends AppCompatActivity {
        String pass = binding.inputPassword.getText().toString();
 
        if(!user.equals("") && !pass.equals("")){
-           mAuth.signInWithEmailAndPassword(user, pass)
+           tokenAutenticacion.signInWithEmailAndPassword(user, pass)
                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {

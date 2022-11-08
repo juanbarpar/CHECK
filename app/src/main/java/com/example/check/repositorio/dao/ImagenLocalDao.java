@@ -31,13 +31,13 @@ import java.util.ArrayList;
 public class ImagenLocalDao {
 
     private String ruta;
-    private FirebaseStorage storage;
-    private StorageReference reference;
+    private FirebaseStorage instanciaAlmacenamiento;
+    private StorageReference referenciaAlmacenamiento;
 
     public ImagenLocalDao(File fi) {
 
-        storage = FirebaseStorage.getInstance();
-        reference = storage.getReference();
+        instanciaAlmacenamiento = FirebaseStorage.getInstance();
+        referenciaAlmacenamiento = instanciaAlmacenamiento.getReference();
 
         this.ruta = fi.getPath()+"/LocalImages.txt";
         this.verificarArchivo();
@@ -77,7 +77,7 @@ public class ImagenLocalDao {
             if (filePath != null) {
 
                 StorageReference ref
-                        = reference
+                        = referenciaAlmacenamiento
                         .child(
                                 "images/"
                                         + imagedb.getUser() + "/" + Math.random());

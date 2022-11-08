@@ -99,7 +99,7 @@ public class ActividadPrincipal extends AppCompatActivity{
 
         super.onStart();
         servicioFirebase = new ServicioFirebase();
-        FirebaseUser currentUser = servicioFirebase.getmAuth().getCurrentUser();
+        FirebaseUser currentUser = servicioFirebase.getTokenAutenticacion().getCurrentUser();
 
         if (currentUser == null) {
             cambiarActividad();
@@ -166,12 +166,12 @@ public class ActividadPrincipal extends AppCompatActivity{
 
             bottonSheetView.findViewById(R.id.set).setOnClickListener(viewe -> {
                 FirebaseFirestore database = FirebaseFirestore.getInstance();
-                database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getmAuth().getUid())).get().addOnSuccessListener(documentSnapshot -> {
+                database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getTokenAutenticacion().getUid())).get().addOnSuccessListener(documentSnapshot -> {
                     bottomSheetDialog.dismiss();
                     Usuario user = documentSnapshot.toObject(Usuario.class);
                     assert user != null;
                     user.setExpedicion(kbvImage.getTag().toString());
-                    database.collection(Constantes.KEY_COLLECTION_USERS).document(servicioFirebase.getmAuth().getUid()).set(user);
+                    database.collection(Constantes.KEY_COLLECTION_USERS).document(servicioFirebase.getTokenAutenticacion().getUid()).set(user);
                 });
             });
 
@@ -272,7 +272,7 @@ public class ActividadPrincipal extends AppCompatActivity{
             dialog.setContentView(box);
             dialog.show();
 
-            Imagedb imagenLocal = new Imagedb("wait",servicioFirebase.getmAuth().getUid(),filePath.toString(),"placeholderw");
+            Imagedb imagenLocal = new Imagedb("wait",servicioFirebase.getTokenAutenticacion().getUid(),filePath.toString(),"placeholderw");
             imagenLocalDao.saveImage(imagenLocal);
 
             return;
