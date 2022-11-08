@@ -47,9 +47,8 @@ import java.util.Objects;
 import kotlin.jvm.functions.Function1;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-public class ActividadPrincipal extends AppCompatActivity{
-
-
+public class ActividadPrincipal extends AppCompatActivity {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private ServicioFirebase servicioFirebase;
     private Connection connection;
     private ImagenLocalDao imagenLocalDao;
@@ -57,7 +56,6 @@ public class ActividadPrincipal extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -69,7 +67,6 @@ public class ActividadPrincipal extends AppCompatActivity{
         remplazar(new FragmentoInicio());
 
         smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
-
             switch (o) {
                 case 0:
                     remplazar(new FragmentoInicio());
@@ -83,12 +80,9 @@ public class ActividadPrincipal extends AppCompatActivity{
             }
             return null;
         });
-
-
     }
 
     public void remplazar(Fragment fragment) {
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frames, fragment);
         transaction.commit();
@@ -96,7 +90,6 @@ public class ActividadPrincipal extends AppCompatActivity{
     }
 
     public void onStart() {
-
         super.onStart();
         servicioFirebase = new ServicioFirebase();
         FirebaseUser currentUser = servicioFirebase.getTokenAutenticacion().getCurrentUser();
@@ -107,41 +100,33 @@ public class ActividadPrincipal extends AppCompatActivity{
 
     }
 
-    private void cambiarActividad(){
+    private void cambiarActividad() {
         Intent Log = new Intent(this, Test_login_Activity.class);
         startActivity(Log);
     }
 
-    private void cambiarIntento(String accion, String contexto){
+    private void cambiarIntento(String accion, String contexto) {
         Intent Log = new Intent(accion, Uri.parse(contexto));
         startActivity(Log);
     }
 
-
     public void desplegarInformacion(View view) {
 
         ////lanzar excepcion
-        if (!connection.isConnected()){
+        if (!connection.isConnected()) {
             throw new ExcepcionConexion(connection.toString());
-        }
-        else {
+        } else {
             KenBurnsView kbvImage;
             TextView textTitle, textLocation;
             kbvImage = view.findViewById(R.id.kbvLocation);
             textTitle = view.findViewById(R.id.textTitle);
             textLocation = view.findViewById(R.id.textLocation);
 
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                    ActividadPrincipal.this, R.style.bt_sheet_dialog
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ActividadPrincipal.this, R.style.bt_sheet_dialog);
 
-            );
-
-            View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
-                    R.layout.bt_sheet, findViewById(R.id.bt_sheet_container)
-            );
+            View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bt_sheet, findViewById(R.id.bt_sheet_container));
             bottonSheetView.findViewById(R.id.button_reserva).setOnClickListener(view1 -> {
-                cambiarIntento(Intent.ACTION_VIEW,(String) textTitle.getTag());
-
+                cambiarIntento(Intent.ACTION_VIEW, (String) textTitle.getTag());
                 bottomSheetDialog.dismiss();
             });
 
@@ -153,10 +138,7 @@ public class ActividadPrincipal extends AppCompatActivity{
                 Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
                 whatsappIntent.setType("text/plain");
                 whatsappIntent.setPackage("com.whatsapp");
-                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " +
-                        "expediciones programadas a distintos lugares de Colombia. " +
-                        "Una diversidad de destinos, itinerarios llenos de momentos" +
-                        " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
+                whatsappIntent.putExtra(Intent.EXTRA_TEXT, "Haz parte de nuestras " + "expediciones programadas a distintos lugares de Colombia. " + "Una diversidad de destinos, itinerarios llenos de momentos" + " auténticos y experiencias de vida que recordarás para siempre " + textTitle.getTag());
                 try {
                     ActividadPrincipal.this.startActivity(whatsappIntent);
                 } catch (android.content.ActivityNotFoundException ex) {
@@ -183,15 +165,9 @@ public class ActividadPrincipal extends AppCompatActivity{
         }
     }
 
-
-
-
     public void desplegarOpcionesdeCaptura(View view) {
-
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ActividadPrincipal.this, R.style.bt_sheet_dialog);
-        View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(
-                R.layout.bt_image, findViewById(R.id.bt_image_container)
-        );
+        View bottonSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bt_image, findViewById(R.id.bt_image_container));
 
         bottonSheetView.findViewById(R.id.cameraOp).setOnClickListener(view1 -> {
             seleccionarDeCamara();
@@ -204,33 +180,21 @@ public class ActividadPrincipal extends AppCompatActivity{
 
         bottomSheetDialog.setContentView(bottonSheetView);
         bottomSheetDialog.show();
-
     }
 
     public void seleccionarDeArchivos() {
-        ImagePicker.with(this).saveDir(archivo)
-                .galleryOnly()
-                .crop()
-                .start(REQUEST_IMAGE_CAPTURE);
+        ImagePicker.with(this).saveDir(archivo).galleryOnly().crop().start(REQUEST_IMAGE_CAPTURE);
 
     }
 
     private void seleccionarDeCamara() {
-
-        ImagePicker.with(this).saveDir(archivo)
-                .cameraOnly()
-                .start(REQUEST_IMAGE_CAPTURE);
+        ImagePicker.with(this).saveDir(archivo).cameraOnly().start(REQUEST_IMAGE_CAPTURE);
 
     }
-
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (resultCode != Activity.RESULT_OK) {
             return;
@@ -241,9 +205,7 @@ public class ActividadPrincipal extends AppCompatActivity{
             assert data != null;
 
             Uri currentUri = data.getData();
-            View box = LayoutInflater.from(getApplicationContext()).inflate(
-                    R.layout.dialog_box, findViewById(R.id.dialog_box_con)
-            );
+            View box = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_box, findViewById(R.id.dialog_box_con));
 
             ImageView imageView = box.findViewById(R.id.selectedimage);
             Picasso.get().load(currentUri).into(imageView);
@@ -258,56 +220,45 @@ public class ActividadPrincipal extends AppCompatActivity{
             dialog.setContentView(box);
             dialog.show();
         }
-
     }
 
     private void subirImagen(Uri filePath) {
-        if(!connection.isConnected()){
-
+        if (!connection.isConnected()) {
             Dialog dialog = new Dialog(this);
-            View box = LayoutInflater.from(getApplicationContext()).inflate(
-                    R.layout.offline_image_box, findViewById(R.id.dialog_box_image_offline)
-            );
+            View box = LayoutInflater.from(getApplicationContext()).inflate(R.layout.offline_image_box, findViewById(R.id.dialog_box_image_offline));
             box.findViewById(R.id.azul).setOnClickListener(view -> dialog.dismiss());
             dialog.setContentView(box);
             dialog.show();
 
-            Imagedb imagenLocal = new Imagedb("wait",servicioFirebase.getTokenAutenticacion().getUid(),filePath.toString(),"placeholderw");
+            Imagedb imagenLocal = new Imagedb("wait", servicioFirebase.getTokenAutenticacion().getUid(), filePath.toString(), "placeholderw");
             imagenLocalDao.saveImage(imagenLocal);
 
             return;
-
         }
+
         if (filePath != null) {
-            servicioFirebase.subirFoto(filePath,this,imagenLocalDao);
+            servicioFirebase.subirFoto(filePath, this, imagenLocalDao);
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void filtrar(View view){
-
+    public void filtrar(View view) {
         RecyclerView recyclerView = findViewById(R.id.view_photo);
         List<Imagedb> imagedbs = new ArrayList<>(ImagenDao.imagedbs);
         imagedbs.clear();
 
         String tag = view.getTag().toString();
-        if(tag.equals("Todas las expediciones")){
+        if (tag.equals("Todas las expediciones")) {
             imagedbs.addAll(ImagenDao.imagedbs);
-
-        }
-        else {
-            for(Imagedb item: ImagenDao.imagedbs){
-                if(item.getExpedicion().equals(tag)){
+        } else {
+            for (Imagedb item : ImagenDao.imagedbs) {
+                if (item.getExpedicion().equals(tag)) {
                     imagedbs.add(item);
                 }
             }
-
         }
 
         recyclerView.setAdapter(new ImageAdapter(imagedbs, this));
         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
-
     }
-
-
 }

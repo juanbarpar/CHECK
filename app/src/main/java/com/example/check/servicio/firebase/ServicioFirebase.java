@@ -23,19 +23,15 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Objects;
 
 public class ServicioFirebase {
-
     private FirebaseAuth tokenAutenticacion;
     private FirebaseStorage instanciaAlmacenamiento;
     private StorageReference referenciaAlmacenamiento;
 
     public ServicioFirebase() {
-
         tokenAutenticacion = FirebaseAuth.getInstance();
         instanciaAlmacenamiento = FirebaseStorage.getInstance();
         referenciaAlmacenamiento = instanciaAlmacenamiento.getReference();
-
     }
-
 
     public FirebaseAuth getTokenAutenticacion() {
         return tokenAutenticacion;
@@ -61,66 +57,44 @@ public class ServicioFirebase {
         this.referenciaAlmacenamiento = referenciaAlmacenamiento;
     }
 
-    public void subirFoto(Uri filePath, Context context, ImagenLocalDao imagenLocalDao){
-        ProgressDialog progressDialog
-                = new ProgressDialog(context);
+    public void subirFoto(Uri filePath, Context context, ImagenLocalDao imagenLocalDao) {
+        ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("Subiendo tu foto...");
         progressDialog.show();
 
-        StorageReference ref
-                = getReference()
-                .child(
-                        "images/"
-                                + getTokenAutenticacion().getUid() + "/" + Math.random());
+        StorageReference ref = getReference().child("images/" + getTokenAutenticacion().getUid() + "/" + Math.random());
 
-        ref.putFile(filePath)
-                .addOnSuccessListener(
-                        taskSnapshot -> {
-                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
-                            //espera mientras se carga la imagen
-                            Uri uriImage = uriTask.getResult();
-                            FirebaseFirestore database = FirebaseFirestore.getInstance();
-                            DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(getTokenAutenticacion().getUid()));
-                            docRef.get().addOnSuccessListener(documentSnapshot -> {
-                                Usuario usuario = documentSnapshot.toObject(Usuario.class);
-                                Imagedb imdb = new Imagedb(Timestamp.now().toString(), usuario.getNombre(),uriImage.toString(), usuario.getExpedicion());
-                                FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                DatabaseReference databaseReference = db.getReference("Images");
-                                databaseReference.push().setValue(imdb);
+        ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> {
+                    Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uriTask.isSuccessful()) ;
+                    //espera mientras se carga la imagen
+                    Uri uriImage = uriTask.getResult();
+                    FirebaseFirestore database = FirebaseFirestore.getInstance();
+                    DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(getTokenAutenticacion().getUid()));
+                    docRef.get().addOnSuccessListener(documentSnapshot -> {
+                        Usuario usuario = documentSnapshot.toObject(Usuario.class);
+                        Imagedb imdb = new Imagedb(Timestamp.now().toString(), usuario.getNombre(), uriImage.toString(), usuario.getExpedicion());
+                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                        DatabaseReference databaseReference = db.getReference("Images");
+                        databaseReference.push().setValue(imdb);
 
-                                imagenLocalDao.eliminar(imdb.getUrl());
+                        imagenLocalDao.eliminar(imdb.getUrl());
 
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(context,
-                                                "Imagen Actualizada!!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                            });
-                        })
+                        progressDialog.dismiss();
+                        Toast.makeText(context, "Imagen Actualizada!!", Toast.LENGTH_SHORT).show();
+                    });
+                })
 
                 .addOnFailureListener(e -> {
                     progressDialog.dismiss();
-                    Toast
-                            .makeText(context,
-                                    "Failed " + e.getMessage(),
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                })
-                .addOnProgressListener(
-                        taskSnapshot -> {
-                            double progress
-                                    = (100.0
-                                    * taskSnapshot.getBytesTransferred()
-                                    / taskSnapshot.getTotalByteCount());
-                            progressDialog.setMessage(
-                                    "Subiendo... ("
-                                            + (int) progress + "%)");
-                        });
+                    Toast.makeText(context, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }).addOnProgressListener(taskSnapshot -> {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Subiendo... (" + (int) progress + "%)");
+                });
     }
 
     public void cargarDatos() {
-
+        // TODO: Implementar el metodo
     }
 }

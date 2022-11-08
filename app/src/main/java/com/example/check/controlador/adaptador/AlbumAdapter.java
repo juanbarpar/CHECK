@@ -15,12 +15,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder>{
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocationViewHolder> {
     private final List<DestinosViaje> albums;
 
     public AlbumAdapter(List<DestinosViaje> destinosViajes) {
         this.albums = destinosViajes;
     }
+
     @NonNull
     @Override
     public TravelLocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,7 +31,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
                         R.layout.item_album,
                         parent, false
                 )
-
         );
     }
 
@@ -38,10 +38,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
     public void onBindViewHolder(@NonNull TravelLocationViewHolder holder, int position) {
         holder.setLocationData(albums.get(position));
     }
+
     @Override
     public int getItemCount() {
         return albums.size();
     }
+
     static class TravelLocationViewHolder extends RecyclerView.ViewHolder {
         private final RoundedImageView kbvLocation;
         private final TextView textTitle;
@@ -51,15 +53,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.TravelLocati
             kbvLocation = itemView.findViewById(R.id.kbvAlbum);
             textTitle = itemView.findViewById(R.id.text_album);
         }
-            void setLocationData(DestinosViaje album){
 
+        void setLocationData(DestinosViaje album) {
             kbvLocation.setTag(album.imagen);
             Picasso.get().load(album.imagen).into(kbvLocation);
             textTitle.setText(album.Nombre);
             itemView.setTag(album.Nombre);
-
         }
-
     }
-
 }

@@ -9,18 +9,14 @@ public class Imagedb {
     String expedicion;
 
 
-    public Imagedb(String date,  String user, String url, String expedicion) {
-
+    public Imagedb(String date, String user, String url, String expedicion) {
         this.date = date;
         this.url = url;
         this.user = user;
         this.expedicion = expedicion;
-
     }
 
-    public Imagedb() {
-
-    }
+    public Imagedb() {}
 
     public String getExpedicion() {
         return expedicion;
@@ -54,7 +50,6 @@ public class Imagedb {
         this.user = user;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,6 +65,6 @@ public class Imagedb {
 
     @Override
     public String toString() {
-        return date +"," +user+","+url + ","+expedicion;
+        return date + "," + user + "," + url + "," + expedicion;
     }
 }

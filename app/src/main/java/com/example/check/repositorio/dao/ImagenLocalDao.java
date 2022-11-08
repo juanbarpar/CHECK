@@ -29,22 +29,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ImagenLocalDao {
-
     private String ruta;
     private FirebaseStorage instanciaAlmacenamiento;
     private StorageReference referenciaAlmacenamiento;
 
     public ImagenLocalDao(File fi) {
-
         instanciaAlmacenamiento = FirebaseStorage.getInstance();
         referenciaAlmacenamiento = instanciaAlmacenamiento.getReference();
 
-        this.ruta = fi.getPath()+"/LocalImages.txt";
+        this.ruta = fi.getPath() + "/LocalImages.txt";
         this.verificarArchivo();
-
     }
-
-    
 
     private void verificarArchivo() {
         try {
@@ -55,99 +50,73 @@ public class ImagenLocalDao {
         } catch (IOException excep) {
             System.out.println("Error en la ruta");
         }
-
     }
 
     public void saveImage(Imagedb im) {
-
         this.saveOffline(im);
-
     }
 
-
-
-    public void uploadOnline(){
-
+    public void uploadOnline() {
         ArrayList<Imagedb> imagedbs = getTodos();
 
-        for (Imagedb imagedb : imagedbs){
+        for (Imagedb imagedb : imagedbs) {
             Uri filePath = Uri.parse(imagedb.getUrl());
             System.out.println("File off: " + filePath);
 
             if (filePath != null) {
+                StorageReference ref = referenciaAlmacenamiento.child("images/" + imagedb.getUser() + "/" + Math.random());
 
-                StorageReference ref
-                        = referenciaAlmacenamiento
-                        .child(
-                                "images/"
-                                        + imagedb.getUser() + "/" + Math.random());
+                ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isSuccessful()) ;
+                                Uri uriImage = uriTask.getResult();
 
-                ref.putFile(filePath)
-                        .addOnSuccessListener(
-                                new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                System.out.println("onSuccess");
 
+                                FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+                                DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(imagedb.getUser());
+                                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        Usuario user = documentSnapshot.toObject(Usuario.class);
+                                        System.out.println("name: " + user.getNombre());
 
-                                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                        while (!uriTask.isSuccessful());
-                                        Uri uriImage = uriTask.getResult();
+                                        Imagedb imdb = new Imagedb(Timestamp.now().toString(), user.getNombre(), uriImage.toString(), user.getExpedicion());
 
-                                        System.out.println("onSuccess");
+                                        eliminar(imagedb.getUrl());
 
-                                        FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-                                        DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(imagedb.getUser());
-                                        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                Usuario user = documentSnapshot.toObject(Usuario.class);
-                                                System.out.println("name: "+ user.getNombre());
-
-
-                                                Imagedb imdb = new Imagedb(Timestamp.now().toString(), user.getNombre(), uriImage.toString(), user.getExpedicion());
-
-                                                eliminar(imagedb.getUrl());
-
-                                                FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                                DatabaseReference databaseReference = db.getReference("Images");
-                                                databaseReference.push().setValue(imdb);
-
-
-                                            }
-                                        });
-
+                                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                        DatabaseReference databaseReference = db.getReference("Images");
+                                        databaseReference.push().setValue(imdb);
                                     }
-                                })
+                                });
+                            }
+                        })
 
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-
                                 System.out.println("Error upl");
-
                             }
                         });
-
             }
         }
-
     }
 
     private void saveOffline(Imagedb im) {
         try {
-
             File fi = new File(this.ruta);
             FileWriter fr = new FileWriter(fi, true);
             PrintWriter pw = new PrintWriter(fr);
             pw.println(im);
             pw.close();
-
         } catch (IOException f) {
             System.out.println("Error");
         }
     }
-
 
     public ArrayList<Imagedb> getTodos() {
         FileReader file;
@@ -159,7 +128,6 @@ public class ImagenLocalDao {
         ArrayList<Imagedb> ims = new ArrayList();
         System.out.println(this.ruta);
         try {
-
             file = new FileReader(this.ruta);
             br = new BufferedReader(file);
             while ((registro = br.readLine()) != null) {
@@ -167,7 +135,6 @@ public class ImagenLocalDao {
                 im = new Imagedb(campos[0], campos[1], campos[2], campos[3]);
                 ims.add(im);
             }
-
         } catch (IOException ex) {
             System.out.println(ex);
             System.out.println("Problemas con la ruta...");
@@ -176,13 +143,11 @@ public class ImagenLocalDao {
     }
 
     public void eliminar(String code) {
-
         File fi = new File(code);
         fi.delete();
 
         ArrayList<Imagedb> rooms = this.getTodos();
         for (Imagedb room : rooms) {
-
             if (room.getUrl().equals(code)) {
                 rooms.remove(room);
                 System.out.println("Eliminando: " + code);
@@ -190,32 +155,20 @@ public class ImagenLocalDao {
                 break;
             }
         }
-
-
     }
 
     private void remplazarArchivo(ArrayList<Imagedb> rooms) {
-
         try {
             File fi = new File(this.ruta);
             FileWriter fr = new FileWriter(fi, false);
             PrintWriter pw = new PrintWriter(fr);
 
             for (Imagedb room : rooms) {
-
                 pw.println(room);
-
             }
             pw.close();
-
         } catch (IOException f) {
             System.out.println("Error al remp");
-
         }
-
     }
-
-
-
 }
-
