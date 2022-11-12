@@ -66,16 +66,25 @@ public class ActividadPrincipal extends AppCompatActivity {
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         remplazar(new FragmentoInicio());
 
+        ImageView imageTopView = findViewById(R.id.topImg);
+        TextView textTopView = findViewById(R.id.topText);
+
         smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
             switch (o) {
                 case 0:
                     remplazar(new FragmentoInicio());
+                    imageTopView.setImageResource(R.drawable.ic_location);
+                    textTopView.setText("Nuestras expediciones");
                     break;
                 case 1:
                     remplazar(new FragmentoGaleria());
+                    imageTopView.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    textTopView.setText("Comparte con nosotros");
                     break;
                 case 2:
                     remplazar(new FragmentoPerfil());
+                    imageTopView.setImageResource(R.drawable.ic_user);
+                    textTopView.setText("Busca tu identidad");
                     break;
             }
             return null;
@@ -260,7 +269,6 @@ public class ActividadPrincipal extends AppCompatActivity {
                 }
             }
         }
-
         recyclerView.setAdapter(new ImageAdapter(imagedbs, this));
         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
     }

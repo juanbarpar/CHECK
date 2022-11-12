@@ -98,7 +98,7 @@ public class FragmentoPerfil extends Fragment {
             textView2.setText(usuario.getExpedicion());
             for (DestinosViaje t : destinosViajes) {
                 if (t.Nombre.equals(usuario.getExpedicion())) {
-                    ImageView imageView = view.findViewById(R.id.banner);
+                    ImageView imageView = view.findViewById(R.id.imagenPerfil);
                     Picasso.get().load(t.imagen).into(imageView);
                     ItinerarioDao itinerario = new ItinerarioDao();
                     itinerario.updateView(viewPager, getContext(), t.imagen);

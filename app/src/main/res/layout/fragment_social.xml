@@ -5,7 +5,7 @@
     android:id="@+id/home_cont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
+    android:background="@drawable/bg_bt_main"
     android:orientation="vertical"
     tools:context=".controlador.fragmento.FragmentoInicio">
 
@@ -16,56 +16,17 @@
         android:layout_height="match_parent">
 
 
-        <View
-            android:id="@+id/actionbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            android:background="@color/red"
-            android:elevation="0dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-        </View>
-
-
-        <TextView
-            android:id="@+id/main_social"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:text="Blog de viaje"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <!-- Contenido -->
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/actionbar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/offtext1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Albumes Check"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="parent" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -87,19 +48,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Ultimas fotos"
+                android:text="Ultimas publicaciones"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/actionbar" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/view_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="100dp"
-                app:layout_constraintTop_toBottomOf="@id/offtext2"></androidx.recyclerview.widget.RecyclerView>
+                android:clipToPadding="false"></androidx.recyclerview.widget.RecyclerView>
 
 
             <LinearLayout
@@ -109,20 +67,6 @@
 
 
             </LinearLayout>
-
-            <ImageView
-
-                android:id="@+id/offimg"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_baseline_signal_wifi_off_24"
-                android:tint="@color/white"
-                android:visibility="invisible">
-
-            </ImageView>
-
 
         </LinearLayout>
 
@@ -141,8 +85,7 @@
             android:focusable="true"
             android:onClick="desplegarOpcionesdeCaptura"
             android:orientation="horizontal"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="@+id/main_social"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:layout_editor_absoluteX="294dp"
             tools:layout_editor_absoluteY="15dp">
@@ -154,15 +97,16 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_add"
-                android:tint="@color/main"
+                android:tint="@color/blue"
                 app:riv_corner_radius="10dp"></ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
                 android:text="Subir foto"
-                android:textColor="@color/main"
+                android:textColor="@color/blue"
                 android:textSize="16sp"></TextView>
 
         </LinearLayout>

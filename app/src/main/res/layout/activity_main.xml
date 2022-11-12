@@ -7,11 +7,49 @@
     android:background="@color/main"
     tools:context=".ActividadPrincipal">
 
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/topImg"
+            android:layout_gravity="center_vertical"
+            android:layout_width="32dp"
+
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_location"
+            android:tint="@color/red"></ImageView>
+
+        <TextView
+
+            android:id="@+id/topText"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:textSize="18dp"
+            android:text="Nuestras expediciones"
+            android:textColor="@color/text" />
+
+    </LinearLayout>
+
+
 
     <FrameLayout
+
         android:id="@+id/frames"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
+        android:layout_marginTop="@dimen/_60ssp"
+        android:background="@drawable/bg_bt_main"
+
         app:layout_constraintBottom_toTopOf="@id/bar_nav"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,7 +61,7 @@
         android:id="@+id/bar_nav"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:backgroundColor="@color/main"
+        app:backgroundColor="@color/sec"
         app:iconSize="20dp"
         app:iconTint="@color/red"
         app:iconTintActive="@color/blue"
