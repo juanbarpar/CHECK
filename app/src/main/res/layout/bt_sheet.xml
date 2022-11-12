@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bt_sheet_container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_bt"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,12 +15,14 @@
         android:text="Haz parte de nuestras expediciones"
         android:textColor="#222222"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="10dp"
-        android:background="#D3D3D3"/>
+        android:background="#D3D3D3" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,34 +54,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="expedición"
-                android:textColor="@color/check3"
+                android:textColor="@color/sec"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/lugar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="lugar"
                 android:textColor="@color/check4"
-                android:textSize="15sp"
-                />
+                android:textSize="15sp" />
+
             <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="propósito"
-                android:textColor="@color/check2"
-                android:textSize="16sp"
-                />
+                android:textColor="@color/blue"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="#D3D3D3"/>
+        android:layout_marginBottom="10dp"
+        android:background="#D3D3D3" />
+
     <LinearLayout
         android:id="@+id/share"
         android:layout_width="match_parent"
@@ -89,20 +94,22 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="12dp">
+
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_share"
-            android:tint="@color/check3"></ImageView>
+            android:tint="@color/sec"></ImageView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:text="Compartir con amigos"
-            android:textColor="@color/check3"/>
+            android:textColor="@color/sec" />
 
     </LinearLayout>
 
@@ -116,49 +123,45 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="12dp">
+
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_location"
-            android:tint="@color/check3"></ImageView>
+            android:tint="@color/sec"></ImageView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:text="Configurar como mi expedicion"
-            android:textColor="@color/check3"/>
+            android:textColor="@color/sec" />
 
     </LinearLayout>
-
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="#D3D3D3"/>
+        android:layout_marginBottom="10dp"
+        android:background="#D3D3D3" />
 
 
     <Button
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:id="@+id/button_reserva"
-    android:background="@drawable/bg_button"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    android:layout_marginBottom="20dp"
-    android:text="¡Hacer mi reserva ahora!"
-    android:textColor="@color/white"
-    android:textSize="15sp"/>
-
-
-
-        
-
+        android:id="@+id/button_reserva"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_button"
+        android:text="¡Hacer mi reserva ahora!"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
 
 </LinearLayout>

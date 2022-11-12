@@ -1,158 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/home_cont"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_cont"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/check1"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controlador.fragmento.FragmentoPerfil"
+    android:background="@color/main"
     android:orientation="vertical"
+    tools:context=".controlador.fragmento.FragmentoPerfil"
 
     >
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/banner"
-        app:layout_constraintTop_toTopOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:scaleType="center"
-        android:src="@drawable/signal">
+        android:layout_height="match_parent">
 
-    </com.makeramen.roundedimageview.RoundedImageView>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="center"
+            android:src="@drawable/signal"
+            app:layout_constraintTop_toTopOf="parent">
 
-<LinearLayout
-    app:layout_constraintTop_toTopOf="parent"
-    android:id="@+id/card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-
-        android:layout_marginVertical="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_30sdp"
-        app:cardCornerRadius="8dp"
-        android:padding="@dimen/_8sdp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="center_horizontal"
-        android:elevation="10dp"
-        android:backgroundTint="@color/check1.2"
-
-        >
+        </com.makeramen.roundedimageview.RoundedImageView>
 
         <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
-            <LinearLayout
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/red"
+                android:elevation="10dp"
+                android:padding="@dimen/_8sdp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
 
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/imagenPerfil"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/signal"
+                            app:riv_corner_radius="@dimen/_8sdp" />
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/imagenPerfil"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/signal"
-                    android:scaleType="centerCrop"
-                    app:riv_corner_radius="@dimen/_8sdp" />
+                        <TextView
+                            android:id="@+id/nombreUsuario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
 
-                <TextView
-                    android:id="@+id/nombreUsuario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
+                            android:text="Usuiario"
 
-                    android:text="Usuiario"
+                            android:textColor="@color/white"
+                            android:textSize="22dp" />
 
-                    android:textColor="@color/white"
-                    android:textSize="22dp" />
-                <TextView
-                    android:id="@+id/expedicion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
+                        <TextView
+                            android:id="@+id/expedicion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center"
 
-                    android:text="Expedicion"
-                    android:layout_marginBottom="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="Expedicion"
 
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
+                            android:textColor="@color/white"
+                            android:textSize="15dp" />
 
-            </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            app:layout_constraintBottom_toTopOf="@id/logout"
+            app:layout_constraintTop_toBottomOf="@id/card" />
 
-
-
-</LinearLayout>
-
-
-    <androidx.viewpager2.widget.ViewPager2
-        app:layout_constraintBottom_toTopOf="@id/logout"
-        app:layout_constraintTop_toBottomOf="@id/card"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="40dp"
-        android:id="@+id/viewPager"
-        />
-
-    <LinearLayout
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/logout"
-        android:padding="5dp"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="logout"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        >
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_exit"
-            app:tint="@color/check1.2" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cerrar Sesión"
-            android:textSize="20sp"
-            />
+            android:layout_gravity="bottom"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="logout"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_exit"
+                app:tint="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cerrar Sesión"
+                android:textSize="20sp" />
 
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>
