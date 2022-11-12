@@ -13,26 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.check.repositorio.entidad.Connection;
 import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.repositorio.entidad.DestinosViaje;
 import com.example.check.controlador.adaptador.AlbumAdapter;
-import com.example.check.repositorio.dao.ImagenLocalDao;
 import com.example.check.repositorio.dao.ImagenDao;
 import com.example.check.controlador.adaptador.ImageAdapter;
 import com.example.check.R;
 import com.example.check.servicio.firebase.ServicioFirebase;
+import com.example.check.servicio.utilidades.excepciones.ExcepcionConexion;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,15 +70,15 @@ public class FragmentoGaleria extends Fragment {
         vistaReciclada.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
         File DIR_SAVE_IMAGES = new File(requireActivity().getFilesDir(), "ImagePicker");
-        ImagenLocalDao imagenLocal = new ImagenLocalDao(DIR_SAVE_IMAGES);
-        System.out.println("File: " + DIR_SAVE_IMAGES.getPath());
+
+
 
         if (!new Connection(getActivity()).isConnected()) {
+            throw new ExcepcionConexion("");
 
         } else {
-            imagenLocal.uploadOnline();
-            List<DestinosViaje> destinosViajes = new ArrayList<>();
 
+            List<DestinosViaje> destinosViajes = new ArrayList<>();
             RecyclerView vistaRecicladaAlbum = vista.findViewById(R.id.view_album);
             vistaRecicladaAlbum.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
             AlbumAdapter adaptadorAlbum = new AlbumAdapter(destinosViajes);
@@ -153,6 +149,4 @@ public class FragmentoGaleria extends Fragment {
         }
         return vista;
     }
-
-
 }

@@ -1,23 +1,20 @@
 package com.example.check.servicio.firebase;
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
 
-import androidx.annotation.NonNull;
-
-import com.example.check.ActividadPrincipal;
-import com.example.check.repositorio.dao.ImagenLocalDao;
+import com.example.check.R;
 import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.servicio.utilidades.Constantes;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.check.servicio.utilidades.dialogo.DialogoCarga;
+import com.example.check.servicio.utilidades.dialogo.DialogoNotificacion;
+import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Formatter;
 import java.util.Objects;
 
 public class ServicioFirebase {
@@ -62,17 +60,13 @@ public class ServicioFirebase {
         this.referenciaAlmacenamiento = referenciaAlmacenamiento;
     }
 
-    public void subirFoto(Uri filePath, Context context, ImagenLocalDao imagenLocalDao) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setTitle("Subiendo tu foto...");
-        progressDialog.show();
-
+    public void subirFoto(Uri filePath, Context context, View box, View box2) {
         StorageReference ref = getReference().child("images/" + getTokenAutenticacion().getUid() + "/" + Math.random());
-
+        DialogoCarga dialogoCarga = new DialogoCarga(context);
+        dialogoCarga.dispararDialogo(box);
         ref.putFile(filePath).addOnSuccessListener(taskSnapshot -> {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful()) ;
-                    //espera mientras se carga la imagen
                     Uri uriImage = uriTask.getResult();
                     FirebaseFirestore database = FirebaseFirestore.getInstance();
                     DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(getTokenAutenticacion().getUid()));
@@ -82,20 +76,21 @@ public class ServicioFirebase {
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = db.getReference("Images");
                         databaseReference.push().setValue(imdb);
+                        dialogoCarga.finalizar();
 
-                        imagenLocalDao.eliminar(imdb.getUrl());
-
-                        progressDialog.dismiss();
-                        Toast.makeText(context, "Imagen Actualizada!!", Toast.LENGTH_SHORT).show();
+                        DialogoNotificacion dialogoNotificacion = new DialogoNotificacion(context);
+                        dialogoNotificacion.dispararDialogo(box2,"Natificacion","La foto se actualizo correctamente",R.raw.ok);
                     });
                 })
 
                 .addOnFailureListener(e -> {
-                    progressDialog.dismiss();
-                    Toast.makeText(context, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    throw new ExcepcionTareaFB("No fue posible avrualizar la foto");
                 }).addOnProgressListener(taskSnapshot -> {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Subiendo... (" + (int) progress + "%)");
+                    Formatter formatter = new Formatter();
+                    formatter.format("%.0f", progress);
+                    dialogoCarga.porsentaje(formatter);
+
                 });
     }
 

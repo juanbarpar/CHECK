@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_notification"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textoPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="mensaje"
+                android:textColor="@color/text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/main" />
+
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/img"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:lottie_rawRes="@raw/ok"
+                    app:lottie_autoPlay="true"
+                    app:lottie_progress="@android:integer/config_longAnimTime"
+                    app:lottie_loop="false"/>
+
+
+
+                <TextView
+                    android:id="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="left"
+
+                    android:layout_marginStart="10dp"
+                    android:text="informacion"
+                    android:textColor="@color/text"
+                    android:textSize="16sp"></TextView>
+
+
+
+
+
+
+            </LinearLayout>
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/boton_de_confirmacion"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_weight="4"
+                android:textColor="@color/text"
+                android:text="Confirmar" />
+
+
+
+        </LinearLayout>
+
+</RelativeLayout>
