@@ -91,6 +91,11 @@ public class ActividadPrincipal extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
+
+
+        Intent Log = new Intent(this, LogActivity.class);
+        startActivity(Log);
+
         servicioFirebase = new ServicioFirebase();
         FirebaseUser currentUser = servicioFirebase.getTokenAutenticacion().getCurrentUser();
 

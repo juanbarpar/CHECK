@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardCornerRadius="12dp"
-    android:backgroundTint="#2596be"
+    android:backgroundTint="@color/blue"
     app:cardElevation="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/waitingforid"
@@ -42,7 +42,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
                 android:src="@drawable/ic_baseline_today_24"
-                app:tint="#FFFFFF" />
+                app:tint="@color/white" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
