@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/home"
-        android:title="Iniciar Sesion"
+        android:title="Iniciar Sesión"
         android:icon="@drawable/ic_home"
         app:cnb_backgroundColor="@color/check1.2"
         app:cnb_iconColor="@color/check2"
@@ -12,9 +12,10 @@
         app:cnb_textColor="@color/white"/>
 
         />
+
     <item
         android:id="@+id/share"
-        android:title="Inscribirse"
+        android:title="Registrate"
         android:icon="@drawable/ic_photo"
         app:cnb_backgroundColor="@color/check1.2"
         app:cnb_iconColor="@color/check2"

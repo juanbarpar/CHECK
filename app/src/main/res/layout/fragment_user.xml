@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/check1"
+    android:background="@drawable/bg_bt_main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".controlador.fragmento.FragmentoPerfil"
     android:orientation="vertical"
@@ -14,16 +14,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/banner"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:scaleType="center"
-        android:src="@drawable/signal">
-
-    </com.makeramen.roundedimageview.RoundedImageView>
 
 <LinearLayout
     app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_gravity="center_horizontal"
         android:elevation="10dp"
-        android:backgroundTint="@color/check1.2"
+        android:backgroundTint="@color/main"
 
         >
 
@@ -124,6 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/logout"
         android:padding="5dp"
+
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,7 +122,6 @@
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="logout"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         >
@@ -140,7 +130,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_exit"
-            app:tint="@color/check1.2" />
+            app:tint="@color/red" />
 
         <TextView
             android:layout_width="wrap_content"

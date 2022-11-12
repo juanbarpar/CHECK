@@ -77,15 +77,7 @@ public class FragmentoGaleria extends Fragment {
         ImagenLocalDao imagenLocal = new ImagenLocalDao(DIR_SAVE_IMAGES);
         System.out.println("File: " + DIR_SAVE_IMAGES.getPath());
 
-        ImageView imageView = vista.findViewById(R.id.offimg);
         if (!new Connection(getActivity()).isConnected()) {
-
-            TextView textView = vista.findViewById(R.id.offtext1);
-            textView.setText("No tiene conexión a internet.");
-            TextView textView2 = vista.findViewById(R.id.offtext2);
-            textView2.setText("Cuando tenga conexión a internet sus imagenes seran cargadas.");
-
-            imageView.setVisibility(View.VISIBLE);
 
         } else {
             imagenLocal.uploadOnline();

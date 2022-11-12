@@ -1,18 +1,23 @@
 package com.example.check.servicio.firebase;
-
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.check.ActividadPrincipal;
 import com.example.check.repositorio.dao.ImagenLocalDao;
 import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.repositorio.entidad.Usuario;
 import com.example.check.servicio.utilidades.Constantes;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -97,4 +102,5 @@ public class ServicioFirebase {
     public void cargarDatos() {
         // TODO: Implementar el metodo
     }
+
 }

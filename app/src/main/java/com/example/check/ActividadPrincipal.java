@@ -22,11 +22,11 @@ import com.example.check.controlador.fragmento.FragmentoGaleria;
 import com.example.check.controlador.fragmento.FragmentoPerfil;
 import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
-import com.example.check.Principal.activities.Test_login_Activity;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionConexion;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -66,16 +66,25 @@ public class ActividadPrincipal extends AppCompatActivity {
         SmoothBottomBar smoothBottomBar = findViewById(R.id.bar_nav);
         remplazar(new FragmentoInicio());
 
+        ImageView imageTopView = findViewById(R.id.topImg);
+        TextView textTopView = findViewById(R.id.topText);
+
         smoothBottomBar.setOnItemSelected((Function1<? super Integer, kotlin.Unit>) o -> {
             switch (o) {
                 case 0:
                     remplazar(new FragmentoInicio());
+                    imageTopView.setImageResource(R.drawable.ic_location);
+                    textTopView.setText("Nuestras expediciones");
                     break;
                 case 1:
                     remplazar(new FragmentoGaleria());
+                    imageTopView.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    textTopView.setText("Comparte con nosotros");
                     break;
                 case 2:
                     remplazar(new FragmentoPerfil());
+                    imageTopView.setImageResource(R.drawable.ic_user);
+                    textTopView.setText("Busca tu identidad");
                     break;
             }
             return null;
@@ -91,6 +100,9 @@ public class ActividadPrincipal extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
+
+
+
         servicioFirebase = new ServicioFirebase();
         FirebaseUser currentUser = servicioFirebase.getTokenAutenticacion().getCurrentUser();
 
@@ -101,7 +113,7 @@ public class ActividadPrincipal extends AppCompatActivity {
     }
 
     private void cambiarActividad() {
-        Intent Log = new Intent(this, Test_login_Activity.class);
+        Intent Log = new Intent(this, LogActivity.class);
         startActivity(Log);
     }
 
@@ -257,8 +269,8 @@ public class ActividadPrincipal extends AppCompatActivity {
                 }
             }
         }
-
         recyclerView.setAdapter(new ImageAdapter(imagedbs, this));
         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
     }
+    
 }

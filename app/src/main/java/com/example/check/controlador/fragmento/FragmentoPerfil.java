@@ -1,4 +1,5 @@
 package com.example.check.controlador.fragmento;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.check.LogActivity;
 import com.example.check.repositorio.entidad.Usuario;
 
 import com.example.check.repositorio.entidad.DestinosViaje;
@@ -22,6 +24,8 @@ import com.example.check.R;
 import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,10 +58,15 @@ public class FragmentoPerfil extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
-
         usuario = new Usuario();
         ServicioFirebase servicioFirebase = new ServicioFirebase();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+        view.findViewById(R.id.logout).setOnClickListener(view1 -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent Log = new Intent(getActivity(), LogActivity.class);
+            startActivity(Log);
+        });
 
         List<DestinosViaje> destinosViajes = new ArrayList<>();
 
@@ -78,6 +87,7 @@ public class FragmentoPerfil extends Fragment {
         });
         ViewPager2 viewPager = view.findViewById(R.id.viewPager);
 
+
         DocumentReference docRef = database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(servicioFirebase.getTokenAutenticacion().getUid()));
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             usuario = documentSnapshot.toObject(Usuario.class);
@@ -86,13 +96,10 @@ public class FragmentoPerfil extends Fragment {
             TextView textView2 = view.findViewById(R.id.expedicion);
 
             textView2.setText(usuario.getExpedicion());
-            for (DestinosViaje t : destinosViajes){
+            for (DestinosViaje t : destinosViajes) {
                 if (t.Nombre.equals(usuario.getExpedicion())) {
-
-
-                    ImageView imageView = view.findViewById(R.id.banner);
+                    ImageView imageView = view.findViewById(R.id.imagenPerfil);
                     Picasso.get().load(t.imagen).into(imageView);
-
                     ItinerarioDao itinerario = new ItinerarioDao();
                     itinerario.updateView(viewPager, getContext(), t.imagen);
                     break;
@@ -113,12 +120,8 @@ public class FragmentoPerfil extends Fragment {
             page.setScaleY(0.90f + r * 0.04f);
         });
         viewPager.setPageTransformer(compositePageTransformer);
-
-
         return view;
     }
-
-
 
 
 }
