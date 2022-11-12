@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_box_3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/dialog_box_3">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,9 +10,9 @@
         android:background="@drawable/bg_box">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -25,11 +25,12 @@
                 android:textColor="#222222"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
-                android:background="#D3D3D3"/>
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,10 +41,10 @@
                     android:id="@+id/selectedimage"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:scaleType="centerCrop"
                     android:layout_gravity="center"
-                    android:tint="@color/check1"
-                    android:src="@drawable/ic_baseline_signal_wifi_off_24">
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_signal_wifi_off_24"
+                    android:tint="@color/main">
 
                 </ImageView>
 
@@ -59,8 +60,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                    android:layout_marginBottom="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,26 +68,23 @@
                     android:orientation="horizontal">
 
 
-
                     <Button
-                        android:layout_weight="3"
-                        android:background="@drawable/bg_button"
+                        android:id="@+id/azul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:text="Confirmar"
-                        android:id="@+id/azul"
-                        android:layout_marginStart="5dp"/>
-
-
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_button"
+                        android:text="Confirmar" />
 
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
 
         </LinearLayout>

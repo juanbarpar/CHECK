@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.makeramen.roundedimageview.RoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/image_post"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:layout_gravity="center"
-    android:scaleType="centerCrop"
-    android:background="@color/check1.2"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/image_post"
     android:layout_margin="5dp"
     android:adjustViewBounds="true"
-    app:riv_corner_radius="5dp"
-
-    android:focusable="true"
+    android:background="@color/red"
     android:clickable="true"
+    android:focusable="true"
+
     android:foreground="?android:attr/selectableItemBackground"
-    >
+    android:scaleType="centerCrop"
+    app:riv_corner_radius="5dp">
 
 </com.makeramen.roundedimageview.RoundedImageView>
