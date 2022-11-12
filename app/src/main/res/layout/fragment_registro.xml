@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controlador.fragmento.Fragmento_Login">
-
+    tools:context=".controlador.fragmento.RegistroFragmento">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +47,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:id="@+id/user"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Nombre"
+                app:floatingLabelColor="@color/blue"
+                app:image="@drawable/ic_user"
+                app:imageColor="@color/text"
+                app:textBoxColor="@color/main" />
+
+            <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
                 android:hint="Correo"
                 app:floatingLabelColor="@color/blue"
@@ -64,7 +74,19 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="20dp"
                 android:hint="Contraseña"
-                android:id="@+id/pass"
+                app:floatingLabelColor="@color/blue"
+                app:image="@drawable/ic_baseline_vpn_key_24"
+                app:imageColor="@color/text"
+                app:textBoxColor="@color/main" />
+
+            <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Confirmar contraseña"
                 app:floatingLabelColor="@color/blue"
                 app:image="@drawable/ic_baseline_vpn_key_24"
                 app:imageColor="@color/text"
@@ -73,10 +95,9 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:id="@+id/ingresar"
-                android:onClick="ingresar"
+                android:id="@+id/button_reserva"
                 android:background="@drawable/bg_button"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"

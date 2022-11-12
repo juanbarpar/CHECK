@@ -22,11 +22,11 @@ import com.example.check.controlador.fragmento.FragmentoGaleria;
 import com.example.check.controlador.fragmento.FragmentoPerfil;
 import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
-import com.example.check.Principal.activities.Test_login_Activity;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionConexion;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -93,8 +93,6 @@ public class ActividadPrincipal extends AppCompatActivity {
         super.onStart();
 
 
-        Intent Log = new Intent(this, LogActivity.class);
-        startActivity(Log);
 
         servicioFirebase = new ServicioFirebase();
         FirebaseUser currentUser = servicioFirebase.getTokenAutenticacion().getCurrentUser();
@@ -106,7 +104,7 @@ public class ActividadPrincipal extends AppCompatActivity {
     }
 
     private void cambiarActividad() {
-        Intent Log = new Intent(this, Test_login_Activity.class);
+        Intent Log = new Intent(this, LogActivity.class);
         startActivity(Log);
     }
 
@@ -266,4 +264,5 @@ public class ActividadPrincipal extends AppCompatActivity {
         recyclerView.setAdapter(new ImageAdapter(imagedbs, this));
         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
     }
+    
 }

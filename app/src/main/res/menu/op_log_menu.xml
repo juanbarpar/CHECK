@@ -12,7 +12,7 @@
         app:cnb_textColor="@color/white"/>
 
         />
-    
+
     <item
         android:id="@+id/share"
         android:title="Registrate"

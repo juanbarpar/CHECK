@@ -1,6 +1,5 @@
 package com.example.check.controlador.fragmento;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,25 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.check.ActividadPrincipal;
-import com.example.check.LogActivity;
 import com.example.check.R;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.tomlonghurst.expandablehinttext.ExpandableHintText;
-
-import java.util.concurrent.Executor;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragmento_Login#newInstance} factory method to
+ * Use the {@link RegistroFragmento#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragmento_Login extends Fragment {
+public class RegistroFragmento extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +26,7 @@ public class Fragmento_Login extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fragmento_Login() {
+    public RegistroFragmento() {
         // Required empty public constructor
     }
 
@@ -47,11 +36,11 @@ public class Fragmento_Login extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragmento_Login.
+     * @return A new instance of fragment RegistroFragmento.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragmento_Login newInstance(String param1, String param2) {
-        Fragmento_Login fragment = new Fragmento_Login();
+    public static RegistroFragmento newInstance(String param1, String param2) {
+        RegistroFragmento fragment = new RegistroFragmento();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,11 +60,7 @@ public class Fragmento_Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_registro, container, false);
     }
-
 }
