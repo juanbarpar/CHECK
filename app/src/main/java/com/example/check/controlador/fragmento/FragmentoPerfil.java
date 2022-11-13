@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.check.LogActivity;
+import com.example.check.ActividadInicio;
 import com.example.check.repositorio.entidad.Usuario;
 
 import com.example.check.repositorio.entidad.DestinosViaje;
@@ -25,7 +25,6 @@ import com.example.check.servicio.firebase.ServicioFirebase;
 import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -64,7 +63,7 @@ public class FragmentoPerfil extends Fragment {
 
         view.findViewById(R.id.logout).setOnClickListener(view1 -> {
             FirebaseAuth.getInstance().signOut();
-            Intent Log = new Intent(getActivity(), LogActivity.class);
+            Intent Log = new Intent(getActivity(), ActividadInicio.class);
             startActivity(Log);
         });
 
