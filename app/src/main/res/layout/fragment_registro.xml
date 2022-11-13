@@ -43,6 +43,7 @@
                 android:background="@color/main"/>
 
             <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:id="@+id/regNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -55,6 +56,7 @@
                 app:textBoxColor="@color/main" />
 
             <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:id="@+id/regCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -67,6 +69,7 @@
                 app:textBoxColor="@color/main" />
 
             <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:id="@+id/regPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -80,6 +83,7 @@
                 app:textBoxColor="@color/main" />
 
             <com.tomlonghurst.expandablehinttext.ExpandableHintText
+                android:id="@+id/regPassConf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -96,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:id="@+id/button_reserva"
+                android:onClick="registrar"
                 android:background="@drawable/bg_button"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
