@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.check.controlador.fragmento.Fragmento_Login;
@@ -20,7 +19,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
-public class LogActivity extends AppCompatActivity {
+public class ActividadInicio extends AppCompatActivity {
 
     private FirebaseAuth tokenAutenticacion;
 
