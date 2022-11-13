@@ -105,7 +105,7 @@ public class ActividadPrincipal extends AppCompatActivity {
     }
 
     private void cambiarActividad() {
-        Intent Log = new Intent(this, LogActivity.class);
+        Intent Log = new Intent(this, ActividadInicio.class);
         startActivity(Log);
     }
 
