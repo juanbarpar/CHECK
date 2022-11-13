@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.example.check.R;
 import com.example.check.repositorio.entidad.Imagedb;
 import com.example.check.repositorio.entidad.Usuario;
@@ -12,8 +14,11 @@ import com.example.check.servicio.utilidades.Constantes;
 import com.example.check.servicio.utilidades.dialogo.DialogoCarga;
 import com.example.check.servicio.utilidades.dialogo.DialogoNotificacion;
 import com.example.check.servicio.utilidades.excepciones.ExcepcionTareaFB;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -94,8 +99,9 @@ public class ServicioFirebase {
                 });
     }
 
-    public void cargarDatos() {
-        // TODO: Implementar el metodo
+    public void registrarUsuario(Usuario user, Task<AuthResult> task) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constantes.KEY_COLLECTION_USERS).document(Objects.requireNonNull(task.getResult().getUser()).getUid())
+                .set(user);
     }
-
 }
